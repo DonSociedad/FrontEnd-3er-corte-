@@ -1,7 +1,11 @@
-//Page para home
+//home
+import HeaderComponent from "@/components/organism/headerComponent";
 
 export default function LoginPage() {
   return (
-    <p>Hola, esto es el home</p>
+    <>
+      <HeaderComponent/>
+      <p>Hola, esto es el home</p>
+    </>
   )
 }
