@@ -14,13 +14,13 @@ export default function ButtonComponent({type, content, icon}:ButtonProps) {
 
   switch (type) {
     case 1:
-      style = "text-black hover:text-orange-400 font-medium py-2 px-4 rounded-lg transition"; // boton de login y register en el header
+      style = "text-black hover:text-pink-400 font-medium py-2 px-4 rounded-lg transition"; // boton de login y register en el header
       break;
     case 2:
-      style = "w-full bg-yellow-400 hover:bg-yellow-300 text-black font-medium py-2 rounded-lg transition"; // iniciar sesion
+      style = "w-full bg-pink-400 hover:bg-pink-200 text-black font-medium py-2 rounded-lg transition"; // iniciar sesion
       break;
     case 3:
-      style = "w-full bg-yellow-400 hover:bg-yellow-300 text-black font-medium py-2 rounded-lg transition"; // negro de necesitas ayuda
+      style = "w-full bg-pink-400 hover:bg-pink-200 text-black font-medium py-2 rounded-lg transition"; // negro de necesitas ayuda
       break;
     default:
       style = "bg-black-500 text-white-500";

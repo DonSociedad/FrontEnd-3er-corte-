@@ -41,7 +41,7 @@ export default function InputComponent({ label, typeElement, idElement, listValu
             />
             )
 
-        };
+        }
 
         </>
 

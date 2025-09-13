@@ -39,7 +39,7 @@ export default function RegisterComponent() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit, onErrors)}
-            className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md"
+            className="space-y-4 p-6 max-w-md mx-auto bg-white rounded-lg shadow-md"
         >
         
         <InputComponent
