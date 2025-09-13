@@ -1,11 +1,11 @@
 import RegisterComponent from "@/components/molecules/registerComponents"
+import FooterComponent from "@/components/organism/footerComponent";
 import HeaderComponent from "@/components/organism/headerComponent";
 
 export default function RegisterPage() {
     return (
 
         <div className="min-h-screen flex flex-col bg-white">
-        {/* Header fijo arriba */}
         <HeaderComponent />
 
         <main className="flex min-h-screen items-center justify-center bg-white py-8">
@@ -54,6 +54,7 @@ export default function RegisterPage() {
                 </div>
             </div>
         </main>
+        <FooterComponent />
         </div>
     );
 }

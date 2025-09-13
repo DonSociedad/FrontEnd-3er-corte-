@@ -1,10 +1,16 @@
+import FooterComponent from "@/components/organism/footerComponent";
 import HeaderComponent from "@/components/organism/headerComponent";
 
 export default function PerfilPage(){
     return(
-        <div>
-            <HeaderComponent/>
-            Perfil Page 
-        </div>
+    <>
+        <HeaderComponent />
+        
+        <main className="min-h-screen flex items-center justify-center">
+            <p className="text-xl text-gray-700">Perfil</p>
+        </main>
+        
+        <FooterComponent />
+    </>
     );
 }
