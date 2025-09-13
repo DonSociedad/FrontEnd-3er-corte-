@@ -41,13 +41,15 @@ return (
           <a href= "perfil" className="text-xs mt-1 text-gray-600">Cuenta</a>
         </div>
 
+        <a href="login">
+          <ButtonComponent type={1} content="Iniciar sesión" />
+        </a>
+
+
         <a href="register">
             <ButtonComponent type={1} content="Registrarse" />
         </a>
 
-        <a href="login">
-          <ButtonComponent type={1} content="Iniciar sesión" />
-        </a>
 
       </div>
     </nav>
