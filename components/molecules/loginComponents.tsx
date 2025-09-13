@@ -54,8 +54,9 @@ export default function LoginComponent() {
 
     return (
         <form
-            onSubmit={handleSubmit(onSubmit, onErrors)}>
-            
+            onSubmit={handleSubmit(onSubmit, onErrors)}
+            className="space-y-4 p-6 max-w-md mx-auto bg-white rounded-lg shadow-md"
+        >
             <InputComponent
                 label="Usuario o correo electrónico"
                 typeElement="text"
