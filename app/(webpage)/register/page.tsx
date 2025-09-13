@@ -3,6 +3,11 @@ import HeaderComponent from "@/components/organism/headerComponent";
 
 export default function RegisterPage() {
     return (
+
+        <div className="min-h-screen flex flex-col bg-white">
+        {/* Header fijo arriba */}
+        <HeaderComponent />
+
         <main className="flex min-h-screen items-center justify-center bg-white py-8">
             {/*<HeaderComponent/>*/}
             <div className="w-full max-w-md mx-4">
@@ -49,5 +54,6 @@ export default function RegisterPage() {
                 </div>
             </div>
         </main>
+        </div>
     );
 }
