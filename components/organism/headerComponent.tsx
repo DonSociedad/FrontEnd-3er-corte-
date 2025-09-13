@@ -44,6 +44,11 @@ return (
         <a href="register">
             <ButtonComponent type={1} content="Registrarse" />
         </a>
+
+        <a href="login">
+          <ButtonComponent type={1} content="Iniciar sesión" />
+        </a>
+
       </div>
     </nav>
     </header>
