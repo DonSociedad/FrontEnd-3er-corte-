@@ -1,3 +1,5 @@
+import ButtonComponent from "../atoms/buttonComponents";
+
 export default function HeaderComponent() {
 return (
   <header className="flex items-center justify-between px-6 py-4 bg-pink-100 text-gray-800 shadow-md">
@@ -38,6 +40,10 @@ return (
           <button className="p-2 rounded-full bg-gray-100 hover:bg-pink-100">👤</button>
           <a href= "perfil" className="text-xs mt-1 text-gray-600">Cuenta</a>
         </div>
+
+        <a href="register">
+            <ButtonComponent type={1} content="Registrarse" />
+        </a>
       </div>
     </nav>
     </header>
