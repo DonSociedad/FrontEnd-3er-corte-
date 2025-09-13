@@ -1,10 +1,10 @@
 import HeaderComponent from "@/components/organism/headerComponent";
 
-export default function PerfilPage(){
-    return(
+export default function UserManualPage() {
+    return (
         <div>
             <HeaderComponent/>
-            Perfil Page 
+            User manual Page
         </div>
     );
-}
+}   
