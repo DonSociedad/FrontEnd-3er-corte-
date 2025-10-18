@@ -1,17 +1,124 @@
 //home
 import FooterComponent from "@/components/organism/footerComponent";
 import HeaderComponent from "@/components/organism/headerComponent";
+import AnimatedContainer from "@/components/utilities/animatedContainer";
 
 export default function HomePage() {
   return (
     <>
       <HeaderComponent />
-      
-      <main className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-700">Home</p>
+
+      <main className="min-h-screen bg-neutral-50 flex flex-col">
+        {/* First section - Image */}
+        <AnimatedContainer>
+            <section className="w-full flex items-center justify-center overflow-hidden relative">
+            <div className="w-screen">
+              <img
+              className="w-full h-auto max-h-[60vh] object-cover mx-auto"
+              src="/cerdo3_2.png"
+              alt="Piglance"
+              />
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4">
+              <h1 className="text-2xl md:text-4xl font-bold mb-2 text-shadow text-gray-900">
+                La mejor forma de aprender de finanzas mientras te diviertes en el proceso
+              </h1>
+              <div className="flex flex-col space-y-2">
+                <a
+                  href="register"
+                  className="inline-flex items-center justify-center min-w-[140px] md:min-w-[160px] whitespace-nowrap bg-neutral-50 text-rose-700 font-bold py-3 px-4 rounded-full hover:bg-rose-700 hover:text-neutral-50 transition text-base md:text-lg"
+                >
+                  Empezar ahora
+                </a>
+                <a
+                  href="login"
+                  className="inline-flex items-center justify-center min-w-[140px] md:min-w-[160px] whitespace-nowrap bg-neutral-50 text-rose-700 font-bold py-3 px-4 rounded-full hover:bg-rose-700 hover:text-neutral-50 transition text-base md:text-lg"
+                >
+                  Ya tengo una cuenta
+                </a>
+              </div>
+              </div>
+            </div>
+            </section>
+        </AnimatedContainer>
+
+        {/* Second section */}
+        <AnimatedContainer delay={0.5}>
+          <section className="w-full bg-neutral-50 flex items-center justify-center py-8">
+            <div className="container mx-auto w-[90%] min-h-[45vh] flex flex-col md:flex-row items-stretch bg-gray-300 rounded-lg shadow-lg overflow-hidden">
+              <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
+                <div className="text-center">
+                  <h2 className="text-lg md:text-2xl font-bold">
+                    Mejora tu vida financiera
+                  </h2>
+                  <p className="mt-2 text-sm md:text-base text-gray-700 max-w-lg mx-auto">
+                    Aprende hábitos simples y herramientas que te ayudarán a
+                    administrar mejor tu dinero en cualquier etapa.
+                  </p>
+                </div>
+              </div>
+              <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
+                <img
+                  className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
+                  src="/hombre muppet.png"
+                  alt="Hombre con dinero"
+                />
+              </div>
+            </div>
+          </section>
+        </AnimatedContainer>
+
+        {/* Third section */}
+        <AnimatedContainer delay={1}>
+          <section className="w-full bg-neutral-50 flex items-center justify-center py-8">
+            <div className="container mx-auto w-[90%] min-h-[45vh] flex flex-col md:flex-row-reverse items-stretch bg-gray-300 rounded-lg shadow-lg overflow-hidden">
+              <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
+                <div className="text-center">
+                  <h2 className="text-lg md:text-2xl font-bold">
+                    Formación para tomar mejores decisiones
+                  </h2>
+                  <p className="mt-2 text-sm md:text-base text-gray-700 max-w-lg mx-auto">
+                    Cursos y recursos diseñados para adaptarse a tu ritmo y a
+                    cualquier tamaño de pantalla.
+                  </p>
+                </div>
+              </div>
+              <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
+                <img
+                  className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
+                  src="/chica con libro.png"
+                  alt="Chica con libro"
+                />
+              </div>
+            </div>
+          </section>
+        </AnimatedContainer>
+
+        {/* Fourth section */}
+        <AnimatedContainer delay={1.5}>
+          <section className="w-full bg-neutral-50 flex items-center justify-center py-8">
+            <div className="container mx-auto w-[90%] min-h-[45vh] flex flex-col md:flex-row items-stretch bg-gray-300 rounded-lg shadow-lg overflow-hidden">
+              <div className="md:w-1/2 w-full p-6 flex flex-col items-center justify-center">
+                <h2 className="text-lg md:text-2xl font-bold text-center">
+                  Domina tu dinero
+                </h2>
+                <p className="mt-2 text-sm md:text-base text-gray-700 text-center max-w-lg">
+                  Guías paso a paso para construir seguridad financiera a largo
+                  plazo.
+                </p>
+              </div>
+              <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
+                <img
+                  className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
+                  src="/hombre con corbata 4.png"
+                  alt="Hombre con brazos arriba"
+                />
+              </div>
+            </div>
+          </section>
+        </AnimatedContainer>
       </main>
-      
+
       <FooterComponent />
     </>
-  )
+  );
 }

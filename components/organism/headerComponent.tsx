@@ -11,7 +11,7 @@ return (
         <a href="/" className="-m-1.5 p-1.5 flex items-center">
           <span className="sr-only">Piglance</span>
           {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
-          <img className="h-50 w-auto" src="/Piglance.png" alt="Piglance" />
+          <img className="h-20 w-auto" src="/Piglance.png" alt="Piglance" />
           
         </a>
       </div>
