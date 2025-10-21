@@ -22,15 +22,21 @@ export default function RegisterComponent() {
 
 
     const onSubmit: SubmitHandler<RegisterDTO> = async (data) => {
-        registerService(data)
-        if (Object.keys(errors).length >1) {
-            console.log(errors);
-            alert('Error en el registro');
+    try {
+        const response = await registerService(data); 
+
+        // Si registerService devuelve un JSON con éxito:
+        if (response && !response.error) {
+        alert("✅ Registro exitoso. Redirigiendo al inicio de sesión...");
+        router.push("/login"); 
         } else {
-            console.log(data);
-            alert('Registro exitoso');
-            router.push("/login");
+        alert("Error al registrar usuario. Revisa los datos e inténtalo de nuevo.");
+        console.error("Error en el registro:", response);
         }
+    } catch (error) {
+        console.error("Error inesperado en registerService:", error);
+        alert("Error de conexión con el servidor. Intenta más tarde.");
+    }
     };
 
     const onErrors=() => {
