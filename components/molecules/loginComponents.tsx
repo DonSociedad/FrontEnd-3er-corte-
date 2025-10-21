@@ -21,36 +21,40 @@ export default function LoginComponent() {
         resolver: zodResolver(loginScheme),
     });
 
-    const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
-        try {
-        const { user, password } = data;
-        const { data: loginData, error } = await loginService({ user, password });
+const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
+  try {
+    const { email, password } = data;
+    const { data: loginData, error } = await loginService({ email, password });
 
-        if (error) {
-            console.error("Error en el login:", error);
-            alert("Error en el login, por favor verifica tus credenciales.");
-            return;
-        }
+    if (error) {
+      console.error("Error en el login:", error);
+      alert("Error en el login, por favor verifica tus credenciales.");
+      return;
+    }
 
-        if (loginData?.session) {
-            Cookies.set("token", loginData.session.access_token, {
-            expires: 7,
-            secure: true,
-            sameSite: "strict",
-            });
-            console.log("Login correcto", loginData);
-        } else {
-            console.warn("No se recibió session en la respuesta.");
-        }
-        } catch (err) {
-        console.error("Error en login", err);
-        }
-    };
+    // Guardar el token en cookies directamente
+    if (loginData?.access_token) {
+      Cookies.set("token", loginData.access_token, {
+        expires: 7,       // Expira en 7 días
+        secure: true,     // Solo HTTPS
+        sameSite: "strict",
+      });
+      console.log("Login correcto", loginData);
+    } else {
+      console.warn("No se recibió token en la respuesta.", loginData);
+    }
+
+  } catch (err) {
+    console.error("Error en login", err);
+  }
+};
+
 
     const onErrors = () => {
         console.log("Errores encontrados en el momento de login, vuelve a ver", errors);
         alert("Información incompleta o errónea, vuelve a intentar");
     };
+    console.log("Errores actuales del formulario:", errors);
 
     return (
         <form
@@ -60,8 +64,8 @@ export default function LoginComponent() {
             <InputComponent
                 label="Usuario o correo electrónico"
                 typeElement="text"
-                idElement="user"
-                nameElement="user"
+                idElement="email"
+                nameElement="email"
                 register={register}
             />
             

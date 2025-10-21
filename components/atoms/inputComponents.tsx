@@ -8,7 +8,7 @@ interface valuesSelect {
 
 interface PropsInput {
     label: string;
-    typeElement: string | "text" | "email" | "password" | "number" | "date";
+    typeElement: string | "text" | "email" | "password" | "number" | "date" ;
     idElement: string;
     listValues?: valuesSelect[];
     nameElement: string;
