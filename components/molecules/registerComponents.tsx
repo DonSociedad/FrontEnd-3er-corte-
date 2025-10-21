@@ -8,15 +8,16 @@ import { RegisterScheme } from "@/schemas/register"
 import InputComponent from "@/components/atoms/inputComponents"
 import ButtonComponent from "@/components/atoms/buttonComponents"
 import { registerService } from "@/libs/authService"
+import { useRouter } from "next/navigation";
 
 
 export default function RegisterComponent() {
+    const router = useRouter();
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm<RegisterDTO>({
-        resolver: zodResolver(RegisterScheme)
     });
 
 
@@ -28,6 +29,7 @@ export default function RegisterComponent() {
         } else {
             console.log(data);
             alert('Registro exitoso');
+            router.push("/login");
         }
     };
 
@@ -53,24 +55,8 @@ export default function RegisterComponent() {
         <InputComponent
         label="Apellido"
         typeElement="text"
-        idElement="lastname"
-        nameElement="lastname"
-        register={register}
-        />
-
-        <InputComponent
-        label="Edad"
-        typeElement="number"
-        idElement="age"
-        nameElement="age"
-        register={register}
-        />
-
-        <InputComponent
-        label="Fecha de nacimiento"
-        typeElement="date"
-        idElement="birthDate"
-        nameElement="birthDate"
+        idElement="lastName"
+        nameElement="lastName"
         register={register}
         />
 
