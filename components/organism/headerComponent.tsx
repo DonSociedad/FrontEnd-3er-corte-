@@ -1,6 +1,6 @@
 export default function HeaderComponent() {
   return (
-    <aside className="flex flex-col bg-pink-100 text-white w-64 h-screen p-6 fixed left-0 top-0">
+    <aside className="flex flex-col bg-gray-800 text-white w-64 h-screen p-6 fixed left-0 top-0">
       {/* LOGO */}
       <div className="flex items-center justify-center mb-10">
         <a href="/logged" className="flex flex-col items-center">
@@ -14,7 +14,7 @@ export default function HeaderComponent() {
           {/* Ejemplo de item seleccionado */}
           <a
             href="#"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-pink-900 font-bold text-[#ff3b3b] tracking-wide text-sm hover:text-white"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 font-bold text-white tracking-wide text-sm "
           >
             <span className="text-2xl">🏠</span>
             <span className="">
@@ -25,7 +25,7 @@ export default function HeaderComponent() {
 
           <a
             href="#"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-pink-900 font-bold text-[#ff3b3b] tracking-wide text-sm hover:text-white"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 font-bold text-white tracking-wide text-sm "
           >
             <span className="text-2xl">🎯</span>
             <span className="">
@@ -36,7 +36,7 @@ export default function HeaderComponent() {
 
           <a
             href="#"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-pink-900 font-bold text-[#ff3b3b] tracking-wide text-sm hover:text-white"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 font-bold text-white tracking-wide text-sm "
           >
             <span className="text-2xl">👤</span>
             <span className="">
@@ -46,7 +46,7 @@ export default function HeaderComponent() {
 
           <a
             href="#"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-pink-900 font-bold text-[#ff3b3b] tracking-wide text-sm hover:text-white"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 font-bold text-white tracking-wide text-sm "
           >
             <span className="text-2xl">⋯</span>
             <span className="">
