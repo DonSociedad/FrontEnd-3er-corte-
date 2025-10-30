@@ -1,123 +1,183 @@
-'use client'
-import { useState, ChangeEvent, FormEvent } from "react";
+'use client';
 
-interface ActivityFormData {
-  title: string;
-  type: string;
-  content: string;
-  question: string;
-  answers: string[];
-  correctAnswer: number | null;
-}
+import { useState } from 'react';
+import { PlusCircle } from 'lucide-react';
 
-export default function CreateActivity() {
-  const [formData, setFormData] = useState<ActivityFormData>({
-    title: "",
-    type: "quiz",
-    content: "",
-    question: "",
-    answers: ["", "", "", ""],
-    correctAnswer: null,
-  });
+export default function AdminCreatePage() {
+  const [type, setType] = useState<'content' | 'quiz' | 'exercise' | ''>('');
+  const [formData, setFormData] = useState<any>({});
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleAnswerChange = (i: number, value: string) => {
-    const updated = [...formData.answers];
-    updated[i] = value;
-    setFormData({ ...formData, answers: updated });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    alert("Actividad creada (modo visual)");
+  const renderFields = () => {
+    switch (type) {
+      case 'content':
+        return (
+          <>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Title</label>
+              <input
+                name="title"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                placeholder="Enter content title"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Description</label>
+              <textarea
+                name="description"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                rows={3}
+                placeholder="Brief description..."
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Type</label>
+                <select
+                  name="type"
+                  onChange={handleChange}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-pink-400"
+                >
+                  <option value="">Select type</option>
+                  <option value="article">Article</option>
+                  <option value="infographic">Infographic</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Topic</label>
+                <input
+                  name="topic"
+                  onChange={handleChange}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                  placeholder="e.g. savings, investment..."
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case 'quiz':
+        return (
+          <>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">contenido asociado</label>
+              <input
+                name="content_id"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                placeholder="ObjectId of related content"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Max Points</label>
+              <input
+                type="number"
+                name="max_points"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-pink-400"
+              />
+            </div>
+
+            <p className="text-gray-500 text-sm mt-2">
+               Questions can be added later in the “Quizzes” section.
+            </p>
+          </>
+        );
+
+      case 'exercise':
+        return (
+          <>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Associated Content ID</label>
+              <input
+                name="content_id"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                placeholder="ObjectId of related content"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Type</label>
+              <select
+                name="type"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-pink-400"
+              >
+                <option value="">Select type</option>
+                <option value="simulation">Simulation</option>
+                <option value="case_study">Case Study</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Instructions</label>
+              <textarea
+                name="instructions"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-pink-400"
+                rows={3}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Points</label>
+              <input
+                type="number"
+                name="points"
+                onChange={handleChange}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-pink-400"
+              />
+            </div>
+          </>
+        );
+
+      default:
+        return <p className="text-gray-500">Select a type to begin creating.</p>;
+    }
   };
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-lg max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold text-pink-600 mb-6">
-        Crear nueva actividad
-      </h2>
+<div className="p-8 bg-white rounded-2xl shadow-md max-w-4xl mx-auto mt-8">
+  <h1 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2">
+    <PlusCircle className="text-pink-500" /> Create New Item
+  </h1>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <label className="text-sm font-semibold text-gray-600">Título</label>
-          <input
-            name="title"
-            placeholder="Ej. Introducción al ahorro"
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-pink-400 mt-1"
-            value={formData.title}
-            onChange={handleChange}
-          />
-        </div>
+  <div className="mb-6">
+    <label className="block text-sm font-medium text-gray-700">Select Type</label>
+    <select
+      onChange={(e) => setType(e.target.value as any)}
+      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-pink-400"
+    >
+      <option value="">Choose an option</option>
+      <option value="content">Content</option>
+      <option value="quiz">Quiz</option>
+      <option value="exercise">Exercise</option>
+    </select>
+  </div>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-600">Tipo</label>
-          <select
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-pink-400 mt-1"
-          >
-            <option value="quiz">Quiz</option>
-            <option value="ejercicio">Ejercicio</option>
-            <option value="actividad">Actividad teórica</option>
-          </select>
-        </div>
+  <form className="space-y-4">{renderFields()}</form>
 
-        <div>
-          <label className="text-sm font-semibold text-gray-600">Descripción</label>
-          <textarea
-            name="content"
-            placeholder="Descripción o instrucciones..."
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-pink-400 mt-1"
-            value={formData.content}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label className="text-sm font-semibold text-gray-600">Pregunta</label>
-          <input
-            name="question"
-            placeholder="Ej. ¿Qué es el ahorro?"
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-pink-400 mt-1"
-            value={formData.question}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-semibold text-gray-600">
-            Respuestas posibles
-          </label>
-          {formData.answers.map((ans, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <input
-                value={ans}
-                placeholder={`Respuesta ${i + 1}`}
-                className="flex-1 border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-pink-400"
-                onChange={(e) => handleAnswerChange(i, e.target.value)}
-              />
-              <input
-                type="radio"
-                name="correctAnswer"
-                checked={formData.correctAnswer === i}
-                onChange={() => setFormData({ ...formData, correctAnswer: i })}
-              />
-            </div>
-          ))}
-        </div>
-
-        <button
-          type="submit"
-          className="bg-pink-500 hover:bg-pink-400 text-white px-6 py-3 rounded-lg font-semibold shadow-md transition"
-        >
-          Guardar actividad
-        </button>
-      </form>
-    </div>
+  {type && (
+    <button
+      className="mt-6 w-full bg-pink-500 hover:bg-pink-400 text-white font-semibold py-2 rounded-lg transition"
+      onClick={() => alert(JSON.stringify(formData, null, 2))}
+    >
+      Save {type.charAt(0).toUpperCase() + type.slice(1)}
+    </button>
+  )}
+</div>
   );
 }
