@@ -6,8 +6,16 @@ import AnimatedContainer from "@/components/utilities/animatedContainer";
 export default function HomePage() {
   return (
     <>
-      <HeaderComponent />
-
+      <div className="flex items-center justify-between px-6 py-4 bg-pink-100 text-gray-800 shadow-md">
+        <div className="flex items-center">
+        <a href="/" className="-m-1.5 p-1.5 flex items-center">
+          <span className="sr-only">Piglance</span>
+          {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
+          <img className="h-20 w-auto" src="/Piglance.png" alt="Piglance" />
+          
+        </a>
+      </div>
+      </div>
       <main className="min-h-screen bg-neutral-50 flex flex-col">
         {/* First section - Image */}
         <AnimatedContainer>
