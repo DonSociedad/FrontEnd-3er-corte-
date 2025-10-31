@@ -1,4 +1,5 @@
 'use client'  
+import ButtonComponent from "@/components/atoms/buttonComponents";
 import CardComponent from "@/components/atoms/card";
 
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default function exercises() {
     },
   ];
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-pink-50 dark:bg-gray-900 p-8">
       <h1 className="text-3xl font-bold text-center text-pink-600 dark:text-pink-300 mb-8">
         Ejercicios
       </h1>
@@ -48,9 +49,12 @@ export default function exercises() {
             title={exercise.title}
             description={exercise.description}
             onClick={() => alert(`Seleccionaste: ${exercise.title}`)}>
-            <button className="mt-4 bg-pink-500 hover:bg-pink-600 text-white py-1.5 px-4 rounded-lg text-sm transition">
-                Ver Detalles
-            </button>
+            <div className="flex gap-3 mt-4">
+              <ButtonComponent
+                type={3} // estilo según tu hook useButton
+                content="Ver mas"
+                />
+            </div>
           </CardComponent>
         ))}
       </div>

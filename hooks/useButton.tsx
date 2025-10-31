@@ -16,7 +16,7 @@ export function useButton(type: number): string {
 
     case 3:
       style =
-        "w-full bg-pink-400 hover:bg-pink-200 text-black font-medium py-2 rounded-lg transition"; // botón de 'necesitas ayuda'
+        "w-28 bg-pink-400 hover:bg-pink-200 text-black font-medium py-2 rounded-lg transition"; // botón de 'necesitas ayuda'
       break;
 
     default:

@@ -37,6 +37,14 @@ export default function AdminIndex() {
               description="Review and manage all activities, quizzes and exercises you’ve created."
             />
           </Link>
+
+          {/*Contenidos */}
+          <Link href="/dashboard/admin/contents">
+            <CardComponent
+              title="Contenidos"
+              description="Review and manage all the contents."
+            />
+          </Link>
         </div>
       </div>
     </div>
