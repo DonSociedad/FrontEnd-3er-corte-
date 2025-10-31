@@ -45,12 +45,10 @@ return (
           <ButtonComponent type={1} content="Iniciar sesión" />
         </a>
 
-
         <a href="register">
             <ButtonComponent type={1} content="Registrarse" />
         </a>
-
-
+        
       </div>
     </nav>
     </header>

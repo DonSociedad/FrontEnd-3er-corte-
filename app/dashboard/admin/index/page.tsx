@@ -1,5 +1,6 @@
-'use client'
+"use client";
 import Link from "next/link";
+import CardComponent from "@/components/atoms/card"; 
 
 export default function AdminIndex() {
   return (
@@ -7,49 +8,34 @@ export default function AdminIndex() {
       <div className="max-w-5xl mx-auto">
         <header className="mb-10">
           <h1 className="text-4xl font-bold text-pink-600">Pigglance Admin</h1>
-          <p className="text-gray-600 mt-2">
-            Gestiona actividades, quizzes y ejercicios de aprendizaje financiero.
+          <p className="text-gray-700 mt-2">
+            Manage activities, quizzes, and exercises for financial learning.
           </p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Crear Actividad */}
-          <Link
-            href="/dashboard/admin/crear-actividad"
-            className="bg-white shadow-md hover:shadow-xl transition p-6 rounded-2xl border border-pink-200 hover:border-pink-400"
-          >
-            <h2 className="text-xl font-semibold text-pink-600 mb-2">
-              📘 Crear Actividad
-            </h2>
-            <p className="text-gray-600">
-              Diseña una nueva actividad interactiva para los usuarios.
-            </p>
+          {/* Crear */}
+          <Link href="/dashboard/admin/crear-actividad">
+            <CardComponent
+              title="📘 Create an Activity, Quiz or Exercise"
+              description="Design new interactive learning activities, quizzes or exercises for users."
+            />
           </Link>
 
-          {/* Crear Quiz */}
-          <Link
-            href="/dashboard/admin/crear-quiz"
-            className="bg-white shadow-md hover:shadow-xl transition p-6 rounded-2xl border border-pink-200 hover:border-pink-400"
-          >
-            <h2 className="text-xl font-semibold text-pink-600 mb-2">
-              🧠 Crear Quiz
-            </h2>
-            <p className="text-gray-600">
-              Añade preguntas de opción múltiple para evaluar conocimientos.
-            </p>
+          {/* Usuarios */}
+          <Link href="/dashboard/admin/listar-usuarios">
+            <CardComponent
+              title="🧠 View Users"
+              description="See who is actively learning and track their progress."
+            />
           </Link>
 
-          {/* Crear Ejercicio */}
-          <Link
-            href="/dashboard/admin/crear-ejercicio"
-            className="bg-white shadow-md hover:shadow-xl transition p-6 rounded-2xl border border-pink-200 hover:border-pink-400"
-          >
-            <h2 className="text-xl font-semibold text-pink-600 mb-2">
-              💪 Crear Ejercicio
-            </h2>
-            <p className="text-gray-600">
-              Crea ejercicios prácticos enfocados en hábitos financieros.
-            </p>
+          {/* Ver más */}
+          <Link href="/dashboard/admin/exercises">
+            <CardComponent
+              title="💪 Your Creations"
+              description="Review and manage all activities, quizzes and exercises you’ve created."
+            />
           </Link>
         </div>
       </div>

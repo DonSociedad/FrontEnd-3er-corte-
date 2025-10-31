@@ -1,13 +1,7 @@
 'use client'
 
-import { ReactNode } from "react";
 import { useButton } from "@/hooks/useButton";
-
-interface ButtonProps {
-  type: number; //estilo
-  content?: string; //texto del botón (opcional)
-  icon?: ReactNode; //icono del botón (opcional)
-}
+import { ButtonProps } from "@/interfaces/button";
 
 //este boton es una funcion a la cual se le pasa un numero y el contenido que quieres que aparezca en el boton
 export default function ButtonComponent({type, content, icon}:ButtonProps) {
