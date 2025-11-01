@@ -1,19 +1,27 @@
+"use client";
+
+import { useState } from "react";
 import HeaderComponent from "@/components/organism/headerComponent";
-import FooterComponentLogged from "@/components/organism/footerComponentLogged";
 import WorkPlaceComponent from "@/components/molecules/workPlaceComponent";
+import ProfileComponent from "@/components/molecules/profileComponent";
 
 export default function LoggedPage() {
+  const [activePage, setActivePage] = useState("workplace");
+
+  const handleNavigate = (page: string) => {
+    setActivePage(page);
+  };
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Header fijo a la izquierda */}
-      <HeaderComponent />
+      <HeaderComponent onNavigate={handleNavigate} />
 
-      {/* Contenido central con scroll independiente */}
-      <main className="flex-1 min-h-0 overflow-y-auto bg-gray-800 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 border-l-4 border-gray-500 ml-64 mr-[22rem]">
-        <WorkPlaceComponent />
+      {/* Contenido principal (sin footer) */}
+      <main className="flex-1 overflow-y-auto bg-gray-800 ml-64">
+        {activePage === "workplace" && <WorkPlaceComponent />}
+        {activePage === "profile" && <ProfileComponent />}
       </main>
-
-
     </div>
   );
 }
