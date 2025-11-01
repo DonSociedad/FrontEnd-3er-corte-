@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Piglance",
-  description: "Proyecto Final, buscando una mejor experiencia de usuario y entendimiento de temas financieros | Piglance",
+  title: "Avatar",
+  description: "Creación de avatar | Piglance",
 };
 
-export default function RootLayout({
+export default function studioLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
