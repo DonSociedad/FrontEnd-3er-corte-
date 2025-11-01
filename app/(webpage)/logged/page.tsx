@@ -9,12 +9,11 @@ export default function LoggedPage() {
       <HeaderComponent />
 
       {/* Contenido central con scroll independiente */}
-      <main className="flex-1 overflow-y-auto bg-gray-800 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 border-l-4 border-gray-500 ml-64 mr-[22rem]">
+      <main className="flex-1 min-h-0 overflow-y-auto bg-gray-800 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 border-l-4 border-gray-500 ml-64 mr-[22rem]">
         <WorkPlaceComponent />
       </main>
 
-      {/* Footer fijo a la derecha */}
-      <FooterComponentLogged />
+
     </div>
   );
 }

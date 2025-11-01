@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -5,7 +6,7 @@ import { ModalButtonProps } from "@/interfaces/buttonInterfaces/modalButtonProps
 
 export default function EmerPageButton({
   buttonLabel,
-  buttonStyle = "bg-blue-500 text-white px-4 py-2 rounded-lg",
+  buttonStyle,
   children,
   icon,
 }: ModalButtonProps) {
@@ -31,8 +32,8 @@ export default function EmerPageButton({
           >
             {/* Contenedor del contenido */}
             <motion.div
-              className="bg-white rounded-2xl shadow-lg p-6 max-w-lg w-full relative 
-                          max-h-[80vh] overflow-y-auto" 
+              className="bg-fuchsia-900 rounded-2xl shadow-lg p-6 max-w-3/4 w-full relative 
+                           overflow-y-auto" 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
