@@ -1,21 +1,7 @@
-import { UseFormRegister } from "react-hook-form"
+'use client'
+import { valuesSelect } from "@/interfaces/input";
+import { PropsInput } from "@/interfaces/input";
 
-interface valuesSelect {
-    value: string;
-    label: string;
-
-};
-
-interface PropsInput {
-    label: string;
-    typeElement: string | "text" | "email" | "password" | "number" | "date";
-    idElement: string;
-    listValues?: valuesSelect[];
-    nameElement: string;
-    // nameElement: "firstName" | "lastName" | "email" | "password" | "age" | "birthDate";
-    register: UseFormRegister<any>;
-
-};
 
 export default function InputComponent({ label, typeElement, idElement, listValues, nameElement, register }: PropsInput) {
     return (
