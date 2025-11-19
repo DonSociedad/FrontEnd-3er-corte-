@@ -12,3 +12,24 @@ export const getLessonsMapService = async () => {
     return { data: null, error };
   }
 };
+
+export const getLessonById = async (id: string) => {
+  try {
+    const response = await apiFetch(`/lessons/${id}`, "GET");
+    return { data: response, error: null };
+  } catch (error: any) {
+    console.error("Error en getLessonById:", error.message);
+    return { data: null, error };
+  }
+};
+
+export const answerLesson = async (id: string, blockId: string, answer: any) => {
+  try {
+    const payload = { blockId, answer };
+    const response = await apiFetch(`/lessons/${id}/answer`, "POST", payload);
+    return { data: response, error: null };
+  } catch (error: any) {
+    console.error("Error en answerLesson:", error.message);
+    return { data: null, error };
+  }
+};
