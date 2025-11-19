@@ -1,7 +1,8 @@
+"use client";
 import HeaderComponent from "@/components/organism/headerComponent";
 import { LessonsMap } from "@/components/organism/lessons/LessonsMap";
 
-export default function PerfilPage(){
+export default function MapPage(){
     return(
     <>
         <HeaderComponent />
