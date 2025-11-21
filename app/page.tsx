@@ -1,6 +1,5 @@
 //home
 import FooterComponent from "@/components/organism/footerComponent";
-import HeaderComponent from "@/components/organism/headerComponent";
 import AnimatedContainer from "@/components/utilities/animatedContainer";
 
 export default function HomePage() {

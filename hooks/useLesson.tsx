@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-// 1. Importamos el servicio para actualizar el nivel en el backend
 import { getLessonById, answerLesson } from "@/libs/lessonsService";
-import { increaseUserLevel } from "@/libs/usersService"; // Asegúrate que la ruta sea correcta
+import { increaseUserLevel } from "@/libs/usersService"; 
 
 type ContentBlock = {
   id: string;
