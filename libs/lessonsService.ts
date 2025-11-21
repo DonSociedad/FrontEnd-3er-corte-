@@ -1,12 +1,26 @@
 import { apiFetch } from "./singletonFetch";
 import { LessonMapItem } from "@/interfaces/lessons/lesson";
 
+const LOCAL_LEVEL_KEY = "currentLevel";
+
+const readLocalCurrentLevel = (): number => {
+  try {
+    const raw = localStorage.getItem(LOCAL_LEVEL_KEY);
+    const n = parseInt(raw ?? "", 10);
+    return Number.isFinite(n) && n > 0 ? n : 1;
+  } catch {
+    return 1;
+  }
+};
+
 export const getLessonsMapService = async () => {
   try {
-    const response = await apiFetch("/lessons/map", "GET");
+    // Obtener currentLevel desde localStorage para pasarlo como query al backend
+    const currentLevel = readLocalCurrentLevel();
+    const url = `/lessons/map?currentLevel=${encodeURIComponent(String(currentLevel))}`;
 
+    const response = await apiFetch(url, "GET");
     return { data: response as LessonMapItem[], error: null };
-
   } catch (error: any) {
     console.error("Error en getLessonsMapService:", error.message);
     return { data: null, error };

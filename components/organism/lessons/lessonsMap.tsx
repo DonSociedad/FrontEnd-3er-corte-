@@ -1,4 +1,4 @@
-import { LessonNode } from "@/components/atoms/lessons/LessonNode";
+import { LessonNode } from "@/components/atoms/lessons/lessonNode";
 import { LessonPath } from "@/components/molecules/lessons/lessonsPath";
 import { useLessonsMap } from "@/hooks/useLessonsMap";
 

@@ -1,6 +1,6 @@
 "use client";
 import HeaderComponent from "@/components/organism/headerComponent";
-import { LessonsMap } from "@/components/organism/lessons/LessonsMap";
+import { LessonsMap } from "@/components/organism/lessons/lessonsMap";
 
 export default function MapPage(){
     return(

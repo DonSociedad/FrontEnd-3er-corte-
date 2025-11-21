@@ -17,6 +17,29 @@ type Lesson = {
   contentBlocks?: ContentBlock[];
 };
 
+const LOCAL_LEVEL_KEY = "currentLevel";
+
+const readLocalCurrentLevel = (): number => {
+  try {
+    const raw = localStorage.getItem(LOCAL_LEVEL_KEY);
+    const n = parseInt(raw ?? "", 10);
+    return Number.isFinite(n) && n > 0 ? n : 1;
+  } catch {
+    return 1;
+  }
+};
+
+const updateLocalCurrentLevelIfLower = (targetLevel: number) => {
+  try {
+    const cur = readLocalCurrentLevel();
+    if (targetLevel > cur) {
+      localStorage.setItem(LOCAL_LEVEL_KEY, String(targetLevel));
+    }
+  } catch {
+    // noop: localStorage might fail in some environments
+  }
+};
+
 export const useLesson = (lessonId: string) => {
   const router = useRouter();
   const [lesson, setLesson] = useState<Lesson | null>(null);
@@ -47,7 +70,6 @@ export const useLesson = (lessonId: string) => {
   useEffect(() => {
     if (!lessonId) return;
     fetchLesson();
-    // reset state when lessonId changes
     setCurrentIndex(0);
     setLastResponse(null);
   }, [lessonId]);
@@ -58,7 +80,23 @@ export const useLesson = (lessonId: string) => {
     if (!lesson?.contentBlocks) return;
     const next = currentIndex + 1;
     if (next >= lesson.contentBlocks.length) {
-      // finished lesson: navigate to map using Next router (SPA)
+      // finished lesson: update local currentLevel for unregistered users
+      // If lesson.order exists, unlock next level => order + 1
+      const order = typeof lesson.order === "number" ? lesson.order : undefined;
+      if (order !== undefined) {
+        const targetLevel = order + 1;
+        updateLocalCurrentLevelIfLower(targetLevel);
+      } else {
+        // fallback: just increment currentLevel by 1
+        try {
+          const cur = readLocalCurrentLevel();
+          updateLocalCurrentLevelIfLower(cur + 1);
+        } catch {
+          // noop
+        }
+      }
+
+      // navigate to map using Next router (SPA)
       router.push("/map");
       return;
     }
@@ -75,10 +113,7 @@ export const useLesson = (lessonId: string) => {
         throw error ?? new Error("No data returned from answerLesson");
       }
       setLastResponse(res as { correct: boolean; explanation?: string });
-
-      // keep response visible and let UI call goToNext when user clicks
       setIsSubmitting(false);
-
       return res;
     } catch (err: any) {
       console.error("Error submitting answer:", err?.message ?? err);
