@@ -5,7 +5,7 @@ import HeaderComponent from "@/components/organism/headerComponent"
 export default function LoginPage() {
     return (
         <div className="min-h-screen flex flex-col bg-white">
-        <HeaderComponent />
+        
 
         <main className="flex flex-1 items-center justify-center bg-white py-8 px-4">
             <div className="p-8 bg-white shadow-lg rounded-xl w-full max-w-md flex flex-col gap-8">
