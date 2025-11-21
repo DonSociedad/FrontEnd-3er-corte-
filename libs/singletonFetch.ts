@@ -23,10 +23,12 @@ export const apiFetch = async (endpoint: string, method: methods, body?: any) =>
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const options: RequestInit = {
+   const options: RequestInit = {
     method,
-    credentials: "include", 
+    credentials: "include",
     headers,
+    cache: 'no-store', 
+    next: { revalidate: 0 } 
   };
 
   if (body && (method === 'POST' || method === 'PUT')) {

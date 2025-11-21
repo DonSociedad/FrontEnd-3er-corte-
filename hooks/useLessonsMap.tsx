@@ -1,121 +1,61 @@
-import { useState, useEffect } from "react";
-import { LessonMapItem } from "@/interfaces/lessons/lesson";
-import { getLessonsMapService } from "@/libs/lessonsService";
+// hooks/useLessonsMap.ts
+"use client";
 
-const LOCAL_LEVEL_KEY = "currentLevel";
+import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { getLocalCompletedLessons, getLessonsMapService } from "@/libs/lessonsService";
 
-const readLocalCurrentLevel = (): number => {
-  try {
-    const raw = localStorage.getItem(LOCAL_LEVEL_KEY);
-    const n = parseInt(raw ?? "", 10);
-    return Number.isFinite(n) && n > 0 ? n : 1;
-  } catch {
-    return 1;
-  }
+type LessonItem = {
+  id: string;
+  title: string;
+  order?: number;
+  status: "completed" | "available" | "locked";
 };
 
 export const useLessonsMap = () => {
-  const [lessons, setLessons] = useState<LessonMapItem[]>([]);
+  const router = useRouter();
+  const [lessons, setLessons] = useState<LessonItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchLessons = async () => {
+  const fetchMap = useCallback(async () => {
     setLoading(true);
-
-    // ✔ Tomar el nivel ANTES de hacer la request
-    const localLevel = readLocalCurrentLevel();
-
-    // ✔ Enviar el currentLevel al backend
-    const { data, error } = await getLessonsMapService(localLevel);
-
-    if (error || !data) {
-      console.error("Error cargando lecciones:", error);
+    try {
+      const localIds = getLocalCompletedLessons();
+      const { data, error } = await getLessonsMapService(localIds);
+      if (error) {
+        console.error("getLessonsMapService error:", error);
+        setError(String(error));
+        setLessons([]);
+      } else {
+        setLessons(data || []);
+        setError(null);
+      }
+    } catch (e: any) {
+      console.error(e);
+      setError(e?.message ?? "Error fetching map");
       setLessons([]);
+    } finally {
       setLoading(false);
-      return;
     }
-
-    const mapped = (data as any[])
-      .map((item: any) => {
-        if (item.status === "completed" || item.status === "available" || item.status === "locked") {
-          return {
-            id: item._id ?? item.id,
-            title: item.title ?? "Sin título",
-            order: typeof item.order === "number" ? item.order : 0,
-            status: item.status,
-          } as LessonMapItem;
-        }
-
-        const order = typeof item.order === "number" ? item.order : undefined;
-
-        if (typeof item.unlocked === "boolean") {
-          return {
-            id: item._id ?? item.id,
-            title: item.title ?? "Sin título",
-            order: order ?? 0,
-            status: item.unlocked ? "available" : "locked",
-          } as LessonMapItem;
-        }
-
-        if (typeof item.completed === "boolean" && item.completed) {
-          return {
-            id: item._id ?? item.id,
-            title: item.title ?? "Sin título",
-            order: order ?? 0,
-            status: "completed",
-          } as LessonMapItem;
-        }
-
-        if (typeof item.minLevel === "number") {
-          const unlocked = localLevel >= item.minLevel;
-          return {
-            id: item._id ?? item.id,
-            title: item.title ?? "Sin título",
-            order: order ?? 0,
-            status: unlocked ? "available" : "locked",
-          } as LessonMapItem;
-        }
-
-        if (order !== undefined) {
-          const unlocked = localLevel >= order;
-          return {
-            id: item._id ?? item.id,
-            title: item.title ?? "Sin título",
-            order: order ?? 0,
-            status: unlocked ? "available" : "locked",
-          } as LessonMapItem;
-        }
-
-        return {
-          id: item._id ?? item.id,
-          title: item.title ?? "Sin título",
-          order: order ?? 0,
-          status: "available",
-        } as LessonMapItem;
-      })
-      .sort((a, b) => a.order - b.order);
-
-    if (mapped.length > 0 && mapped[0].status === "locked") {
-      mapped[0].status = "available";
-    }
-
-    setLessons(mapped);
-    setLoading(false);
-  };
-
-  const goToLesson = (id: string) => {
-    window.location.href = `/learn/${id}`;
-  };
+  }, []);
 
   useEffect(() => {
-    fetchLessons();
+    fetchMap();
+    // Re-consultar si otra pestaña modifica completedLessons
     const onStorage = (e: StorageEvent) => {
-      if (e.key === LOCAL_LEVEL_KEY) fetchLessons();
+      if (e.key === "completedLessons") fetchMap();
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
-  }, []);
+  }, [fetchMap]);
 
-  return { lessons, loading, goToLesson };
+  const goToLesson = (id: string) => {
+    if (!id) return;
+    router.push(`/learn/${id}`);
+  };
+
+  return { lessons, loading, error, goToLesson, refresh: fetchMap } as const;
 };
 
 export default useLessonsMap;
