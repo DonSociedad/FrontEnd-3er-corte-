@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/authContext";
 
 export const metadata: Metadata = {
-  title: "Duolingo-finanzas-home",
-  description: "Proyecto basado en un duolingo",
+  title: "Piglance",
+  description: "Proyecto Final, buscando una mejor experiencia de usuario y entendimiento de temas financieros | Piglance",
 };
 
 export default function RootLayout({
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <AuthProvider>  
+          {children}
+        </AuthProvider>  
       </body>
     </html>
   );
