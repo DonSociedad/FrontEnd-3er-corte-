@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+// 1. Importamos el servicio para actualizar el nivel en el backend
 import { getLessonById, answerLesson } from "@/libs/lessonsService";
+import { increaseUserLevel } from "@/libs/usersService"; // Asegúrate que la ruta sea correcta
 
 type ContentBlock = {
   id: string;
@@ -36,7 +38,6 @@ const updateLocalCurrentLevelIfLower = (targetLevel: number) => {
       localStorage.setItem(LOCAL_LEVEL_KEY, String(targetLevel));
     }
   } catch {
-    // noop: localStorage might fail in some environments
   }
 };
 
@@ -76,30 +77,37 @@ export const useLesson = (lessonId: string) => {
 
   const currentBlock = lesson?.contentBlocks && lesson.contentBlocks.length > 0 ? lesson.contentBlocks[currentIndex] : null;
 
-  const goToNext = () => {
+  const goToNext = async () => {
     if (!lesson?.contentBlocks) return;
     const next = currentIndex + 1;
+    
+    // SI SE TERMINÓ LA LECCIÓN:
     if (next >= lesson.contentBlocks.length) {
-      // finished lesson: update local currentLevel for unregistered users
-      // If lesson.order exists, unlock next level => order + 1
+      
       const order = typeof lesson.order === "number" ? lesson.order : undefined;
       if (order !== undefined) {
         const targetLevel = order + 1;
         updateLocalCurrentLevelIfLower(targetLevel);
       } else {
-        // fallback: just increment currentLevel by 1
         try {
           const cur = readLocalCurrentLevel();
           updateLocalCurrentLevelIfLower(cur + 1);
-        } catch {
-          // noop
-        }
+        } catch { }
       }
 
-      // navigate to map using Next router (SPA)
+      try {
+        await increaseUserLevel(); 
+        console.log("Nivel incrementado en Backend");
+      } catch (err) {
+        console.error("Error actualizando nivel en backend:", err);
+      }
+
+      // Redirección
       router.push("/map");
       return;
     }
+    
+    // SI NO SE TERMINÓ, SEGUIMOS AL SIGUIENTE BLOQUE
     setCurrentIndex(next);
     setLastResponse(null);
   };

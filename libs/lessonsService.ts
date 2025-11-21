@@ -13,16 +13,13 @@ const readLocalCurrentLevel = (): number => {
   }
 };
 
-export const getLessonsMapService = async () => {
+export const getLessonsMapService = async (currentLevel?: number) => {
   try {
-    // Obtener currentLevel desde localStorage para pasarlo como query al backend
-    const currentLevel = readLocalCurrentLevel();
-    const url = `/lessons/map?currentLevel=${encodeURIComponent(String(currentLevel))}`;
+    const query = currentLevel ? `?currentLevel=${currentLevel}` : "";
+    const response = await apiFetch(`/lessons/map${query}`, "GET");
 
-    const response = await apiFetch(url, "GET");
     return { data: response as LessonMapItem[], error: null };
   } catch (error: any) {
-    console.error("Error en getLessonsMapService:", error.message);
     return { data: null, error };
   }
 };

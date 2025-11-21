@@ -20,7 +20,12 @@ export const useLessonsMap = () => {
 
   const fetchLessons = async () => {
     setLoading(true);
-    const { data, error } = await getLessonsMapService();
+
+    // ✔ Tomar el nivel ANTES de hacer la request
+    const localLevel = readLocalCurrentLevel();
+
+    // ✔ Enviar el currentLevel al backend
+    const { data, error } = await getLessonsMapService(localLevel);
 
     if (error || !data) {
       console.error("Error cargando lecciones:", error);
@@ -29,23 +34,19 @@ export const useLessonsMap = () => {
       return;
     }
 
-    const localLevel = readLocalCurrentLevel();
-
     const mapped = (data as any[])
       .map((item: any) => {
-        // Preserve values if backend already sends a status matching our interface
         if (item.status === "completed" || item.status === "available" || item.status === "locked") {
           return {
             id: item._id ?? item.id,
             title: item.title ?? "Sin título",
             order: typeof item.order === "number" ? item.order : 0,
-            status: item.status as "completed" | "available" | "locked",
+            status: item.status,
           } as LessonMapItem;
         }
 
-        // Otherwise compute status
         const order = typeof item.order === "number" ? item.order : undefined;
-        // If backend provides unlocked boolean, prefer it
+
         if (typeof item.unlocked === "boolean") {
           return {
             id: item._id ?? item.id,
@@ -55,8 +56,7 @@ export const useLessonsMap = () => {
           } as LessonMapItem;
         }
 
-        // If backend provides completed flag
-        if (typeof item.completed === "boolean" && item.completed === true) {
+        if (typeof item.completed === "boolean" && item.completed) {
           return {
             id: item._id ?? item.id,
             title: item.title ?? "Sin título",
@@ -65,7 +65,6 @@ export const useLessonsMap = () => {
           } as LessonMapItem;
         }
 
-        // Use minLevel if provided
         if (typeof item.minLevel === "number") {
           const unlocked = localLevel >= item.minLevel;
           return {
@@ -76,7 +75,6 @@ export const useLessonsMap = () => {
           } as LessonMapItem;
         }
 
-        // Fallback to comparing order with localLevel
         if (order !== undefined) {
           const unlocked = localLevel >= order;
           return {
@@ -87,7 +85,6 @@ export const useLessonsMap = () => {
           } as LessonMapItem;
         }
 
-        // If nothing else, make it available
         return {
           id: item._id ?? item.id,
           title: item.title ?? "Sin título",
@@ -95,9 +92,8 @@ export const useLessonsMap = () => {
           status: "available",
         } as LessonMapItem;
       })
-      .sort((a: LessonMapItem, b: LessonMapItem) => a.order - b.order);
+      .sort((a, b) => a.order - b.order);
 
-    // UX: ensure first lesson is available (si por alguna razón quedó locked)
     if (mapped.length > 0 && mapped[0].status === "locked") {
       mapped[0].status = "available";
     }
