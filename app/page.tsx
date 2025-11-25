@@ -1,6 +1,5 @@
 //home
 import FooterComponent from "@/components/organism/footerComponent";
-import HeaderComponent from "@/components/organism/headerComponent";
 import AnimatedContainer from "@/components/utilities/animatedContainer";
 
 export default function HomePage() {
@@ -32,7 +31,7 @@ export default function HomePage() {
               </h1>
               <div className="flex flex-col space-y-2">
                 <a
-                  href="register"
+                  href="map"
                   className="inline-flex items-center justify-center min-w-[140px] md:min-w-[160px] whitespace-nowrap bg-neutral-50 text-rose-700 font-bold py-3 px-4 rounded-full hover:bg-rose-700 hover:text-neutral-50 transition text-base md:text-lg"
                 >
                   Empezar ahora

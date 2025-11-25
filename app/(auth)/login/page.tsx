@@ -1,4 +1,4 @@
-import LoginComponent from "@/components/molecules/loginComponents"
+import LoginComponent from "@/components/molecules/auth/loginComponents"
 import FooterComponent from "@/components/organism/footerComponent"
 import HeaderComponent from "@/components/organism/headerComponent"
 

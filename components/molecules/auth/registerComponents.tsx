@@ -1,8 +1,8 @@
 'use client'
 
-import { useRegister } from "@/hooks/useRegister";
-import InputComponent from "../atoms/inputComponents";
-import ButtonComponent from "../atoms/buttonComponents";
+import { useRegister } from "@/hooks/auth/useRegister";
+import InputComponent from "../../atoms/inputComponents";
+import ButtonComponent from "../../atoms/buttonComponents";
 
 
 export default function RegisterComponent() {

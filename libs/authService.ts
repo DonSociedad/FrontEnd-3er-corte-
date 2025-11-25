@@ -14,8 +14,6 @@ export const loginService = async (body: LoginDTO) => {
   }
 };
 
-
-
 export const registerService = async (body: RegisterDTO) => {
   try {
     const response = await apiFetch("/users", "POST", body);

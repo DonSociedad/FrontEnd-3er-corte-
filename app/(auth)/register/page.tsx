@@ -1,4 +1,4 @@
-import RegisterComponent from "@/components/molecules/registerComponents"
+import RegisterComponent from "@/components/molecules/auth/registerComponents"
 import FooterComponent from "@/components/organism/footerComponent";
 import HeaderComponent from "@/components/organism/headerComponent";
 
