@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation" 
 
-import { LoginDTO } from "@/interfaces/login"
+import { LoginDTO } from "@/interfaces/access/login"
 import { loginScheme } from "@/schemas/login"
 import { useAuth } from "@/contexts/authContext" 
 

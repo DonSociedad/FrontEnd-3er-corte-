@@ -1,6 +1,6 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
-type methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type methods = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 // Función auxiliar para leer cookies en el cliente
 const getCookie = (name: string) => {
@@ -31,7 +31,7 @@ export const apiFetch = async (endpoint: string, method: methods, body?: any) =>
     next: { revalidate: 0 } 
   };
 
-  if (body && (method === 'POST' || method === 'PUT')) {
+  if (body && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
     options.body = JSON.stringify(body);
   }
 

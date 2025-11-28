@@ -1,10 +1,6 @@
 "use client";
 
-interface NextButtonProps {
-  onClick?: () => void;
-  disabled?: boolean;
-  label?: string;
-}
+import { NextButtonProps } from "@/interfaces/buttonInterfaces/nextButtonProps";
 
 export default function NextButton({ onClick, disabled, label = "Siguiente" }: NextButtonProps) {
   return (

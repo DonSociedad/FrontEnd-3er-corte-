@@ -1,10 +1,6 @@
-import React from "react";
+import { LessonNodeProps } from "@/interfaces/lessons/lessonNodeProps";
 
-interface LessonNodeProps {
-  status: "completed" | "available" | "locked";
-  onClick?: () => void;
-  title?: string;
-}
+import React from "react";
 
 export const LessonNode = ({ status, onClick, title }: LessonNodeProps) => {
   // Base styles

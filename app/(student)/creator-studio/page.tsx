@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import ButtonComponent from '@/components/atoms/buttonComponents';
 import ShopComponent from '@/components/organism/creator-studio/shopComponent';
-import { useCreatorStudio } from '@/hooks/useCreatorStudio';
+import { useCreatorStudio } from '@/hooks/lessons/useCreatorStudio';
 import { FaShoppingCart, FaCoins } from 'react-icons/fa';
 
 export default function CreatorStudioPage() {

@@ -1,6 +1,6 @@
 import { apiFetch } from "./singletonFetch"
-import { RegisterDTO } from "@/interfaces/register"
-import { LoginDTO } from "@/interfaces/login"
+import { RegisterDTO } from "@/interfaces/access/register"
+import { LoginDTO } from "@/interfaces/access/login"
 
 export const loginService = async (body: LoginDTO) => {
   try {

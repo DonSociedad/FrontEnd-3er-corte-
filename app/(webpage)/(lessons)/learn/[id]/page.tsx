@@ -1,10 +1,17 @@
-import LearnClient from './LearnClient'
+import LearnClient from "@/components/organism/lessons/learnClientComponent";
 
 type Props = {
-    params: { id: string };
+    params: Promise<{
+        id: string;
+    }>;
 };
 
 export default async function LearnPage({ params }: Props) {
-    const p = await params;
-    return <LearnClient lessonId={p.id} />;
+    try {
+        const p = await params;
+        return <LearnClient lessonId={p.id} />;
+    } catch (error) {
+        console.error('Error loading lesson:', error);
+        return <div>Error loading lesson</div>;
+    }
 }
