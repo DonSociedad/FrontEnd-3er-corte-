@@ -17,7 +17,9 @@ type SocialButtonProps = {
 const SocialButton = ({ provider, onClick, iconPath }: SocialButtonProps) => (
     <button 
         onClick={onClick}
-        className="group relative w-full flex justify-center items-center py-2.5 px-4 border border-gray-200 rounded-xl shadow-sm bg-white text-sm font-medium text-gray-600 hover:bg-gray-50 hover:border-pink-300 hover:text-gray-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-pink-400"
+        className="group relative w-full flex justify-center items-center py-2.5 px-4 border border-gray-200 rounded-xl shadow-sm bg-white text-sm 
+        font-medium text-gray-600 hover:bg-gray-50 hover:border-pink-300 hover:text-gray-900 transition-all duration-200 focus:outline-none 
+        focus:ring-2 focus:ring-offset-1 focus:ring-[#f0b9a8ff]"
     >
         <div className="absolute left-4 flex items-center justify-center w-5 h-5">
             {iconPath}
@@ -59,7 +61,7 @@ export default function RegisterPage() {
                 <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100">
                     <button 
                         onClick={() => router.back()} 
-                        className="mb-4 flex items-center text-sm text-gray-400 hover:text-pink-500 transition-colors font-medium group">
+                        className="mb-4 flex items-center text-sm text-gray-400 hover:text-[#f0b9a8ff] transition-colors font-medium group">
                         <ArrowLeftIcon />
                         <span className="ml-1 group-hover:-translate-x-1 translate-x-0 transition-transform duration-200">
                             Volver
@@ -68,7 +70,7 @@ export default function RegisterPage() {
 
                     <div className="text-center mb-6">
                         <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">
-                            Únete a <span className="text-pink-500">Piglance</span>
+                            Únete a <span className="text-[#f0b9a8ff]">Piglance</span>
                         </h1>
                         <p className="mt-1 text-xs sm:text-sm text-gray-500">
                             Crea tu cuenta y comienza a aprender hoy.
@@ -98,7 +100,7 @@ export default function RegisterPage() {
                     <div className="mt-6 border-t border-gray-100 pt-4">
                         <p className="text-center text-xs sm:text-sm text-gray-600">
                             ¿Ya tienes una cuenta?{' '}
-                            <Link href="/login" className="font-bold px-5 py-6 text-pink-500 hover:text-pink-600 transition-colors">
+                            <Link href="/login" className="font-bold px-5 py-6 text-[#f0b9a8ff] hover:text-[#f0b9a8ff]transition-colors">
                                 Iniciar sesión
                             </Link>
                         </p>

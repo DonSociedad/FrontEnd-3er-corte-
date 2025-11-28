@@ -118,7 +118,6 @@ export default function SidebarRight() {
               ¡Visita el estudio y personaliza tu personaje!
             </p>
 
-            {/* Botón Ir al Estudio (ROSA) */}
             <button
               onClick={() => router.push("/creator-studio")}
               className="w-full py-3 rounded-xl font-bold text-slate-900 transition-all active:translate-y-1 active:shadow-none uppercase"

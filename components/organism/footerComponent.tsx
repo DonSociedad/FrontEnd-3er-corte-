@@ -13,12 +13,12 @@ import {
 
 export default function FooterComponent() {
     return (
-        <footer className="bg-pink-100 text-gray-700 py-2 border-t border-pink-200">
-            <div className="container mx-auto px-6">
+        <footer className="bg-pink-100 text-gray-700 py-7 border-t border-pink-200">
+            <div className="container mx-auto px-12">
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
 
-                    <div className="flex flex-col space-y-4">
+                    <div className="flex flex-col space-y-3">
                         <div className="text-2xl font-bold text-gray-900">
                             Piglance
                         </div>

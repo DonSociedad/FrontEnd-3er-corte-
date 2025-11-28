@@ -57,7 +57,7 @@ export default function LoginPage() {
                 <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100">
                     <button 
                         onClick={() => router.back()} 
-                        className="mb-4 flex items-center text-sm text-gray-400 hover:text-pink-500 transition-colors font-medium group">
+                        className="mb-4 flex items-center text-sm text-gray-400 hover:text-[#f0b9a8ff] transition-colors font-medium group">
                         <ArrowLeftIcon />
                         <span className="ml-1 group-hover:-translate-x-1 translate-x-0 transition-transform duration-200">
                             Volver
@@ -69,7 +69,7 @@ export default function LoginPage() {
                             ¡Bienvenido de nuevo!
                         </h1>
                         <p className="mt-1 text-xs sm:text-sm text-gray-500">
-                            Ingresa tus datos para continuar aprendiendo en <span className="font-semibold text-pink-500">Piglance</span>.
+                            Ingresa tus datos para continuar aprendiendo en <span className="font-semibold text-[#f0b9a8ff] ">Piglance</span>.
                         </p>
                     </div>
 
@@ -100,7 +100,7 @@ export default function LoginPage() {
                             <span>¿No tienes cuenta?</span>
                             <Link 
                                 href="/register" 
-                                className="font-bold text-pink-500 hover:text-pink-600 hover:underline transition-all"
+                                className="font-bold text-[#f0b9a8ff] hover:text-[#f0b9a8ff] hover:underline transition-all"
                             >
                                 Regístrate aquí
                             </Link>

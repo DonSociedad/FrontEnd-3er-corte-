@@ -68,7 +68,7 @@ export default function HeaderComponent() {
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
           <Image src="/perfil.png"
-            alt= "/images/header/perfil" 
+            alt= "/images/header/perfil.png" 
             width={100} 
             height={100} /> 
             <span>Perfil</span>
