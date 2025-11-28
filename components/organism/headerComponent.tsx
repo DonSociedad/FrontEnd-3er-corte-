@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-
 import { useHeader } from '@/hooks/compotents/useHeader';
 import { useAuth } from '@/contexts/authContext';
 import { useRouter } from 'next/navigation';

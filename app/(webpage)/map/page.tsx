@@ -1,4 +1,3 @@
-// src/app/map/page.tsx (o donde tengas tu MapPage)
 "use client";
 
 import HeaderComponent from "@/components/organism/headerComponent";

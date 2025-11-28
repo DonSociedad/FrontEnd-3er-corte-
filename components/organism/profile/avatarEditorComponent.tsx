@@ -67,11 +67,11 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
               `}
             >
               <div className="w-16 h-16 flex items-center justify-center mb-1">
-                 {imgSrc ? (
-                     <img src={imgSrc} alt={item.name} className="max-w-full max-h-full object-contain" />
-                 ) : (
-                     <span className="text-2xl text-gray-300">🚫</span> 
-                 )}
+                  {imgSrc ? (
+                      <img src={imgSrc} alt={item.name} className="max-w-full max-h-full object-contain" />
+                  ) : (
+                      <span className="text-2xl text-gray-300">🚫</span> 
+                  )}
               </div>
               <span className="text-[10px] font-bold text-gray-600 text-center leading-tight">
                 {item.name}

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Admin page"
+    title: "Administrador | Piglance",
+    description: "Panel de administración para gestionar usuarios, contenidos y configuraciones de la plataforma | Piglance",
 };
 
 export default function homeDashboardPage() {

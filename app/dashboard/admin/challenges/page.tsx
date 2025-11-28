@@ -1,7 +1,7 @@
 export default function ChallengesPage() {
     return (
         <div>
-            <h1>Admin Challenges Page</h1>
+            <h1>Pagina de Administrador</h1>
         </div>
     );
 }

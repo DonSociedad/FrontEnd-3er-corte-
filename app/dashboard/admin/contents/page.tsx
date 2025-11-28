@@ -1,5 +1,7 @@
 "use client";
+
 import ButtonComponent from "@/components/atoms/buttonComponents";
+
 export default function ContenidosListPage() {
   const contenidos = [
     {
