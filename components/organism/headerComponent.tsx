@@ -18,44 +18,33 @@ export default function HeaderComponent() {
   };
 
   return (
-    <aside className="flex flex-col bg-[#0f172a] border-r border-gray-800 w-64 h-screen p-4 fixed left-0 top-0 z-20 hidden md:flex">
-      <div className="flex items-center mb-8 px-4">
-        <button onClick={() => handleNav('workplace')} className="flex items-center gap-2">
-            {/* Ajusta el src de tu logo */}
-          <img className="h-8 w-auto" src="/Piglance.png" alt="Piglance" />
+    <aside className="flex flex-col bg-gray-100 text-white w-64 h-screen p-6 fixed left-0 top-0">
+      <div className="flex items-center justify-center mb-10">
+        <button onClick={() => onNavigate("workplace")} className="flex flex-col items-center">
+          <img className="h-12 w-auto mb-2" src="/Piglance.png" alt="Piglance" />
         </button>
       </div>
 
       <nav className="flex flex-col gap-2 w-full">
         <button
-          onClick={() => handleNav('workplace')}
-          className="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-gray-800/50 font-bold text-gray-400 hover:text-white tracking-wide text-sm uppercase transition-colors"
+          onClick={() => onNavigate("workplace")}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
           <span className="text-2xl">🏠</span> <span>Aprender</span>
         </button>
 
-        {/* SOLO MOSTRAR SI ESTÁ AUTENTICADO */}
-        {isAuthenticated && (
-          <>
-            <button
-              onClick={() => handleNav('profile')}
-              className="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-gray-800/50 font-bold text-gray-400 hover:text-white tracking-wide text-sm uppercase transition-colors"
-            >
-              <span className="text-2xl">👤</span> <span>Perfil</span>
-            </button>
-            
-             <button
-              onClick={() => router.push('/creator-studio')}
-              className="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-gray-800/50 font-bold text-gray-400 hover:text-white tracking-wide text-sm uppercase transition-colors"
-            >
-              <span className="text-2xl">🎨</span> <span>Personaje</span>
-            </button>
-          </>
-        )}
-        
-        {/* Opción de Tienda o Misiones visible para todos o solo users? 
-            Generalmente visible, pero funcional solo para users. Lo dejo opcional.
-        */}
+        <button
+          onClick={() => onNavigate("profile")}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+        >
+          <span className="text-2xl">👤</span> <span>PERFIL</span>
+        </button>
+        <button
+          onClick={() => onNavigate("store")}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+        >
+          <span className="text-2xl">👤</span> <span>TIENDA</span>
+        </button>
       </nav>
 
       {/* FOOTER DEL HEADER */}

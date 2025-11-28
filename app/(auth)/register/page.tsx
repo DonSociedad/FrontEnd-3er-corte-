@@ -6,7 +6,7 @@ export default function RegisterPage() {
     return (
 
         <div className="min-h-screen flex flex-col bg-white">
-        <HeaderComponent />
+        
 
         <main className="flex min-h-screen items-center justify-center bg-white py-8">
             {/*<HeaderComponent/>*/}
