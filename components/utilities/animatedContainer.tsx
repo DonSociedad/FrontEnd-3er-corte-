@@ -1,12 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
 
-interface AnimatedContainerProps {
-  children: ReactNode;
-  delay?: number;
-  y?: number;
-}
+import { AnimatedContainerProps } from "@/interfaces/shopPet/animatedContainerProps";
+import { motion } from "framer-motion";
 
 export default function AnimatedContainer({
   children,

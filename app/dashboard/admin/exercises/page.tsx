@@ -1,21 +1,10 @@
 'use client'  
+
 import ButtonComponent from "@/components/atoms/buttonComponents";
 import CardComponent from "@/components/atoms/card";
 
-import Link from "next/link";
-
-export interface Exercise {
-  _id: string;
-  title: string;
-  description: string;
-  contentId: string; // references Content
-  instructions: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-  createdAt: Date;
-}
-
 export default function exercises() {
-   const exercises = [
+  const exercises = [
     {
       id: 1,
       title: "Abdominal Crunch",

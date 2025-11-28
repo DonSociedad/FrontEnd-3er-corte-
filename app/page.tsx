@@ -1,4 +1,6 @@
-//home
+// home
+import Image from "next/image";
+import Link from "next/link";
 import FooterComponent from "@/components/organism/footerComponent";
 import AnimatedContainer from "@/components/utilities/animatedContainer";
 
@@ -7,6 +9,18 @@ export default function HomePage() {
     <>
       <div className="flex items-center justify-between px-6 py-4 bg-pink-100 text-gray-800 shadow-md">
         <div className="flex items-center">
+          <Link href="/" className="-m-1.5 p-1.5 flex items-center">
+            {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
+            <Image 
+              className="h-25 w-auto" 
+              src="/Piglance.png" 
+              alt="Piglance" 
+              width={100} 
+              height={100} 
+              priority 
+            />       
+          </Link>
+        </div>
         <a href="/" className="-m-1.5 p-1.5 flex items-center">
           <span className="sr-only">Piglance</span>
           {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
@@ -15,37 +29,39 @@ export default function HomePage() {
         </a>
       </div>
       </div>
+      
       <main className="min-h-screen bg-neutral-50 flex flex-col">
         {/* First section - Image */}
         <AnimatedContainer>
-            <section className="w-full flex items-center justify-center overflow-hidden relative">
-            <div className="w-screen">
-              <img
+          <section className="w-full flex items-center justify-center overflow-hidden relative">
+            <Image
               className="w-full h-auto max-h-[60vh] object-cover mx-auto"
               src="/images/home/cerdo3_2.png"
               alt="Piglance"
-              />
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4">
+              width={1200}
+              height={600}
+              priority // ✅ Optimizado para Vercel
+            />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4">
               <h1 className="text-2xl md:text-4xl font-bold mb-2 text-shadow text-gray-900">
                 La mejor forma de aprender de finanzas mientras te diviertes en el proceso
               </h1>
               <div className="flex flex-col space-y-2">
-                <a
-                  href="map"
+                <Link
+                  href="/map"
                   className="inline-flex items-center justify-center min-w-[140px] md:min-w-[160px] whitespace-nowrap bg-neutral-50 text-rose-700 font-bold py-3 px-4 rounded-full hover:bg-rose-700 hover:text-neutral-50 transition text-base md:text-lg"
                 >
                   Empezar ahora
-                </a>
-                <a
-                  href="login"
+                </Link>
+                <Link
+                  href="/login"
                   className="inline-flex items-center justify-center min-w-[140px] md:min-w-[160px] whitespace-nowrap bg-neutral-50 text-rose-700 font-bold py-3 px-4 rounded-full hover:bg-rose-700 hover:text-neutral-50 transition text-base md:text-lg"
                 >
                   Ya tengo una cuenta
-                </a>
-              </div>
+                </Link>
               </div>
             </div>
-            </section>
+          </section>
         </AnimatedContainer>
 
         {/* Second section */}
@@ -61,6 +77,13 @@ export default function HomePage() {
                     Aprende hábitos simples y herramientas que te ayudarán a
                     administrar mejor tu dinero en cualquier etapa.
                   </p>
+                  <Image
+                    className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh] mt-4"
+                    src="/hombre muppet.png"
+                    alt="Hombre con dinero"
+                    width={500}
+                    height={450}
+                  />
                 </div>
               </div>
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
@@ -85,8 +108,15 @@ export default function HomePage() {
                   </h2>
                   <p className="mt-2 text-sm md:text-base text-gray-700 max-w-lg mx-auto">
                     Cursos y recursos diseñados para adaptarse a tu ritmo y a
-                    cualquier tamaño de pantalla.
+                    tus necesidades específicas.
                   </p>
+                  <Image
+                    className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh] mt-4"
+                    src="/chica con libro.png"
+                    alt="Chica con libro"
+                    width={500}
+                    height={450}
+                  />
                 </div>
               </div>
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
@@ -105,19 +135,20 @@ export default function HomePage() {
           <section className="w-full bg-neutral-50 flex items-center justify-center py-8">
             <div className="container mx-auto w-[90%] min-h-[45vh] flex flex-col md:flex-row items-stretch bg-gray-300 rounded-lg shadow-lg overflow-hidden">
               <div className="md:w-1/2 w-full p-6 flex flex-col items-center justify-center">
-                <h2 className="text-lg md:text-2xl font-bold text-center">
+                <h2 className="text-lg md:text-2xl font-bold text-center mb-4">
                   Domina tu dinero
                 </h2>
-                <p className="mt-2 text-sm md:text-base text-gray-700 text-center max-w-lg">
-                  Guías paso a paso para construir seguridad financiera a largo
-                  plazo.
+                <p className="text-sm md:text-base text-gray-700 text-center max-w-lg mx-auto">
+                  Toma el control de tus finanzas personales y alcanza tus metas económicas.
                 </p>
               </div>
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
-                <img
+                <Image
                   className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
                   src="/images/home/hombre con corbata 4.png"
                   alt="Hombre con brazos arriba"
+                  width={500}
+                  height={450}
                 />
               </div>
             </div>

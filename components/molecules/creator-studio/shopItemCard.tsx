@@ -1,13 +1,10 @@
-// components/molecules/shopItemCard.tsx
-import Image from 'next/image';
-import { ShopItem } from '@/interfaces/shop';
-import ButtonComponent from '@/components/atoms/buttonComponents'
+'use client';
 
-interface ShopItemCardProps {
-  item: ShopItem;
-  onBuy: (item: ShopItem) => void;
-  userCoins: number;
-}
+import ButtonComponent from '@/components/atoms/buttonComponents'
+import { ShopItemCardProps } from '@/interfaces/shopPet/shopItemCardProps';
+
+import Image from 'next/image';
+
 
 export default function ShopItemCard({ item, onBuy, userCoins }: ShopItemCardProps) {
   const canAfford = userCoins >= item.price;

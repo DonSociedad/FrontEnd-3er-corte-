@@ -1,51 +1,93 @@
-// src/components/organism/headerComponent.tsx
 'use client';
 
-import { useHeader } from '@/hooks/useHeader';
+import Image from 'next/image';
+
+import { useHeader } from '@/hooks/compotents/useHeader';
 import { useAuth } from '@/contexts/authContext';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function HeaderComponent() {
   const { onNavigate } = useHeader();
-  const { isAuthenticated, logout } = useAuth(); // Usamos el estado y la función logout
+  const { isAuthenticated, logout } = useAuth(); 
   const router = useRouter();
 
-  // Wrapper para navegar (usando tu hook existente o router directo)
-  const handleNav = (path: string) => {
-    // Si onNavigate usa router.push internamente, está bien.
-    // Si no, podrías usar router.push(path) aquí.
-    onNavigate(path); 
-  };
-
   return (
-    <aside className="flex flex-col bg-gray-100 text-white w-64 h-screen p-6 fixed left-0 top-0">
-      <div className="flex items-center justify-center mb-10">
-        <button onClick={() => onNavigate("workplace")} className="flex flex-col items-center">
-          <img className="h-12 w-auto mb-2" src="/images/logos/Piglance.png" alt="Piglance" />
-        </button>
+    <aside className="flex flex-col bg-[#f8f4eb] text-white w-60 h-screen p-2 fixed left-0 top-0">
+      <div className="flex items-center justify-center mb-6 mt-6">
+        <Link href='/' className="flex flex-col items-center">
+          <Image 
+            className="h-27 w-auto mb-4" 
+            src="/Piglance.png" 
+            alt="Piglance" 
+            width={200} 
+            height={200} />
+        </Link>
       </div>
 
-      <nav className="flex flex-col gap-2 w-full">
-        <button
-          onClick={() => onNavigate("workplace")}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+      <nav className="flex flex-col  px-1 gap-2 w-ss">
+        <Link 
+          href="/"
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
-          <span className="text-2xl">🏠</span> <span>Aprender</span>
-        </button>
+          <Image 
+            src="/home.png" 
+            alt="Inicio" 
+            width={100} 
+            height={100}
+          /> 
+          <span>Inicio</span>
+        </Link>
 
-        <button
-          onClick={() => onNavigate("profile")}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+        <Link
+          href="/map"
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
-          <span className="text-2xl">👤</span> <span>PERFIL</span>
-        </button>
+          <Image src="/learn.png"
+          alt= "aprender" 
+          width={90} 
+          height={90} /> 
+          <span>Aprender</span>
+        </Link>
+      </nav>
+
+      <div className="flex flex-col py-12 gap-2 w-ss mt-3">
         <button
           onClick={() => onNavigate("store")}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
-          <span className="text-2xl">👤</span> <span>TIENDA</span>
+            <Image src="/shop.png"
+            alt= "tienda" 
+            width={100} 
+            height={100} /> 
+            <span>Tienda</span>
         </button>
-      </nav>
+
+          <button
+          onClick={() => onNavigate("profile")}
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+        >
+          <Image src="/perfil.png"
+            alt= "perfil" 
+            width={100} 
+            height={100} /> 
+            <span>Perfil</span>
+        </button>
+
+        <button className="flex items-center px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm">
+          <Image 
+          src="/notificaciones.png" 
+          alt= "notificaciones" 
+          width={100} 
+          height={100} />
+          <span> Notificaciones</span>
+        </button>
+
+      </div>
+
+      <div className="  flex justify-center">
+        <span className="text-gray-400 text-sm">v1.0.0</span>
+      </div>
 
       {/* FOOTER DEL HEADER */}
       <div className="mt-auto flex justify-center pb-4">

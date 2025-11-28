@@ -2,21 +2,7 @@
 
 import MultipleChoice from "@/components/molecules/multipleChoice";
 import NextButton from "@/components/atoms/nextButton";
-
-interface Option {
-  id: string;
-  text: string;
-}
-
-interface LearnOrganismProps {
-  title: string;
-  prompt: string;
-  options: Option[];
-  onSelect: (id: string) => void;
-  disabled?: boolean;
-  feedback?: { correct: boolean; explanation?: string } | null;
-  onNext?: () => void;
-}
+import { LearnOrganismProps } from "@/interfaces/lessons/learnOrganismProps";
 
 export default function LearnOrganism({ title, prompt, options, onSelect, disabled, feedback, onNext }: LearnOrganismProps) {
   return (

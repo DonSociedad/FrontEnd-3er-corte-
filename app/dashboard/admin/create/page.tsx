@@ -5,7 +5,7 @@ import { PlusCircle } from 'lucide-react';
 
 export default function AdminCreatePage() {
   const [type, setType] = useState<'content' | 'quiz' | 'exercise' | ''>('');
-  const [formData, setFormData] = useState<any>({});
+  const [formData, setFormData] = useState([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -158,7 +158,7 @@ export default function AdminCreatePage() {
   <div className="mb-6">
     <label className="block text-sm font-medium text-gray-700">Select Type</label>
     <select
-      onChange={(e) => setType(e.target.value as any)}
+      onChange={(e) => setType(e.target.value as 'content' | 'quiz' | 'exercise' | '')}
       className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-pink-400"
     >
       <option value="">Choose an option</option>

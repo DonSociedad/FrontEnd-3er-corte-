@@ -1,13 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
-
-interface OptionButtonProps {
-  children: ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  className?: string;
-}
+import { OptionButtonProps } from "@/interfaces/buttonInterfaces/optionButtonProps";
 
 export default function OptionButton({ children, onClick, disabled, className }: OptionButtonProps) {
   return (

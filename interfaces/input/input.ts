@@ -1,4 +1,3 @@
-'use client'
 import { UseFormRegister } from "react-hook-form"
 
 export interface valuesSelect {

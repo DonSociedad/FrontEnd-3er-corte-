@@ -1,9 +1,7 @@
 "use client"
 
-import { useState } from "react";
 import EmerPageButton from "../atoms/buttons/emerPageButtonComponent";
 import StoreComponent from "./storeComponent";
-
 
 export default function WorkPlaceComponent() { 
     return (

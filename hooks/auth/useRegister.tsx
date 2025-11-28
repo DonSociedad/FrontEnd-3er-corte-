@@ -2,7 +2,7 @@
 
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useRouter } from "next/navigation"
-import { RegisterDTO } from "@/interfaces/register"
+import { RegisterDTO } from "@/interfaces/access/register"
 import { useAuth } from "@/contexts/authContext" 
 
 export function useRegister() {

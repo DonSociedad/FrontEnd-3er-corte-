@@ -47,7 +47,7 @@ export default function RegisterComponent() {
         />
 
         <ButtonComponent
-            type={3}
+            type={2}
             content="Iniciar sesión"
         />
         </form>

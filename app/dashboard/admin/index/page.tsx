@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import CardComponent from "@/components/atoms/card"; 
+import Image from "next/image";
 
 export default function AdminIndex() {
   return (
@@ -17,29 +18,47 @@ export default function AdminIndex() {
           {/* Crear */}
           <Link href="/dashboard/admin/crear-actividad">
             <CardComponent
-              title="📘 Create an Activity, Quiz or Exercise"
+              title="Create an Activity, Quiz or Exercise"
               description="Design new interactive learning activities, quizzes or exercises for users."
             />
           </Link>
 
           {/* Usuarios */}
           <Link href="/dashboard/admin/listar-usuarios">
+          <Image 
+            src="/ver_usuarios.png" 
+            alt="Inicio" 
+            width={100} 
+            height={100}
+          /> 
             <CardComponent
-              title="🧠 View Users"
+              title="View Users"
               description="See who is actively learning and track their progress."
             />
           </Link>
 
           {/* Ver más */}
           <Link href="/dashboard/admin/exercises">
+            <Image 
+            src="/ver_creaciones.png" 
+            alt="Inicio" 
+            width={100} 
+            height={100}
+            /> 
             <CardComponent
-              title="💪 Your Creations"
+              title="Your Creations"
               description="Review and manage all activities, quizzes and exercises you’ve created."
             />
           </Link>
 
           {/*Contenidos */}
           <Link href="/dashboard/admin/contents">
+          <Image 
+            src="/crear_actividades.png" 
+            alt="Inicio" 
+            width={100} 
+            height={100}
+          /> 
             <CardComponent
               title="Contenidos"
               description="Review and manage all the contents."
