@@ -1,6 +1,6 @@
 import { LessonNode } from "@/components/atoms/lessons/lessonNode";
 import { LessonPath } from "@/components/molecules/lessons/lessonsPath";
-import { useLessonsMap } from "@/hooks/useLessonsMap";
+import { useLessonsMap } from "@/hooks/lessons/useLessonsMap";
 
 export const LessonsMap = () => {
   const { lessons, loading, goToLesson } = useLessonsMap();

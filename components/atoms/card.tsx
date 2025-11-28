@@ -1,14 +1,8 @@
 "use client";
 
-import { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { CardProps } from "@/interfaces/interaction/cardProps";
 
-interface CardProps {
-  title: string;
-  description?: string;
-  children?: ReactNode;
-  onClick?: () => void;
-}
+import { motion } from "framer-motion";
 
 export default function CardComponent({
   title,

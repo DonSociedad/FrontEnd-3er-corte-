@@ -1,6 +1,6 @@
 "use client";
 
-import useLesson from "@/hooks/useLesson";
+import useLesson from "@/hooks/lessons/useLesson";
 import LearnOrganism from "@/components/organism/learnOrganism";
 
 interface LearnClientProps {

@@ -3,8 +3,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginService, registerService } from "@/libs/authService"; // Ajusta la ruta a tu authService
-import { LoginDTO } from "@/interfaces/login";
-import { RegisterDTO } from "@/interfaces/register";
+import { LoginDTO } from "@/interfaces/access/login";
+import { RegisterDTO } from "@/interfaces/access/register";
 
 // --- Tipos ---
 

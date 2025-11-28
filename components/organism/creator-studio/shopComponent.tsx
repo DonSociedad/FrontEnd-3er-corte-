@@ -1,15 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import ShopItemCard from '@/components/molecules/creator-studio/shopItemCard';
-import { ShopItem } from '@/interfaces/shop';
+import { ShopItem } from '@/interfaces/shopPet/shop';
+import { ShopComponentProps } from '@/interfaces/shopPet/shopComponentProps';
+
 import Image from 'next/image';
 
-interface ShopComponentProps {
-  onItemSelected: (item: ShopItem) => void;
-  userCoins: number;
-  onBuyItem: (item: ShopItem) => void;
-}
 
 export default function ShopComponent({ onItemSelected, userCoins, onBuyItem }: ShopComponentProps) {
   

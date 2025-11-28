@@ -1,7 +1,7 @@
 // src/components/organism/headerComponent.tsx
 'use client';
 
-import { useHeader } from '@/hooks/useHeader';
+import { useHeader } from '@/hooks/compotents/useHeader';
 import { useAuth } from '@/contexts/authContext';
 import { useRouter } from 'next/navigation';
 

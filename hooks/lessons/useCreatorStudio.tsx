@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ShopItem } from '@/interfaces/shop';
+import { ShopItem } from '@/interfaces/shopPet/shop';
 
 export function useCreatorStudio() {
   const [currentOutfit, setCurrentOutfit] = useState<string>('/images/piggy/default-outfit.png');

@@ -1,19 +1,7 @@
 "use client";
 
 import OptionButton from "@/components/atoms/optionButton";
-
-interface Option {
-  id: string;
-  text: string;
-}
-
-interface MultipleChoiceProps {
-  prompt: string;
-  options: Option[];
-  onSelect: (id: string) => void;
-  disabled?: boolean;
-  feedback?: { correct: boolean; explanation?: string } | null;
-}
+import { MultipleChoiceProps } from "@/interfaces/lessons/multipleChoiceProps";
 
 export default function MultipleChoice({ prompt, options, onSelect, disabled, feedback }: MultipleChoiceProps) {
   return (

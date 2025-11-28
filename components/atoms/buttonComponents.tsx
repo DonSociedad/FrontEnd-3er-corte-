@@ -1,7 +1,7 @@
 'use client'
 
-import { useButton } from "@/hooks/useButton";
-import { ButtonProps } from "@/interfaces/button";
+import { useButton } from "@/hooks/buttons/useButton";
+import { ButtonProps } from "@/interfaces/buttonInterfaces/button";
 
 export default function ButtonComponent({type, content, icon, onClick}:ButtonProps) {
   const style = useButton(type);

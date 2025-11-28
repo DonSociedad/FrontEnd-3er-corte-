@@ -1,8 +1,6 @@
-'use client'
+'use client';
 
-import { valuesSelect } from "@/interfaces/input";
-import { PropsInput } from "@/interfaces/input";
-
+import { PropsInput } from "@/interfaces/input/input";
 
 export default function InputComponent({ label, typeElement, idElement, listValues, nameElement, register }: PropsInput) {
     return (
