@@ -76,7 +76,7 @@ export default function FooterComponent() {
                                 <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
                                 className="bg-white p-2 rounded-full shadow-sm hover:shadow-md hover:scale-110 transition-all">
                                     <Image
-                                        src="/facebook.png" 
+                                        src="/images/icons/facebook.png" 
                                         alt="Facebook" 
                                         width={24}
                                         height={24}
@@ -86,7 +86,7 @@ export default function FooterComponent() {
                                 <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
                                 className="bg-white p-2 rounded-full shadow-sm hover:shadow-md hover:scale-110 transition-all">
                                     <Image 
-                                        src="/instagram.png" 
+                                        src="/images/icons/instagram.png" 
                                         alt="Instagram" 
                                         width={24} 
                                         height={24} 

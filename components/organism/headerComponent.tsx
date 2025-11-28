@@ -18,7 +18,7 @@ export default function HeaderComponent() {
         <Link href='/' className="flex flex-col items-center">
           <Image 
             className="h-27 w-auto mb-4" 
-            src="/Piglance.png" 
+            src="/images/logos/Piglance.png" 
             alt="Piglance" 
             width={200} 
             height={200} />
@@ -31,7 +31,7 @@ export default function HeaderComponent() {
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
           <Image 
-            src="/home.png" 
+            src="/images/header/home.png" 
             alt="Inicio" 
             width={100} 
             height={100}
@@ -43,7 +43,7 @@ export default function HeaderComponent() {
           href="/map"
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
-          <Image src="/learn.png"
+          <Image src="/images/header/learn.png"
           alt= "aprender" 
           width={90} 
           height={90} /> 
@@ -56,7 +56,7 @@ export default function HeaderComponent() {
           onClick={() => onNavigate("store")}
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
-            <Image src="/shop.png"
+            <Image src="/images/header/shop.png"
             alt= "tienda" 
             width={100} 
             height={100} /> 
@@ -68,7 +68,7 @@ export default function HeaderComponent() {
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
           <Image src="/perfil.png"
-            alt= "perfil" 
+            alt= "/images/header/perfil" 
             width={100} 
             height={100} /> 
             <span>Perfil</span>
@@ -76,7 +76,7 @@ export default function HeaderComponent() {
 
         <button className="flex items-center px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm">
           <Image 
-          src="/notificaciones.png" 
+          src="/images/header/notificaciones.png" 
           alt= "notificaciones" 
           width={100} 
           height={100} />

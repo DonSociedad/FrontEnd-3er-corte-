@@ -13,7 +13,7 @@ export default function HomePage() {
             {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
             <Image 
               className="h-25 w-auto" 
-              src="/Piglance.png" 
+              src="/images/logos/Piglance.png" 
               alt="Piglance" 
               width={100} 
               height={100} 
@@ -29,7 +29,7 @@ export default function HomePage() {
           <section className="w-full flex items-center justify-center overflow-hidden relative">
             <Image
               className="w-full h-auto max-h-[60vh] object-cover mx-auto"
-              src="/cerdo3_2.png"
+              src="/images/home/cerdo3_2.png"
               alt="Piglance"
               width={1200}
               height={600}
@@ -72,7 +72,7 @@ export default function HomePage() {
                   </p>
                   <Image
                     className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh] mt-4"
-                    src="/hombre muppet.png"
+                    src="/images/home/hombre muppet.png"
                     alt="Hombre con dinero"
                     width={500}
                     height={450}
@@ -98,7 +98,7 @@ export default function HomePage() {
                   </p>
                   <Image
                     className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh] mt-4"
-                    src="/chica con libro.png"
+                    src="/images/home/chica con libro.png"
                     alt="Chica con libro"
                     width={500}
                     height={450}
@@ -124,7 +124,7 @@ export default function HomePage() {
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
                 <Image
                   className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
-                  src="/hombre con corbata 4.png"
+                  src="/images/home/hombre con corbata 4.png"
                   alt="Hombre con brazos arriba"
                   width={500}
                   height={450}
