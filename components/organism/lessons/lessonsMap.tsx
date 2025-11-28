@@ -9,7 +9,7 @@ export const LessonsMap = () => {
 
   return (
     <section className="w-full max-w-md mx-auto py-12 px-4 flex flex-col items-center">
-      <h2 className="text-gray-300 mb-6 text-lg">Mapa de lecciones</h2>
+      <h2 className="text-gray-900 mb-6 text-lg">Mapa de lecciones</h2>
 
       <div className="flex flex-col items-center gap-6">
         {lessons.map((lesson, index) => (

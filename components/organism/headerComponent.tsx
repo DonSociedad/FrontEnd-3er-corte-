@@ -13,7 +13,7 @@ export default function HeaderComponent() {
   const router = useRouter();
 
   return (
-    <aside className="flex flex-col bg-gray-100 text-white w-60 h-screen p-2 fixed left-0 top-0">
+    <aside className="flex flex-col bg-[#f8f4eb] text-white w-60 h-screen p-2 fixed left-0 top-0">
       <div className="flex items-center justify-center mb-6 mt-6">
         <Link href='/' className="flex flex-col items-center">
           <Image 
