@@ -17,7 +17,7 @@ export default function HomePage() {
               alt="Piglance" 
               width={80} 
               height={80} 
-              priority // ✅ Optimizado para Vercel
+              priority 
             />       
           </Link>
         </div>
