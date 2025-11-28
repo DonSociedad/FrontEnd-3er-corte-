@@ -21,13 +21,6 @@ export default function HomePage() {
             />       
           </Link>
         </div>
-        <a href="/" className="-m-1.5 p-1.5 flex items-center">
-          <span className="sr-only">Piglance</span>
-          {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
-          <img className="h-20 w-auto" src="/images/logos/Piglance.png" alt="Piglance" />
-          
-        </a>
-      </div>
       </div>
       
       <main className="min-h-screen bg-neutral-50 flex flex-col">
@@ -36,7 +29,7 @@ export default function HomePage() {
           <section className="w-full flex items-center justify-center overflow-hidden relative">
             <Image
               className="w-full h-auto max-h-[60vh] object-cover mx-auto"
-              src="/images/home/cerdo3_2.png"
+              src="/cerdo3_2.png"
               alt="Piglance"
               width={1200}
               height={600}
@@ -86,13 +79,6 @@ export default function HomePage() {
                   />
                 </div>
               </div>
-              <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
-                <img
-                  className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
-                  src="/images/home/hombre muppet.png"
-                  alt="Hombre con dinero"
-                />
-              </div>
             </div>
           </section>
         </AnimatedContainer>
@@ -119,13 +105,6 @@ export default function HomePage() {
                   />
                 </div>
               </div>
-              <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
-                <img
-                  className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
-                  src="/images/home/chica con libro.png"
-                  alt="Chica con libro"
-                />
-              </div>
             </div>
           </section>
         </AnimatedContainer>
@@ -145,7 +124,7 @@ export default function HomePage() {
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
                 <Image
                   className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
-                  src="/images/home/hombre con corbata 4.png"
+                  src="/hombre con corbata 4.png"
                   alt="Hombre con brazos arriba"
                   width={500}
                   height={450}
