@@ -1,3 +1,4 @@
+import HeaderComponent from "@/components/organism/headerComponent";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ export default function studioLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <HeaderComponent />
+          {children}
+        <HeaderComponent />
       </body>
     </html>
   );
