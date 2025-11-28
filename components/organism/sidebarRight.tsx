@@ -1,6 +1,7 @@
 // src/components/organism/sidebarRight.tsx
 "use client";
 
+import Image from "next/image";
 import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
 
@@ -70,8 +71,12 @@ export default function SidebarRight() {
       <div className="border border-gray-700 rounded-2xl p-5 bg-gray-900/50">
         <h3 className="text-lg font-bold text-white mb-4">Ligas</h3>
         <div className="flex items-center gap-4 text-gray-400">
-          <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">
-            🛡️
+            <div className="w-39 h-20 bg-gray-800 rounded-lg flex items-center justify-center">
+          <Image    
+          src="/liga.png" 
+          alt="aprender" 
+          width={300} 
+          height={300} />
           </div>
           <p className="text-sm">Completa más lecciones para entrar a la liga de Bronce.</p>
         </div>

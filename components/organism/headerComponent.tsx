@@ -17,15 +17,15 @@ export default function HeaderComponent() {
       <div className="flex items-center justify-center mb-6 mt-6">
         <Link href='/' className="flex flex-col items-center">
           <Image 
-            className="h-15 w-auto mb-4" 
+            className="h-27 w-auto mb-4" 
             src="/Piglance.png" 
             alt="Piglance" 
-            width={60} 
-            height={60} />
+            width={200} 
+            height={200} />
         </Link>
       </div>
 
-      <nav className="flex flex-col py-2 px-1 gap-2 w-ss">
+      <nav className="flex flex-col  px-1 gap-2 w-ss">
         <Link 
           href="/"
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
@@ -51,7 +51,7 @@ export default function HeaderComponent() {
         </Link>
       </nav>
 
-      <div className="flex flex-col py-12 gap-2 w-ss mt-10">
+      <div className="flex flex-col py-12 gap-2 w-ss mt-3">
         <button
           onClick={() => onNavigate("store")}
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"

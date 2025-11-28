@@ -12,11 +12,11 @@ export default function HomePage() {
           <Link href="/" className="-m-1.5 p-1.5 flex items-center">
             {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
             <Image 
-              className="h-20 w-auto" 
+              className="h-25 w-auto" 
               src="/Piglance.png" 
               alt="Piglance" 
-              width={80} 
-              height={80} 
+              width={100} 
+              height={100} 
               priority 
             />       
           </Link>
