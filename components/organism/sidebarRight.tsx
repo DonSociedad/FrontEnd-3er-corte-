@@ -1,4 +1,3 @@
-// src/components/organism/sidebarRight.tsx
 "use client";
 
 import Image from "next/image";
@@ -39,7 +38,7 @@ export default function SidebarRight() {
 
   return (
     <aside 
-      className="hidden lg:flex flex-col w-96 p-6 fixed right-0 top-0 h-screen overflow-y-auto border-l-4 border-gray-800"
+      className="hidden lg:flex flex-col w-96 p-6 fixed right-0 top-0 h-screen overflow-y-auto border-l-4 border-pink-200"
       style={{ backgroundColor: THEME.bgMain }}
     >
       
