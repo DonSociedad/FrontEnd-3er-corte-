@@ -145,7 +145,7 @@ export default function SidebarRight() {
         </h3>
         <div className="flex items-center gap-4">
             <div 
-              className="w-20 h-20 rounded-xl flex items-center justify-center shrink-0 border-2"
+              className="w-25 h-25 rounded-xl flex items-center justify-center shrink-0 border-2"
               style={{ 
                 backgroundColor: THEME.blue.light,
                 borderColor: THEME.blue.main 
@@ -154,8 +154,8 @@ export default function SidebarRight() {
               <Image    
                 src="/liga.png" 
                 alt="Liga Bronce" 
-                width={50} 
-                height={50} 
+                width={90} 
+                height={90} 
                 className="object-contain drop-shadow-md"
               />
             </div>
