@@ -1,4 +1,5 @@
 import { Poppins } from 'next/font/google'
+import Image from 'next/image'
 
 
 const poppins = Poppins({
@@ -11,15 +12,15 @@ export default function FooterComponentLogged() {
     <aside className="fixed top-0 right-0 h-screen w-95 bg-gray-800 z-50 flex flex-col">
       <div className="flex justify-center mt-4 items-center p-4 gap-2">
         <div className="flex items-center gap-2">
-          <img src="/fire icon.png" alt="Numero de vidas" className="h-7 w-auto" />
+          <Image src="/fire icon.png" alt="Numero de vidas" width={60} height={60} className="h-15 w-15"/>
           
           <span className={`${poppins.className} font-semibold text-yellow-400`}>
             3
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <img src="/corazon.png" alt="Numero de vidas" className="h-7 w-auto" />
+        <div className="flex items-center gap-2 " >
+        <Image src="/corazon.png" alt="Numero de vidas" width={60} height={60} className="h-15 w-15"/>
           <span className={`${poppins.className} font-semibold text-red-500`}>
             3
           </span>
@@ -36,7 +37,7 @@ export default function FooterComponentLogged() {
             <div className='flex'>
                 <div className='ml-3 w-20 h-20 rounded-full bg-white overflow-hidden flex-shrink-0'>
                     <a href="#">
-                    <img src="/hombre muppet.png" alt="foto de perfil" className=''/>
+                    <Image src="/hombre muppet.png" alt="foto de perfil" className=''/>
                     </a>
                 </div>
                 

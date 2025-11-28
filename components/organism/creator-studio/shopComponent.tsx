@@ -7,7 +7,7 @@ import { ShopComponentProps } from '@/interfaces/shopPet/shopComponentProps';
 import Image from 'next/image';
 
 
-export default function ShopComponent({ onItemSelected, userCoins, onBuyItem }: ShopComponentProps) {
+export default function ShopComponent({ userCoins, onBuyItem }: ShopComponentProps) {
   
   // Datos de ejemplo para los ítems de la tienda
   const shopItems: ShopItem[] = [

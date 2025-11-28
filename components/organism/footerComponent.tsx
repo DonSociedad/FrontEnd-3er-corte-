@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
 export default function FooterComponent() {
     return (
         <footer className="bg-pink-100 text-gray-800 py-8 shadow-inner">
@@ -5,14 +8,18 @@ export default function FooterComponent() {
             
             {/* Redes sociales */}
             <div className="flex space-x-6">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                className="transition-transform transform hover:scale-110" >
-                <img src="/facebook.jpg" alt="Facebook" className="h-15 w-15"/>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                className="transition-transform transform hover:scale-110">
-                <img src="/instagrama.jpg" alt="Instagram" className="h-15 w-15"/>
-            </a>
+            <Link href="https://facebook.com" rel="noopener noreferrer" className="transition-transform transform hover:scale-110" target="_blank">
+                <Image
+                        src="/facebook.jpg" 
+                        alt="Facebook" 
+                        width={60}
+                        height={60}
+                        className="h-15 w-15"
+                />
+            </Link>
+            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="transition-transform transform hover:scale-110">
+                <Image src="/instagrama.jpg" alt="Instagram" width={60} height={60} className="h-15 w-15"/>
+            </Link>
             </div>
 
             <div className="text-center text-lg font-bold">

@@ -16,7 +16,7 @@ export default function LoggedPage() {
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Header fijo a la izquierda */}
-      <HeaderComponent onNavigate={handleNavigate} />
+      <HeaderComponent/>
 
       {/* Contenido principal (sin footer) */}
       <main className="flex-1 overflow-y-auto bg-gray-100 ml-64">

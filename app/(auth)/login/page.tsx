@@ -1,6 +1,7 @@
 import LoginComponent from "@/components/molecules/auth/loginComponents"
 import FooterComponent from "@/components/organism/footerComponent"
-import HeaderComponent from "@/components/organism/headerComponent"
+
+import Link from "next/link"
 
 export default function LoginPage() {
     return (
@@ -51,9 +52,9 @@ export default function LoginPage() {
 
                 <div className="text-center mt-4">
                 <p className="text-gray-700 text-base">¿No tienes cuenta?</p>
-                <a href="/register" className="font-semibold text-pink-300 hover:text-pink-400 text-lg">
+                <Link href="/register" className="font-semibold text-pink-300 hover:text-pink-400 text-lg">
                     Regístrate
-                </a>
+                </Link>
                 </div>
             </div>
             </div>

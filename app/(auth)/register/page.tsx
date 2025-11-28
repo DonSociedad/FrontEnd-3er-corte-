@@ -1,6 +1,5 @@
 import RegisterComponent from "@/components/molecules/auth/registerComponents"
 import FooterComponent from "@/components/organism/footerComponent";
-import HeaderComponent from "@/components/organism/headerComponent";
 
 export default function RegisterPage() {
     return (
