@@ -10,7 +10,7 @@ export default function HomePage() {
         <a href="/" className="-m-1.5 p-1.5 flex items-center">
           <span className="sr-only">Piglance</span>
           {/* Logo de Piglance, se encuentra en la carpeta public donde se deben de poner las imagenes */}
-          <img className="h-20 w-auto" src="/Piglance.png" alt="Piglance" />
+          <img className="h-20 w-auto" src="/images/logos/Piglance.png" alt="Piglance" />
           
         </a>
       </div>
@@ -22,7 +22,7 @@ export default function HomePage() {
             <div className="w-screen">
               <img
               className="w-full h-auto max-h-[60vh] object-cover mx-auto"
-              src="/cerdo3_2.png"
+              src="/images/home/cerdo3_2.png"
               alt="Piglance"
               />
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center px-4">
@@ -66,7 +66,7 @@ export default function HomePage() {
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
                 <img
                   className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
-                  src="/hombre muppet.png"
+                  src="/images/home/hombre muppet.png"
                   alt="Hombre con dinero"
                 />
               </div>
@@ -92,7 +92,7 @@ export default function HomePage() {
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
                 <img
                   className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
-                  src="/chica con libro.png"
+                  src="/images/home/chica con libro.png"
                   alt="Chica con libro"
                 />
               </div>
@@ -116,7 +116,7 @@ export default function HomePage() {
               <div className="md:w-1/2 w-full p-6 flex items-center justify-center">
                 <img
                   className="w-full h-auto object-contain max-h-[40vh] md:max-h-[45vh]"
-                  src="/hombre con corbata 4.png"
+                  src="/images/home/hombre con corbata 4.png"
                   alt="Hombre con brazos arriba"
                 />
               </div>

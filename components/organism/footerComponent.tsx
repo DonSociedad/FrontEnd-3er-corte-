@@ -7,11 +7,11 @@ export default function FooterComponent() {
             <div className="flex space-x-6">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
                 className="transition-transform transform hover:scale-110" >
-                <img src="/facebook.jpg" alt="Facebook" className="h-15 w-15"/>
+                <img src="/images/icons/facebook.jpg" alt="Facebook" className="h-15 w-15"/>
             </a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
                 className="transition-transform transform hover:scale-110">
-                <img src="/instagrama.jpg" alt="Instagram" className="h-15 w-15"/>
+                <img src="/images/icons/instagram.jpg" alt="Instagram" className="h-15 w-15"/>
             </a>
             </div>
 
