@@ -1,4 +1,6 @@
 'use client';
+
+import Image from "next/image";
 import useProfile from '@/hooks/profile/useProfile';
 import ProfileCard from '@/components/organism/profile/profileCardComponent';
 
@@ -31,7 +33,14 @@ export default function ProfilePage() {
         <header className="p-6 flex justify-between items-center max-w-7xl mx-auto w-full">
             {/* Monedas */}
             <div className="bg-red-500 text-white px-4 py-2 rounded-xl font-bold flex items-center gap-2 shadow-lg transform -rotate-2">
-                <span>⭐</span>
+                <Image
+                src="/images/icons/moneda.png" 
+                alt="Moneda" 
+                width={90} 
+                height={90} 
+                className="object-contain drop-shadow-md"
+                />
+                <span> Moneda</span>
                 <span>{user.coins || 0}</span>
             </div>
         </header>

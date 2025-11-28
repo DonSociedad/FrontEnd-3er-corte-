@@ -111,7 +111,13 @@ export default function SidebarRight() {
                 boxShadow: `0 4px 0 0 ${THEME.pink.shadow}`
               }}
             >
-              🎨
+              <Image    
+                src="/images/icons/personalizar.png" 
+                alt="Avatar Icon" 
+                width={90} 
+                height={90} 
+                className="object-contain drop-shadow-md"
+              />
             </div>
             
             <p className="text-center text-sm font-medium" style={{ color: THEME.text.dim }}>

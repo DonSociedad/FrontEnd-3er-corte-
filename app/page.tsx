@@ -8,7 +8,7 @@ export default function HomePage() {
     <>
       <div className="relative z-50 flex items-center justify-between px-6 py-4 bg-[#f8f4eb] text-gray-800 shadow-sm">
         <div className="flex items-center">
-          <Link href="/" className="-m-1.5 p-1.5 flex items-center">
+          <Link href="/" className="-m-1.5 p-1 flex items-center">
             <Image 
               className="h-auto w-auto" 
               src="/images/logos/Piglance.png" 
@@ -24,7 +24,7 @@ export default function HomePage() {
       <main className="min-h-screen bg-neutral-50 flex flex-col">
 
         <AnimatedContainer>
-          <section className="relative w-full h-[96vh] flex flex-col items-center justify-center text-center overflow-hidden">
+          <section className="relative w-full h-[87vh] flex flex-col items-center justify-center text-center overflow-hidden">
             <Image
               src="/images/header/home2.png"
               alt="Piglance Hero Background"
