@@ -14,7 +14,7 @@ export default function HeaderComponent() {
 
   return (
     <aside className="flex flex-col bg-gray-100 text-white w-60 h-screen p-2 fixed left-0 top-0">
-      <div className="flex items-center justify-center mb-10 mt-10">
+      <div className="flex items-center justify-center mb-6 mt-6">
         <Link href='/' className="flex flex-col items-center">
           <Image 
             className="h-15 w-auto mb-4" 
@@ -25,10 +25,10 @@ export default function HeaderComponent() {
         </Link>
       </div>
 
-      <nav className="flex flex-col py-12 px-1 gap-2 w-ss">
+      <nav className="flex flex-col py-2 px-1 gap-2 w-ss">
         <Link 
           href="/"
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
           <Image 
             src="/home.png" 
@@ -41,7 +41,7 @@ export default function HeaderComponent() {
 
         <Link
           href="/map"
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
           <Image src="/learn.png"
           alt= "aprender" 
@@ -51,10 +51,10 @@ export default function HeaderComponent() {
         </Link>
       </nav>
 
-      <div className="flex flex-col py-12 gap-2 w-ss mt-50">
+      <div className="flex flex-col py-12 gap-2 w-ss mt-10">
         <button
           onClick={() => onNavigate("store")}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
             <Image src="/shop.png"
             alt= "tienda" 
@@ -65,7 +65,7 @@ export default function HeaderComponent() {
 
           <button
           onClick={() => onNavigate("profile")}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
+          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
           <Image src="/perfil.png"
             alt= "perfil" 
@@ -74,7 +74,7 @@ export default function HeaderComponent() {
             <span>Perfil</span>
         </button>
 
-        <button className="flex items-center px-2 py-3 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm">
+        <button className="flex items-center px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm">
           <Image 
           src="/notificaciones.png" 
           alt= "notificaciones" 
