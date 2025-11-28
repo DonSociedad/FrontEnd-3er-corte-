@@ -15,7 +15,7 @@ export default function HeaderComponent() {
     <aside className="flex flex-col bg-gray-100 text-white w-64 h-screen p-6 fixed left-0 top-0">
       <div className="flex items-center justify-center mb-10">
         <button onClick={() => onNavigate("workplace")} className="flex flex-col items-center">
-          <Image className="h-12 w-auto mb-2" src="/Piglance.png" alt="Piglance" />
+          <Image className="h-12 w-auto mb-2" src="/Piglance.png" alt="Piglance" width={60} height={60} />
         </button>
       </div>
 
