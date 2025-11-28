@@ -168,3 +168,4 @@ export default function SidebarRight() {
     </aside>
   );
 }
+{/*Hago un comentario para decir que esto del color es genial, basense en el, pls */}
