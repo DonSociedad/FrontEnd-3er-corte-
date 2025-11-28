@@ -49,8 +49,6 @@ export default function RegisterPage() {
     return (
         <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
             
-            <HeaderComponent/>
-        
             <main className="flex-grow flex items-center justify-center py-3 px-2 sm:px-6">
                 
                 <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100">
@@ -65,7 +63,7 @@ export default function RegisterPage() {
                         </p>
                     </div>
                     
-                    <div className="mb-3 ">
+                    <div className="space-y-6">
                         <RegisterComponent/>
                     </div>
 
