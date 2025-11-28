@@ -1,8 +1,12 @@
+'use client';
+
 import LoginComponent from "@/components/molecules/auth/loginComponents"
-import HeaderComponent from "@/components/organism/headerComponent"
 
 import type { ReactNode, MouseEventHandler } from 'react';
 import Link from "next/link"
+import { useRouter } from 'next/navigation'; 
+import { ArrowLeftIcon } from "lucide-react";
+
 type SocialButtonProps = {
     provider: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -43,12 +47,22 @@ const GoogleDisclaimer = () => (
 );
 
 export default function LoginPage() {
+    const router = useRouter(); 
+
     return (
         <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
     
             <main className="flex-grow flex items-center justify-center py-8 px-4 sm:px-6">
                 
                 <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100">
+                    <button 
+                        onClick={() => router.back()} 
+                        className="mb-4 flex items-center text-sm text-gray-400 hover:text-pink-500 transition-colors font-medium group">
+                        <ArrowLeftIcon />
+                        <span className="ml-1 group-hover:-translate-x-1 translate-x-0 transition-transform duration-200">
+                            Volver
+                        </span>
+                    </button>
                     
                     <div className="text-center mb-6">
                         <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">

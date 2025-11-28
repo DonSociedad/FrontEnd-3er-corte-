@@ -1,8 +1,11 @@
-import Link from 'next/link';
+'use client';
+
 import RegisterComponent from "@/components/molecules/auth/registerComponents"
-import FooterComponent from "@/components/organism/footerComponent";
-import HeaderComponent from "@/components/organism/headerComponent";
+
 import type { ReactNode, MouseEventHandler } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation'; 
+import { ArrowLeftIcon } from "lucide-react";
 
 type SocialButtonProps = {
     provider: string;
@@ -46,14 +49,23 @@ const SocialButton = ({ provider, onClick, iconPath }: SocialButtonProps) => (
 
 
 export default function RegisterPage() {
+    const router = useRouter(); 
+
     return (
         <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
             
             <main className="flex-grow flex items-center justify-center py-3 px-2 sm:px-6">
                 
                 <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100">
+                    <button 
+                        onClick={() => router.back()} 
+                        className="mb-4 flex items-center text-sm text-gray-400 hover:text-pink-500 transition-colors font-medium group">
+                        <ArrowLeftIcon />
+                        <span className="ml-1 group-hover:-translate-x-1 translate-x-0 transition-transform duration-200">
+                            Volver
+                        </span>
+                    </button>
 
-                    {/* Encabezado */}
                     <div className="text-center mb-6">
                         <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">
                             Únete a <span className="text-pink-500">Piglance</span>
