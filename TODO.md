@@ -1,1 +1,5 @@
 - [x] Update middleware.ts to implement token check and redirect for student module routes (/creator-studio, /profile)
+- [x] Create IProduct interface in interfaces/products/product.ts
+- [x] Create productsService.ts in libs/ with getAllProductsService function
+- [x] Create useProducts hook in hooks/products/useProducts.tsx
+- [x] Update AvatarEditorComponent to use products from backend instead of hardcoded catalog

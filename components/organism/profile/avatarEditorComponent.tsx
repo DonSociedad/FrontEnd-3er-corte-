@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Image from "next/image";
 import { IPigData } from '@/interfaces/users/user';
-import { AvatarCategory, getItemsByCategory } from '@/utils/avatarCatalog';
+import { AvatarCategory } from '@/utils/avatarCatalog';
 import { getPigAssetPath } from '@/utils/pigHelpers';
+import useProducts from '@/hooks/products/useProducts';
 
 interface AvatarEditorProps {
   pigData: IPigData;
@@ -11,6 +12,7 @@ interface AvatarEditorProps {
 
 export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
   const [activeTab, setActiveTab] = useState<AvatarCategory>('hats');
+  const { products, loading, error } = useProducts();
 
   // Categorías disponibles
   const tabs: { key: AvatarCategory; label: string; icon: string }[] = [
@@ -21,7 +23,27 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
     { key: 'skins', label: 'Piel', icon: '/images/icons/personalizar.png' },
   ];
 
-  const items = getItemsByCategory(activeTab);
+  const items = products.filter(product => product.category === activeTab);
+
+  // Agregar opción "none" para deseleccionar, excepto para skins, solo si no existe ya
+  if (activeTab !== 'skins' && !items.some(item => item.key === 'none')) {
+    items.unshift({
+      id: 'none',
+      key: 'none',
+      name: 'Nada',
+      price: 0,
+      category: activeTab,
+      createdAt: '',
+      updatedAt: ''
+    });
+  }
+
+  // Asegurar que "none" siempre esté primero
+  items.sort((a, b) => {
+    if (a.key === 'none') return -1;
+    if (b.key === 'none') return 1;
+    return 0;
+  });
 
   return (
     <div className="flex flex-col h-full">
@@ -52,22 +74,31 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
       </div>
 
       <div className="grid grid-cols-3 gap-3 overflow-y-auto pr-2 custom-scrollbar max-h-[300px]">
-        {items.map((item) => {
-          const isOwned = pigData.inventory.includes(item.id);
-          
-          // Mapeo inverso
-          const fieldMap: Record<string, string> = { hats: 'hat', bodies: 'body', eyes: 'eyes', faces: 'mouth', skins: 'skin' };
-          // @ts-ignore
-          const currentEquippedId = pigData.equipped[fieldMap[activeTab]];
-          const isEquipped = currentEquippedId === item.id;
+        {loading ? (
+          <div className="col-span-3 text-center py-8">
+            <p className="text-gray-500">Cargando productos...</p>
+          </div>
+        ) : error ? (
+          <div className="col-span-3 text-center py-8">
+            <p className="text-red-500">Error al cargar productos</p>
+          </div>
+        ) : (
+          items.map((item) => {
+            const isOwned = item.key === 'none' || pigData.inventory.includes(item.key);
 
-          const imgSrc = getPigAssetPath(activeTab, item.id);
+            // Mapeo inverso
+            const fieldMap: Record<string, string> = { hats: 'hat', bodies: 'body', eyes: 'eyes', faces: 'mouth', skins: 'skin' };
+            // @ts-ignore
+            const currentEquippedId = pigData.equipped[fieldMap[activeTab]];
+            const isEquipped = currentEquippedId === item.key;
+
+            const imgSrc = getPigAssetPath(activeTab, item.key);
 
           return (
             <button
               key={item.id}
               disabled={!isOwned}
-              onClick={() => onEquip(activeTab, item.id)}
+              onClick={() => onEquip(activeTab, item.key)}
               className={`
                 relative p-2 rounded-xl border-2 flex flex-col items-center justify-center transition-all h-28
                 ${isEquipped ? 'border-red-500 bg-red-50 ring-2 ring-red-200' : 'border-gray-200 bg-white'}
@@ -112,7 +143,8 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
               )}
             </button>
           );
-        })}
+        })
+        )}
       </div>
     </div>
   );
