@@ -1,5 +1,4 @@
 import { LessonNodeProps } from "@/interfaces/lessons/lessonNodeProps";
-
 import React from "react";
 
 export const LessonNode = ({ status, onClick, title }: LessonNodeProps) => {
@@ -13,19 +12,19 @@ export const LessonNode = ({ status, onClick, title }: LessonNodeProps) => {
 
   switch (status) {
     case "available":
-      // Púrpura vibrante con efecto de elevación
-      statusStyles = "bg-purple-600 hover:bg-purple-500 hover:-translate-y-1 shadow-purple-500/50 cursor-pointer";
-      borderStyle = "border-purple-400";
+      // Rosado principal con efecto de elevación
+      statusStyles = `bg-[#cf88a7] hover:bg-[#b87090] hover:-translate-y-1 shadow-[#cf88a7]/50 cursor-pointer`;
+      borderStyle = "border-white";
       break;
     case "completed":
-      // Dorado/Ámbar para indicar éxito
-      statusStyles = "bg-amber-500 hover:bg-amber-400 cursor-pointer";
-      borderStyle = "border-amber-300";
+      // Rosado principal
+      statusStyles = `bg-[#cf88a7] hover:bg-[#b87090] cursor-pointer`;
+      borderStyle = "border-[#a66580]";
       break;
     case "locked":
     default:
       // Gris apagado
-      statusStyles = "bg-slate-700 opacity-50 cursor-not-allowed grayscale";
+      statusStyles = "bg-slate-600 opacity-50 cursor-not-allowed grayscale";
       borderStyle = "border-slate-600";
       iconColor = "#94a3b8"; // Gris claro
       break;
@@ -33,7 +32,6 @@ export const LessonNode = ({ status, onClick, title }: LessonNodeProps) => {
 
   const Icon = () => {
     if (status === "completed") {
-      // Checkmark / Trofeo
       return (
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M20 6L9 17l-5-5" stroke={iconColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
@@ -41,14 +39,12 @@ export const LessonNode = ({ status, onClick, title }: LessonNodeProps) => {
       );
     }
     if (status === "locked") {
-      // Candado
       return (
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z" stroke={iconColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       );
     }
-    // Available: Estrella o Play
     return (
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill={iconColor} />
@@ -65,25 +61,27 @@ export const LessonNode = ({ status, onClick, title }: LessonNodeProps) => {
         className={`${baseBtn} ${statusStyles} ${borderStyle}`}
         aria-label={`Lección ${status}: ${title ?? "sin título"}`}
       >
-        {/* Icono */}
         <div className={`transform transition-transform ${status === "available" ? "group-hover:scale-110" : ""}`}>
             <Icon />
         </div>
       </button>
 
-      {/* Título */}
+      {/* Título: Cambiado a negro */}
       {title && (
-        <span className={`text-sm font-medium text-center w-32 truncate transition-colors ${status === "locked" ? "text-slate-500" : "text-slate-200"}`}>
+        <span className={`text-sm font-medium text-center w-32 truncate transition-colors ${status === "locked" ? "text-slate-400" : "text-black"}`}>
           {title}
         </span>
       )}
 
-      {/* Etiqueta Flotante "EMPEZAR" para disponibles */}
+      {/* Etiqueta Flotante "EMPEZAR" */}
       {status === "available" && (
-        <div className="absolute mt-[4.5rem] animate-bounce">
-            <div className="px-3 py-1 bg-white text-purple-700 text-xs font-bold rounded-full shadow-lg">
+        <div className="absolute mt-[4.5rem] animate-bounce z-10">
+            {/* Texto cambiado a negro */}
+            <div className="px-3 py-1 bg-white text-black text-xs font-bold rounded-full shadow-lg border border-gray-200">
                 EMPEZAR
             </div>
+            {/* Triángulo del tooltip */}
+            <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white mx-auto -mt-[28px]"></div>
         </div>
       )}
     </div>

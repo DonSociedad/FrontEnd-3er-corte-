@@ -28,7 +28,7 @@ const THEME = {
   text: {
     dark: "#717888ff",         
     light: "#d89595ff",         
-    dim: "#707883ff",          
+    dim: "#837570ff",          
   }
 };
 
@@ -47,7 +47,7 @@ export default function SidebarRight() {
         <div 
           className="rounded-2xl p-6 mb-8 border-2 relative overflow-hidden transition-all hover:-translate-y-1"
           style={{ 
-            backgroundColor: "rgba(235, 189, 175, 0.1)", // Melocotón transparente
+            backgroundColor: "hsla(14, 60%, 80%, 0.10)", // Melocotón transparente
             borderColor: THEME.peach.main,
             boxShadow: `0 6px 0 0 ${THEME.peach.shadow}` // Sombra de la tarjeta
           }}

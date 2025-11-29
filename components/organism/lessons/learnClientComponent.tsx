@@ -1,7 +1,7 @@
 'use client';
 
 import useLesson from "@/hooks/lessons/useLesson";
-import LearnOrganism from "@/components/organism/learnOrganism";
+import LearnOrganism from "@/components/organism/lessons/learnOrganism";
 import { LearnClientProps } from "@/interfaces/lessons/learnClientProps";
 
 

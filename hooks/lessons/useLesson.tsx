@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-// Asegúrate de importar completeLessonService que creamos en el paso anterior
+
 import { getLessonById, answerLesson, completeLessonService } from "@/libs/lessonsService";
 
 type ContentBlock = {

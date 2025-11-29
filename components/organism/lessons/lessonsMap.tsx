@@ -1,4 +1,3 @@
-// src/components/organism/lessons/LessonsMap.tsx
 "use client";
 
 import { LessonNode } from "@/components/atoms/lessons/lessonNode";
