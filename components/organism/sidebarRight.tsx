@@ -10,7 +10,7 @@ const THEME = {
   peach: {
     main: "#f0b9a8ff",         
     shadow: "#c9998aff",        
-    light: "#ffccbc",         
+    light: "rgba(255, 204, 188, 1)",         
   },
 
   pink: {
@@ -28,7 +28,7 @@ const THEME = {
   text: {
     dark: "#717888ff",         
     light: "#d89595ff",         
-    dim: "#707883ff",          
+    dim: "#837570ff",          
   }
 };
 
@@ -47,7 +47,7 @@ export default function SidebarRight() {
         <div 
           className="rounded-2xl p-6 mb-8 border-2 relative overflow-hidden transition-all hover:-translate-y-1"
           style={{ 
-            backgroundColor: "rgba(235, 189, 175, 0.1)", // Melocotón transparente
+            backgroundColor: "hsla(14, 60%, 80%, 0.10)", // Melocotón transparente
             borderColor: THEME.peach.main,
             boxShadow: `0 6px 0 0 ${THEME.peach.shadow}` // Sombra de la tarjeta
           }}
@@ -111,14 +111,19 @@ export default function SidebarRight() {
                 boxShadow: `0 4px 0 0 ${THEME.pink.shadow}`
               }}
             >
-              🎨
+              <Image    
+                src="/images/icons/personalizar.png" 
+                alt="Avatar Icon" 
+                width={90} 
+                height={90} 
+                className="object-contain drop-shadow-md"
+              />
             </div>
             
             <p className="text-center text-sm font-medium" style={{ color: THEME.text.dim }}>
               ¡Visita el estudio y personaliza tu personaje!
             </p>
 
-            {/* Botón Ir al Estudio (ROSA) */}
             <button
               onClick={() => router.push("/creator-studio")}
               className="w-full py-3 rounded-xl font-bold text-slate-900 transition-all active:translate-y-1 active:shadow-none uppercase"

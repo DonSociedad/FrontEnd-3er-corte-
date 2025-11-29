@@ -1,6 +1,5 @@
-"use client";
-
-import { AnimatedContainerProps } from "@/interfaces/shopPet/animatedContainerProps";
+'use client';
+import { AnimatedContainerProps } from "@/interfaces/interaction/animatedContainerProps";
 import { motion } from "framer-motion";
 
 export default function AnimatedContainer({

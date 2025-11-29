@@ -1,7 +1,6 @@
 import { Poppins } from 'next/font/google'
 import Image from 'next/image'
 
-
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '600', '700'], 
@@ -9,7 +8,7 @@ const poppins = Poppins({
 
 export default function FooterComponentLogged() {
   return (
-    <aside className="fixed top-0 right-0 h-screen w-95 bg-gray-800 z-50 flex flex-col">
+    <aside className="fixed top-0 right-0 h-screen w-100 bg-gray-800 z-50 flex flex-col">
       <div className="flex justify-center mt-4 items-center p-4 gap-2">
         <div className="flex items-center gap-2">
           <Image src="/fire icon.png" alt="Numero de vidas" width={60} height={60} className="h-15 w-15"/>

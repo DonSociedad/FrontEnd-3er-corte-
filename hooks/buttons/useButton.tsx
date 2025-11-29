@@ -11,7 +11,7 @@ export function useButton(type: number): string {
 
     case 2:
       style =
-        "w-full bg-pink-400 hover:bg-pink-200 text-black font-medium py-2 rounded-lg transition"; // botón de iniciar sesión
+        "w-full bg-[#f0b9a8ff] hover:bg-pink-200 text-black font-medium py-2 rounded-lg transition"; // botón de iniciar sesión
       break;
 
     case 3:

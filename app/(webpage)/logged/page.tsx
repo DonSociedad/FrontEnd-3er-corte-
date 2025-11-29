@@ -9,9 +9,7 @@ import StoreComponent from "@/components/molecules/storeComponent";
 export default function LoggedPage() {
   const [activePage, setActivePage] = useState("workplace");
 
-  const handleNavigate = (page: string) => {
-    setActivePage(page);
-  };
+
 
   return (
     <div className="flex h-screen overflow-hidden">

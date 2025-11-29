@@ -1,5 +1,8 @@
 "use client";
+
 import ButtonComponent from "@/components/atoms/buttonComponents";
+import Image from "next/image";
+
 export default function ContenidosListPage() {
   const contenidos = [
     {
@@ -21,7 +24,16 @@ export default function ContenidosListPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-purple-100 p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-pink-600 mb-6">📖 Contenidos</h1>
+        <h1 className="text-4xl font-bold text-pink-600 mb-6">
+          <Image
+            src="/images/icons/contenido.png" 
+            alt="Icono de Contenidos"
+            width={50}
+            height={50}
+            className="inline-block mr-3 object-contain"
+          />
+          Gestión de Contenidos
+        </h1>
         <ul className="space-y-6">
           {contenidos.map((item) => (
             <li

@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import CardComponent from "@/components/atoms/card"; 
 import Image from "next/image";
@@ -8,18 +9,18 @@ export default function AdminIndex() {
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-purple-100 p-8">
       <div className="max-w-5xl mx-auto">
         <header className="mb-10">
-          <h1 className="text-4xl font-bold text-pink-600">Pigglance Admin</h1>
+          <h1 className="text-4xl font-bold text-pink-600">Administrador de pinglance</h1>
           <p className="text-gray-700 mt-2">
-            Manage activities, quizzes, and exercises for financial learning.
+            Manejo de usuarios, contenidos y configuraciones de la plataforma.
           </p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Crear */}
+
           <Link href="/dashboard/admin/crear-actividad">
             <CardComponent
-              title="Create an Activity, Quiz or Exercise"
-              description="Design new interactive learning activities, quizzes or exercises for users."
+              title="Crear una actividad, un cuestionario o un ejercicio"
+              description="Diseña nuevas actividades de aprendizaje interactivas, cuestionarios o ejercicios para los usuarios."
             />
           </Link>
 
@@ -32,8 +33,8 @@ export default function AdminIndex() {
             height={100}
           /> 
             <CardComponent
-              title="View Users"
-              description="See who is actively learning and track their progress."
+              title="Ver usuarios"
+              description="Vea quién está aprendiendo activamente y realice un seguimiento de su progreso."
             />
           </Link>
 
@@ -46,8 +47,8 @@ export default function AdminIndex() {
             height={100}
             /> 
             <CardComponent
-              title="Your Creations"
-              description="Review and manage all activities, quizzes and exercises you’ve created."
+              title="Tus creaciones"
+              description="Revisa y gestiona todas las actividades, cuestionarios y ejercicios que hayas creado."
             />
           </Link>
 
@@ -61,7 +62,7 @@ export default function AdminIndex() {
           /> 
             <CardComponent
               title="Contenidos"
-              description="Review and manage all the contents."
+              description="Revisa y gestiona todos los contenidos."
             />
           </Link>
         </div>

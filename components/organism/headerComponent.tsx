@@ -1,7 +1,7 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-
 import { useHeader } from '@/hooks/compotents/useHeader';
 import { useAuth } from '@/contexts/authContext';
 import { useRouter } from 'next/navigation';
@@ -12,102 +12,148 @@ export default function HeaderComponent() {
   const { isAuthenticated, logout } = useAuth(); 
   const router = useRouter();
 
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setShowUserMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuRef]);
+
+  const handleSwitchAccount = () => {
+    router.push('/login');
+  };
+
+  const btnStyle = "flex items-center rounded-xl transition hover:bg-orange-100 hover:text-black font-bold text-gray-900 tracking-wide text-sm cursor-pointer w-full";
+
   return (
-    <aside className="flex flex-col bg-[#f8f4eb] text-white w-60 h-screen p-2 fixed left-0 top-0">
-      <div className="flex items-center justify-center mb-6 mt-6">
-        <Link href='/' className="flex flex-col items-center">
-          <Image 
-            className="h-27 w-auto mb-4" 
-            src="/images/logos/Piglance.png" 
-            alt="Piglance" 
-            width={200} 
-            height={200} />
-        </Link>
-      </div>
+    <>
+      <aside className="flex flex-col bg-[#f8f4eb] text-white w-60 h-screen p-2 fixed left-0 top-0">
+        
+        <div className="hidden md:flex items-center justify-center mb-2 mt-4">
+          <Link href='/' className="flex flex-col items-center">
+            <Image 
+              className="mb-5" 
+              src="/images/logos/Piglance.png" 
+              alt="Piglance" 
+              width={100} 
+              height={100} 
+              style={{ width: 'auto', height: 'auto' }} 
+            />
+          </Link>
+        </div>
 
-      <nav className="flex flex-col  px-1 gap-2 w-ss">
-        <Link 
-          href="/"
-          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
-        >
-          <Image 
-            src="/images/header/home.png" 
+        <nav className="flex flex-col px-1 gap-2 w-ss">
+          <Link href="/" className={btnStyle}>
+            <Image 
+            src="/images/header/home.png"
             alt="Inicio" 
-            width={100} 
-            height={100}
-          /> 
-          <span>Inicio</span>
-        </Link>
+            width={90} 
+            height={90} /> 
+            <span className="hidden md:block">Inicio</span>
+          </Link>
 
-        <Link
-          href="/map"
-          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
-        >
-          <Image src="/images/header/learn.png"
-          alt= "aprender" 
-          width={90} 
-          height={90} /> 
-          <span>Aprender</span>
-        </Link>
-      </nav>
+          <Link href="/map" className={btnStyle}>
+            <Image 
+            src="/images/header/learn.png" 
+            alt="Aprender" 
+            width={90} 
+            height={90} /> 
+            <span className="hidden md:block">Aprender</span>
+          </Link>  
+        </nav>
 
-      <div className="flex flex-col py-12 gap-2 w-ss mt-3">
-        <button
-          onClick={() => onNavigate("store")}
-          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
-        >
-            <Image src="/images/header/shop.png"
-            alt= "tienda" 
-            width={100} 
-            height={100} /> 
-            <span>Tienda</span>
-        </button>
+        <div className="flex md:mt-auto gw-auto md:w-full md:block relative" ref={menuRef}>         
 
-          <button
-          onClick={() => onNavigate("profile")}
-          className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
-        >
-          <Image src="/perfil.png"
-            alt= "/images/header/perfil" 
-            width={100} 
-            height={100} /> 
-            <span>Perfil</span>
-        </button>
+            {isAuthenticated && (
+              <>
+                <Link href="/store" className={btnStyle}>
+                  <Image 
+                  src="/images/header/shop.png" 
+                  alt="Tienda" 
+                  width={90} 
+                  height={90} /> 
+                  <span className="hidden md:block">Tienda</span>
+                </Link>
 
-        <button className="flex items-center px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm">
-          <Image 
-          src="/images/header/notificaciones.png" 
-          alt= "notificaciones" 
-          width={100} 
-          height={100} />
-          <span> Notificaciones</span>
-        </button>
+                <button className={`${btnStyle} hidden md:flex`}>
+                  <Image 
+                  src="/images/header/notificaciones.png" 
+                  alt="Notificaciones" 
+                  width={90} 
+                  height={90} />
+                  <span>Notificaciones</span>
+                </button>
+              </>
+            )}
 
-      </div>
-
-      <div className="  flex justify-center">
-        <span className="text-gray-400 text-sm">v1.0.0</span>
-      </div>
-
-      {/* FOOTER DEL HEADER */}
-      <div className="mt-auto flex justify-center pb-4">
-        {isAuthenticated ? (
-          <button 
-            onClick={logout}
-            className="text-sm font-bold text-gray-400 hover:text-red-400 transition uppercase tracking-widest"
-          >
-            Cerrar sesión
-          </button>
-        ) : (
-            // Opcional: Botón de ingreso si está en móvil donde no se ve la barra derecha
-            <button 
-                onClick={() => router.push('/login')}
-                className="md:hidden text-sm font-bold text-blue-400 hover:text-blue-300 transition uppercase tracking-widest"
+            <button
+              onClick={() => {
+                if (isAuthenticated) {
+                  setShowUserMenu(!showUserMenu);
+                } else {
+                  router.push('/login');
+                }
+              }}
+              className={`${btnStyle} justify-center md:justify-start`}
             >
-                Ingresar
+              <Image 
+                src="/images/header/perfil.png" 
+                alt="Perfil" 
+                width={90} 
+                height={90} 
+              /> 
+              <span className="hidden md:block">
+                {isAuthenticated ? "Perfil" : "Iniciar Sesión"}
+              </span>
             </button>
-        )}
-      </div>
-    </aside>
+
+            {showUserMenu && isAuthenticated && (
+              <div className="absolute bottom-16 md:bottom-12 left-1/2 -translate-x-1/2 
+              md:left-0 md:translate-x-0 w-48 bg-[#e1f5fe]/90 rounded-lg 
+              shadow-xl border border-[#81d4fa] overflow-hidden z-50">
+
+                <div className="py-1">
+                  <button 
+                    onClick={() => { onNavigate("profile"); setShowUserMenu(false); }}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#71b8e0ff]/30"
+                  >
+                    Ver Perfil
+                  </button>
+
+                  <button 
+                    onClick={handleSwitchAccount}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#71b8e0ff]/30"
+                  >
+                    Cambiar cuenta
+                  </button>
+
+                  <div className="border-t border-gray-100 my-1"></div>
+                  <button 
+                    onClick={() => { logout(); setShowUserMenu(false); }}
+                    className="block w-full text-left px-4 py-2 text-sm text-[#c9998aff] font-bold hover:bg-[#71b8e0ff]/30"
+                  >
+                    Cerrar sesión
+                  </button>
+                  
+                </div>
+              </div>
+            )}
+        </div>
+
+
+        <div className="hidden md:flex justify-center mt-2 pb-2">
+          <span className="text-gray-900 text-xs">v1.0.0</span>
+        </div>
+
+      </aside>
+      <div className="md:hidden h-16 w-full"></div> 
+      <div className="hidden md:block w-60 flex-shrink-0"></div>
+    </>
   );
 }

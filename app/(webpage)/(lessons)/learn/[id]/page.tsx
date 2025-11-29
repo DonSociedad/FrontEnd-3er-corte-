@@ -12,6 +12,6 @@ export default async function LearnPage({ params }: Props) {
         return <LearnClient lessonId={p.id} />;
     } catch (error) {
         console.error('Error loading lesson:', error);
-        return <div>Error loading lesson</div>;
+        return <div>Error al cargar lecciones</div>;
     }
 }

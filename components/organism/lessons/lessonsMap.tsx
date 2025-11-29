@@ -1,19 +1,39 @@
+"use client";
+
 import { LessonNode } from "@/components/atoms/lessons/lessonNode";
 import { LessonPath } from "@/components/molecules/lessons/lessonsPath";
 import { useLessonsMap } from "@/hooks/lessons/useLessonsMap";
+import { ArrowLeftIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const LessonsMap = () => {
   const { lessons, loading, goToLesson } = useLessonsMap();
-
-  if (loading) return <div className="py-20 text-center text-gray-300">Cargando...</div>;
+  const router = useRouter();
+  if (loading) return <div className="py-50 text-center text-white">Cargando...</div>;
 
   return (
-    <section className="w-full max-w-md mx-auto py-12 px-4 flex flex-col items-center">
-      <h2 className="text-gray-900 mb-6 text-lg">Mapa de lecciones</h2>
+    <section className="w-full min-h-screen bg-#ebd1dbff flex flex-col items-center py-12 px-6">
 
-      <div className="flex flex-col items-center gap-6">
+      <div className="w-full mb-9"> 
+            <button 
+                onClick={() => router.back()} 
+                className="flex items-center  gap-2 text-gray-500 hover:text-[#f0b9a8] transition-colors font-bold group"
+            >
+                <ArrowLeftIcon className="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-1" />
+                <span className="text-lg">
+                  Volver
+                </span>
+            </button>
+
+        <h2 className="text-gray-600 font-bold mb-2 text-xl text-center">
+          Mapa de lecciones
+        </h2>
+      </div>
+
+      <div className="flex flex-col items-center gap-7 w-full max-w-md">
+
         {lessons.map((lesson, index) => (
-          <div key={lesson.id} className="flex flex-col items-center">
+          <div key={lesson.id} className="flex flex-col items-center w-full">
             <LessonNode
               status={lesson.status}
               title={lesson.title}
@@ -23,6 +43,7 @@ export const LessonsMap = () => {
           </div>
         ))}
       </div>
+      
     </section>
   );
 };
