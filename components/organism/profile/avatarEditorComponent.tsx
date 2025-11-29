@@ -88,7 +88,7 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
 
             // Mapeo inverso
             const fieldMap: Record<string, string> = { hats: 'hat', bodies: 'body', eyes: 'eyes', faces: 'mouth', skins: 'skin' };
-            // @ts-ignore
+            // @ts-expect-error: TypeScript cannot infer the exact type of equipped fields
             const currentEquippedId = pigData.equipped[fieldMap[activeTab]];
             const isEquipped = currentEquippedId === item.key;
 
