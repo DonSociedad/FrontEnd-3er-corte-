@@ -1,4 +1,3 @@
-import HeaderComponent from "@/components/organism/headerComponent";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -51,8 +51,8 @@ export default function HeaderComponent() {
       </nav>
 
       <div className="flex flex-col py-12 gap-2 w-ss mt-3">
-        <button
-          onClick={() => onNavigate("store")}
+        <Link
+          href="/store"
           className="flex items-center gap-3 px-2 py-2 rounded-xl transition hover:bg-gray-600 hover:text-white font-bold text-gray-900 tracking-wide text-sm"
         >
             <Image src="/images/header/shop.png"
@@ -60,7 +60,7 @@ export default function HeaderComponent() {
             width={100} 
             height={100} /> 
             <span>Tienda</span>
-        </button>
+        </Link>
 
           <button
           onClick={() => onNavigate("profile")}

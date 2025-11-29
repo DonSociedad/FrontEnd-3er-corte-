@@ -5,7 +5,6 @@ import useProfile from '@/hooks/profile/useProfile';
 import ProfileCard from '@/components/organism/profile/profileCardComponent';
 
 export default function ProfilePage() {
-  // 1. AQUÍ TE FALTABA SACAR 'equipItem' DEL HOOK
   const { user, loading, error, equipItem } = useProfile();
 
   if (loading) {
