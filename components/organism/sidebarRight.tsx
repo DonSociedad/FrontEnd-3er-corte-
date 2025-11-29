@@ -10,7 +10,7 @@ const THEME = {
   peach: {
     main: "#f0b9a8ff",         
     shadow: "#c9998aff",        
-    light: "#ffccbc",         
+    light: "rgba(255, 204, 188, 1)",         
   },
 
   pink: {

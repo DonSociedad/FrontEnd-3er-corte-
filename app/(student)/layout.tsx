@@ -2,7 +2,7 @@ import HeaderComponent from "@/components/organism/headerComponent";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Avatar",
+  title: "Avatar | piglance",
   description: "Creación de avatar | Piglance",
 };
 
