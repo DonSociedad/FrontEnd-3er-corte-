@@ -70,7 +70,7 @@ export default function ProfilePage() {
             </div>
         </header>
 
-        {/* Contenido Central: Profile Card */}
+        {/*No entiendo porque no da el vercel*/}
         <section className="flex-1 flex items-center justify-center p-4 w-full">
             <div className="w-full max-w-4xl">
                 <ProfileCard user={user} onEquip={equipItem} />
