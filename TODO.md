@@ -1,0 +1,1 @@
+- [x] Update middleware.ts to implement token check and redirect for student module routes (/creator-studio, /profile)
