@@ -73,8 +73,9 @@ export default function useStore() {
 
     // 4. Lógica de Filtrado
     const filteredProducts = useMemo(() => {
-        if (filter === 'all') return products;
-        return products.filter(p => p.category === filter);
+        const validProducts = products.filter(p => p.key !== 'none'); // Excluir productos "none"
+        if (filter === 'all') return validProducts;
+        return validProducts.filter(p => p.category === filter);
     }, [products, filter]);
 
     const categories = useMemo(() => {

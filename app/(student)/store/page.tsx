@@ -4,21 +4,24 @@ import useStore from '@/hooks/shopPig/useStore';
 import ProductCard from '@/components/molecules/shopPig/productCartComponent';
 import PigPreview from '@/components/organism/shopPig/pigPreviewComponent';
 
-// Mapeo para textos bonitos en los tabs
+// Diccionario local de categorías (Mapeo Backend -> Frontend)
+// Se define fuera del componente para que no se recree en cada render
 const CATEGORY_NAMES: Record<string, string> = {
     all: 'Todos',
-    clothing: 'Ropa',
-    hat: 'Sombreros',
-    eyes: 'Ojos',
-    mouth: 'Bocas',
-    skin: 'Pieles',
-    accessories: 'Accesorios',
+    // Plurales (habitual en DB)
+    skins: 'Pieles',
     hats: 'Sombreros',
     bodies: 'Ropa',
-    faces: 'Boca',
-    skins: 'Pieles',
+    eyes: 'Ojos',
+    faces: 'Bocas',
+    // Singulares/Variaciones (por seguridad si el backend cambia)
+    skin: 'Pieles',
+    hat: 'Sombreros',
     body: 'Ropa',
-    face: 'Boca'
+    clothing: 'Ropa',
+    mouth: 'Bocas',
+    face: 'Bocas',
+    accessories: 'Accesorios'
 };
 
 export default function StorePage() {
@@ -36,27 +39,21 @@ export default function StorePage() {
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                 {/* Spinner simple con Tailwind */}
                 <div className="w-12 h-12 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20">
-            {/* Header simple similar a la imagen */}
-            <header className="bg-white border-b-2 border-gray-100 py-4 px-6 mb-8 sticky top-0 z-40">
-                <div className="max-w-6xl mx-auto flex items-center justify-between">
-                    <h1 className="text-2xl font-black text-gray-700 tracking-tight">Tienda Piglance</h1>
-                    {/* Aquí podrías poner un Link para volver al Home */}
-                </div>
-            </header>
-
+        <div className="min-h-screen bg-gray-50 pb-20 pt-8">
             <main className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-10">
                 
                 {/* COLUMNA IZQUIERDA: Preview del Cerdo */}
                 <aside className="lg:col-span-5 xl:col-span-4">
-                    <PigPreview user={user} />
+                    {/* Sticky: Hace que el cerdo te siga al bajar el scroll */}
+                    <div className="sticky top-24">
+                        <PigPreview user={user} />
+                    </div>
                 </aside>
 
                 {/* COLUMNA DERECHA: Productos */}
@@ -71,8 +68,8 @@ export default function StorePage() {
                                 className={`
                                     px-5 py-2 rounded-xl font-bold text-sm transition-all border-b-4 active:border-b-0 active:translate-y-1
                                     ${filter === cat
-                                        ? 'bg-red-50 text-red-500 border-red-300'
-                                        : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-100'
+                                        ? 'bg-red-50 text-red-500 border-red-300 shadow-sm'
+                                        : 'bg-white text-gray-400 border-gray-200 hover:bg-gray-50 hover:text-gray-600'
                                     }
                                 `}
                             >
@@ -87,14 +84,17 @@ export default function StorePage() {
                             <ProductCard
                                 key={product.key}
                                 product={product}
+                                // Verificación segura (Optional chaining)
                                 isOwned={user?.pig.inventory.includes(product.key) || false}
                                 canAfford={(user?.coins || 0) >= product.price}
                                 isProcessing={purchasingKey === product.key}
                                 onBuy={handleBuy}
                             />
                         )) : (
-                            <div className="col-span-full py-10 text-center text-gray-400">
-                                <p>No hay productos disponibles en esta categoría.</p>
+                            // Empty State
+                            <div className="col-span-full py-12 flex flex-col items-center justify-center text-gray-400 bg-white rounded-3xl border-2 border-dashed border-gray-200">
+                                <span className="text-4xl mb-2">🐽</span>
+                                <p className="font-medium">No hay productos en esta categoría.</p>
                             </div>
                         )}
                     </div>
