@@ -1,5 +1,8 @@
 "use client";
+
 import useAdminUsers from "@/hooks/admin/useAdminUsers";
+
+import Image from "next/image";
 
 export default function UserTable() {
     const { users, isLoading, error, filter, setFilter } = useAdminUsers();
@@ -8,25 +11,25 @@ export default function UserTable() {
     if (error) return <div className="p-10 text-center text-red-500">Error: {error}</div>;
 
     return (
-        <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-200">
+        <div className="bg-[#9e7d74ff]/20 rounded-2xl shadow-lg p-6 border-2 border-[#9e7d74ff]">
             {/* --- Header con Buscador --- */}
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                 <h2 className="text-2xl font-bold text-gray-800">
-                    Usuarios <span className="text-sm font-normal text-gray-500">({users.length})</span>
+                    Usuarios <span className="text-sm font-normal text-gray-700">({users.length})</span>
                 </h2>
                 
                 <div className="relative w-full md:w-auto">
                     <input 
-                        type="text" 
+                        type="text-gray-900" 
                         placeholder="Buscar nombre, apellido..." 
-                        className="pl-4 pr-10 py-2 w-full md:w-64 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-red-400 transition-colors"
+                        className="pl-4 pr-10 py-2 w-full md:w-64 border-2 border-[#9e7d74ff] rounded-xl focus:outline-none focus:border-[#9e7d74ff]/30 transition-colors"
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
                     />
                     {filter && (
                         <button 
                             onClick={() => setFilter('')}
-                            className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 font-bold"
+                            className="absolute right-3 top-2.5 text-gray-200 hover:text-gray-200 font-bold"
                         >✕</button>
                     )}
                 </div>
@@ -62,21 +65,26 @@ export default function UserTable() {
                                 </td>
                                 <td className="py-4 px-4 text-center">
                                     <span className={`text-xs font-bold px-2 py-1 rounded-md uppercase ${
-                                        user.role === 'admin' ? 'bg-black text-white' : 'bg-gray-200 text-gray-600'
+                                        user.role === 'admin' ? 'bg-[#6f8d48ff] text-white' : 'bg-[#c9ae98ff] text-gray-600'
                                     }`}>
                                         {user.role}
                                     </span>
                                 </td>
                                 <td className="py-4 px-4 text-center">
-                                    <span className="text-yellow-600 font-bold flex items-center justify-center gap-1">
-                                        💰 {user.coins}
+                                    <span className="text-orange-400 font-bold flex items-center justify-center gap-1">
+                                        <Image
+                                            src="/images/icons/moneda.png"
+                                            alt="Monedas"
+                                            width={40}
+                                            height={40}
+                                        /> {user.coins}
                                     </span>
                                 </td>
                                 <td className="py-4 px-4 text-center">
                                     <span className={`inline-block min-w-[30px] py-1 px-2 rounded-full text-sm font-bold ${
                                         (user.completedLessons || 0) > 0 
-                                            ? 'bg-green-100 text-green-700' 
-                                            : 'bg-gray-100 text-gray-400'
+                                            ? 'bg-[#c9ae98ff] text-white-700' 
+                                            : 'bg-[#d89595ff] text-white-400'
                                     }`}>
                                         {user.completedLessons || 0}
                                     </span>

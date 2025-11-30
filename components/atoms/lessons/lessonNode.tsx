@@ -13,12 +13,11 @@ export const LessonNode = ({ status, onClick, title }: LessonNodeProps) => {
   switch (status) {
     case "available":
       // Rosado principal con efecto de elevación
-      statusStyles = `bg-[#cf88a7] hover:bg-[#b87090] hover:-translate-y-1 shadow-[#cf88a7]/50 cursor-pointer`;
+      statusStyles = `bg-[#c9ae98ff] hover:bg-[#b87090] hover:-translate-y-1 shadow-[#cf88a7]/50 cursor-pointer`;
       borderStyle = "border-white";
       break;
     case "completed":
-      // Rosado principal
-      statusStyles = `bg-[#cf88a7] hover:bg-[#b87090] cursor-pointer`;
+      statusStyles = `bg-[#c9ae98ff] hover:bg-[#b87090] cursor-pointer`;
       borderStyle = "border-[#a66580]";
       break;
     case "locked":

@@ -11,16 +11,30 @@ export default function HeaderComponent() {
   const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
 
-  const btnStyle = "flex items-center rounded-xl transition hover:bg-orange-100 hover:text-black font-bold text-gray-900 tracking-wide text-sm cursor-pointer w-full";
+  const sidebarBg = isAuthenticated 
+    ? "bg-gradient-to-b from-cyan-50 via-teal-50 to-emerald-50 border-r border-teal-100" // Oceánico Primaveral
+    : "bg-[#f8f4eb]"; 
+
+  // Texto base
+  const textColor = isAuthenticated
+    ? "text-cyan-900" 
+    : "text-gray-900";
+
+
+  const btnHover = isAuthenticated
+    ? "hover:bg-cyan-200/50 hover:text-cyan-950" 
+    : "hover:bg-orange-100 hover:text-black"; 
+
+  const btnStyle = `flex items-center rounded-xl transition font-bold tracking-wide text-sm cursor-pointer w-full ${textColor} ${btnHover}`;
 
   return (
     <>
-      <aside className="flex flex-col bg-[#f8f4eb] text-white w-60 h-screen p-2 fixed left-0 top-0">
+      <aside className={`flex flex-col ${sidebarBg} w-60 h-screen p-2 fixed left-0 top-0 transition-colors duration-500 ease-in-out z-40 shadow-sm`}>
         
         <div className="hidden md:flex items-center justify-center mb-2 mt-4">
           <Link href='/' className="flex flex-col items-center">
             <Image 
-              className="mb-5" 
+              className="mb-5 drop-shadow-sm" 
               src="/images/logos/Piglance.png" 
               alt="Piglance" 
               width={100} 
@@ -95,30 +109,31 @@ export default function HeaderComponent() {
               </span>
             </button>
 
+            {/* Menú desplegable */}
             {showUserMenu && isAuthenticated && (
               <div className="absolute bottom-16 md:bottom-12 left-1/2 -translate-x-1/2 
-              md:left-0 md:translate-x-0 w-48 bg-[#e1f5fe]/90 rounded-lg 
-              shadow-xl border border-[#81d4fa] overflow-hidden z-50">
+              md:left-0 md:translate-x-0 w-48 bg-white/95 backdrop-blur-sm rounded-lg 
+              shadow-xl border border-cyan-200 overflow-hidden z-50">
 
                 <div className="py-1">
                   <button 
                     onClick={() => { onNavigate("profile"); setShowUserMenu(false); }}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#71b8e0ff]/30"
+                    className="block w-full text-left px-4 py-2 text-sm text-cyan-900 hover:bg-cyan-50 font-medium"
                   >
                     Ver Perfil
                   </button>
 
                   <button 
                     onClick={handleSwitchAccount}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#71b8e0ff]/30"
+                    className="block w-full text-left px-4 py-2 text-sm text-cyan-900 hover:bg-cyan-50 font-medium"
                   >
                     Cambiar cuenta
                   </button>
 
-                  <div className="border-t border-gray-100 my-1"></div>
+                  <div className="border-t border-cyan-100 my-1"></div>
                   <button 
                     onClick={() => { logout(); setShowUserMenu(false); }}
-                    className="block w-full text-left px-4 py-2 text-sm text-[#c9998aff] font-bold hover:bg-[#71b8e0ff]/30"
+                    className="block w-full text-left px-4 py-2 text-sm text-red-400 font-bold hover:bg-red-50"
                   >
                     Cerrar sesión
                   </button>
@@ -128,9 +143,9 @@ export default function HeaderComponent() {
             )}
         </div>
 
-
         <div className="hidden md:flex justify-center mt-2 pb-2">
-          <span className="text-gray-900 text-xs">v1.0.0</span>
+          {/* Ajustamos el color del texto de la versión también */}
+          <span className={`text-xs opacity-60 ${textColor}`}>v1.0.0</span>
         </div>
 
       </aside>

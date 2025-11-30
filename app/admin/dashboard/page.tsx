@@ -4,6 +4,29 @@ import UserTable from "@/components/organism/admin/userTable";
 import useAdminUsers from "@/hooks/admin/useAdminUsers";
 import useAdminLessons from "@/hooks/admin/useAdminLessons";
 
+const THEME = {
+  bgMain: "#ebd1dbff",         
+  
+  peach: {
+    main: "#885e51ff",         
+    shadow: "#c9998aff",        
+    light: "#ffccbcff",         
+  },
+
+  pink: {
+    main: "#f1c0d0ff",
+    shadow: "#cf88a7ff",
+    bg: "#fce4ec",           
+  },
+
+  text: {
+    dark: "#717888ff",         
+    light: "#d89595ff",         
+    dim: "#837570ff",          
+  }
+};
+
+
 export default function AdminDashboardPage() {
   const { totalUsers, isLoading: loadingUsers } = useAdminUsers();
   const { totalLessons, isLoading: loadingLessons } = useAdminLessons(); 
@@ -24,22 +47,21 @@ export default function AdminDashboardPage() {
         <StatCard 
             title="Usuarios Totales" 
             value={loadingUsers ? "..." : totalUsers.toString()} 
-            color="bg-white-600" 
+            color="bg-[#c9998aff]" 
             icon="/images/icons/usuariostotales.png"
         />
         
-         {/* 3. Usar el dato real de lecciones */}
         <StatCard 
             title="Total Lecciones" 
             value={loadingLessons ? "..." : totalLessons.toString()} 
-            color="bg-white-600" 
+            color="bg-[#856171ff]" 
             icon="/images/icons/totallecciones.png"
         />
         
         <StatCard 
             title="Ventas Tienda" 
             value="450" 
-            color="bg-white-600" 
+            color="bg-[#885e51ff]" 
             icon="/images/icons/ventas.png"
         />
       </div>
@@ -52,16 +74,24 @@ export default function AdminDashboardPage() {
   );
 }
 
-// ... componente StatCard igual que antes
+// --- MODIFICACIÓN AQUÍ ---
 function StatCard({ title, value, color, icon }: { title: string; value: string; color: string; icon: string }) {
     return (
-        <div className={`${color} rounded-2xl p-6 text-white shadow-xl shadow-gray-200 transform hover:-translate-y-1 transition-transform duration-300`}>
-            <div className="flex justify-between items-start">
+        <div className={`${color} rounded-2xl p-6 text-white shadow-xl shadow-gray-200 transform hover:-translate-y-1 transition-transform duration-300 overflow-hidden relative`}>
+            {/* items-center: para que el texto se centre verticalmente con la imagen grande */}
+            <div className="flex justify-between items-center z-10 relative">
                 <div>
-                    <h3 className="text-sm font-medium opacity-90 uppercase tracking-wider">{title}</h3>
-                    <p className="text-4xl font-bold mt-2">{value}</p>
+                    <h3 className="text-sm font-bold opacity-90 uppercase tracking-wider">{title}</h3>
+                    <p className="text-5xl font-extrabold mt-2">{value}</p>
                 </div>
-                <span className="text-3xl opacity-50">{icon}</span>
+                
+                <div className="flex-shrink-0 ml-4">
+                    <img 
+                        src={icon} 
+                        alt={title} 
+                        className="w-24 h-24 object-contain drop-shadow-md" 
+                    />
+                </div>
             </div>
         </div>
     )
