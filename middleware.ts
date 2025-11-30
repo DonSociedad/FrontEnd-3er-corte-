@@ -14,8 +14,8 @@ export async function middleware(request: NextRequest) {
 
   // 1. Si NO hay token y quiere entrar a rutas privadas -> Login
   if (!token) {
-    if (adminRoutes.some(route => pathname.startsWith(route)) || 
-        studentRoutes.some(route => pathname.startsWith(route))) {
+    if (adminRoutes.some(route => pathname.startsWith(route)) ||
+        (studentRoutes.some(route => pathname.startsWith(route)) && !pathname.startsWith('/map') && !pathname.startsWith('/learn'))) {
       return NextResponse.redirect(new URL('/login', request.url));
     }
     return NextResponse.next();
@@ -43,7 +43,7 @@ export async function middleware(request: NextRequest) {
 
     // B. Si es Estudiante e intenta entrar a /admin -> Lo mandamos a su mapa
     if (role === 'student' && adminRoutes.some(route => pathname.startsWith(route))) {
-      return NextResponse.redirect(new URL('/learn', request.url));
+      return NextResponse.redirect(new URL('/map', request.url));
     }
 
     // C. Si es Admin e intenta jugar (entrar a /learn) -> Lo mandamos a su dashboard

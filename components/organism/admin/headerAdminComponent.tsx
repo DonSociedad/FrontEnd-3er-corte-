@@ -73,7 +73,7 @@ export default function AdminSidebar() {
             <span className="hidden md:block">Usuarios</span>
           </Link>  
 
-          <Link href="/admin/content" className={getBtnClass('/admin/content')}>
+          <Link href="/admin/lessons" className={getBtnClass('/admin/content')}>
              <div className="w-10 flex justify-center">
                 <Image 
                   src="/images/header/learn.png" 

@@ -2,14 +2,15 @@
 
 import UserTable from "@/components/organism/admin/userTable";
 import useAdminUsers from "@/hooks/admin/useAdminUsers";
+import useAdminLessons from "@/hooks/admin/useAdminLessons";
 
 export default function AdminDashboardPage() {
-  // Consumimos el hook para obtener el número real de usuarios
-  const { totalUsers, isLoading } = useAdminUsers();
+  // 2. Consumir hooks (usuarios y lecciones)
+  const { totalUsers, isLoading: loadingUsers } = useAdminUsers();
+  const { totalLessons, isLoading: loadingLessons } = useAdminLessons(); 
 
   return (
     <div className="p-8 md:p-12">
-      {/* Título de la sección */}
       <div className="mb-8">
         <h1 className="text-4xl font-extrabold text-gray-800 tracking-tight">
           Dashboard
@@ -19,26 +20,23 @@ export default function AdminDashboardPage() {
         </p>
       </div>
 
-      {/* Grid de Tarjetas de Estadísticas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
          
-         {/* Tarjeta 1: Usuarios (Datos Reales) */}
          <StatCard 
             title="Usuarios Totales" 
-            value={isLoading ? "..." : totalUsers.toString()} 
+            value={loadingUsers ? "..." : totalUsers.toString()} 
             color="bg-blue-600" 
             icon="👥"
          />
          
-         {/* Tarjeta 2: Lecciones (Simulado por ahora) */}
+         {/* 3. Usar el dato real de lecciones */}
          <StatCard 
-            title="Lecciones Completadas" 
-            value="856" 
+            title="Total Lecciones" 
+            value={loadingLessons ? "..." : totalLessons.toString()} 
             color="bg-green-600" 
-            icon="✅"
+            icon="📚"
          />
          
-         {/* Tarjeta 3: Ventas (Simulado por ahora) */}
          <StatCard 
             title="Ventas Tienda" 
             value="450" 
@@ -47,13 +45,15 @@ export default function AdminDashboardPage() {
          />
       </div>
 
-      {/* Tabla de Usuarios */}
-      <UserTable />
+       <div className="mt-8">
+          <h3 className="text-xl font-bold text-gray-700 mb-4">Usuarios Recientes</h3>
+          <UserTable />
+       </div>
     </div>
   );
 }
 
-// Sub-componente simple para las tarjetas (puedes moverlo a un archivo en 'molecules' si prefieres)
+// ... componente StatCard igual que antes
 function StatCard({ title, value, color, icon }: { title: string; value: string; color: string; icon: string }) {
     return (
         <div className={`${color} rounded-2xl p-6 text-white shadow-xl shadow-gray-200 transform hover:-translate-y-1 transition-transform duration-300`}>
