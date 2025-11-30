@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/contexts/authContext';
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'; 
 
 export const useHeaderAdmin = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  
+  // Obtenemos el pathname aquí de forma segura
   const pathname = usePathname();
 
-  // Cerrar menú al hacer clic fuera
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -19,11 +20,9 @@ export const useHeaderAdmin = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const toggleMenu = () => {
-    setShowUserMenu((prev) => !prev);
-  };
+  const toggleMenu = () => setShowUserMenu((prev) => !prev);
 
-  // Función para saber si el botón debe estar pintado (Ruta activa)
+  // Helper simple para coincidencia exacta
   const isActive = (path: string) => pathname === path;
 
   return {
@@ -33,6 +32,7 @@ export const useHeaderAdmin = () => {
     showUserMenu,
     menuRef,
     toggleMenu,
-    isActive
+    isActive,
+    pathname 
   };
 };

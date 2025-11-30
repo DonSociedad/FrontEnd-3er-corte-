@@ -33,8 +33,7 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
       name: 'Nada',
       price: 0,
       category: activeTab,
-      createdAt: '',
-      updatedAt: ''
+      createdAt: ''
     });
   }
 
