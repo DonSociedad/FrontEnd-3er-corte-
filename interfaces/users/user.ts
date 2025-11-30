@@ -19,8 +19,20 @@ export interface IUserProfile {
   role: string;
   pig: IPigData;
   coins: number;
-  // datos simulados 
+  // Propiedades calculadas o adicionales
   completedLessons?: number; 
   friends?: number;
   itemsCount?: number;
+}
+
+export interface IRawUserResponse {
+    _id: string;
+    name: string;
+    lastName: string;
+    email: string;
+    role: string;
+    pig: any;
+    coins: number;
+    progress: string[]; 
+    registrationDate: string;
 }

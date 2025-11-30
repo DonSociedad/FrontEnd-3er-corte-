@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useHeader } from '@/hooks/compotents/useHeader';
 import { useAuth } from '@/contexts/authContext';
@@ -8,26 +7,9 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function HeaderComponent() {
-  const { onNavigate } = useHeader();
-  const { isAuthenticated, logout } = useAuth(); 
+  const { onNavigate, showUserMenu, setShowUserMenu, menuRef, handleSwitchAccount } = useHeader();
+  const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
-
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowUserMenu(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [menuRef]);
-
-  const handleSwitchAccount = () => {
-    router.push('/login');
-  };
 
   const btnStyle = "flex items-center rounded-xl transition hover:bg-orange-100 hover:text-black font-bold text-gray-900 tracking-wide text-sm cursor-pointer w-full";
 
