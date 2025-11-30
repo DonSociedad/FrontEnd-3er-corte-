@@ -31,7 +31,7 @@ const saveLocalProgress = (lessonId: string) => {
   }
 
   try {
-    const raw = localStorage.getItem(LOCAL_COMPLETED_KEY);
+    const raw = sessionStorage.getItem(LOCAL_COMPLETED_KEY);
     let currentIds: string[] = [];
     try {
       currentIds = JSON.parse(raw ?? "[]");
@@ -42,7 +42,7 @@ const saveLocalProgress = (lessonId: string) => {
 
     if (!currentIds.includes(lessonId)) {
       currentIds.push(lessonId);
-      localStorage.setItem(LOCAL_COMPLETED_KEY, JSON.stringify(currentIds));
+      sessionStorage.setItem(LOCAL_COMPLETED_KEY, JSON.stringify(currentIds));
       console.log("✅ Progreso guardado localmente. Nueva lista:", currentIds);
     } else {
       console.log("⚠️ La lección ya estaba guardada anteriormente.");
@@ -111,25 +111,25 @@ const goToNext = async () => {
       // 2. INTENTO DE GUARDADO MANUAL (Sin usar la función helper externa para probar)
       try {
         const key = "completedLessons";
-        const raw = localStorage.getItem(key);
+        const raw = sessionStorage.getItem(key);
         let ids: string[] = JSON.parse(raw ?? "[]");
-        
+
         if (!Array.isArray(ids)) ids = [];
 
         if (!ids.includes(lessonId)) {
             ids.push(lessonId);
-            localStorage.setItem(key, JSON.stringify(ids));
+            sessionStorage.setItem(key, JSON.stringify(ids));
             console.log("💾 Guardado ejecutado. Nuevos IDs:", ids);
         } else {
             console.log("💾 El ID ya existía en la lista.");
         }
 
         // 3. VERIFICACIÓN INMEDIATA
-        const check = localStorage.getItem(key);
+        const check = sessionStorage.getItem(key);
         console.log("🔍 Verificación post-guardado:", check);
-        
+
         if (!check || !check.includes(lessonId)) {
-            alert("ERROR: Se intentó guardar pero el LocalStorage sigue sin tener el ID.");
+            alert("ERROR: Se intentó guardar pero el SessionStorage sigue sin tener el ID.");
             return; // NO REDIRIGIR SI FALLÓ
         }
 

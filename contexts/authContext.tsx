@@ -143,7 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     removeCookie("token");
     setUser(null);
-    localStorage.removeItem("currentLevel"); 
+    localStorage.removeItem("completedLessons");
     router.push("/login");
   };
 

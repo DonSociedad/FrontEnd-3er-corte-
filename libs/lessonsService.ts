@@ -15,7 +15,7 @@ export const createLessonService = async (lesson: ICreateLessonPayload) => {
 export const getLocalCompletedLessons = (): string[] => {
   if (typeof window === 'undefined') return [];
   try {
-    const raw = localStorage.getItem("completedLessons"); 
+    const raw = sessionStorage.getItem("completedLessons");
     const parsed = JSON.parse(raw ?? "[]");
     return Array.isArray(parsed) ? parsed : [];
   } catch {
