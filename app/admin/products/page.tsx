@@ -1,6 +1,9 @@
 "use client";
-import Link from "next/link";
+
 import ProductTable from "@/components/organism/admin/productTableComponent";
+
+import Link from "next/link";
+
 
 export default function AdminProductsPage() {
   return (

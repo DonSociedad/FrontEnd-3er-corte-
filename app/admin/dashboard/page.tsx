@@ -5,7 +5,6 @@ import useAdminUsers from "@/hooks/admin/useAdminUsers";
 import useAdminLessons from "@/hooks/admin/useAdminLessons";
 
 export default function AdminDashboardPage() {
-  // 2. Consumir hooks (usuarios y lecciones)
   const { totalUsers, isLoading: loadingUsers } = useAdminUsers();
   const { totalLessons, isLoading: loadingLessons } = useAdminLessons(); 
 
@@ -21,34 +20,34 @@ export default function AdminDashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-         
-         <StatCard 
+        
+        <StatCard 
             title="Usuarios Totales" 
             value={loadingUsers ? "..." : totalUsers.toString()} 
-            color="bg-blue-600" 
-            icon="👥"
-         />
-         
+            color="bg-white-600" 
+            icon="/images/icons/usuariostotales.png"
+        />
+        
          {/* 3. Usar el dato real de lecciones */}
-         <StatCard 
+        <StatCard 
             title="Total Lecciones" 
             value={loadingLessons ? "..." : totalLessons.toString()} 
-            color="bg-green-600" 
-            icon="📚"
-         />
-         
-         <StatCard 
+            color="bg-white-600" 
+            icon="/images/icons/totallecciones.png"
+        />
+        
+        <StatCard 
             title="Ventas Tienda" 
             value="450" 
-            color="bg-purple-600" 
-            icon="💰"
-         />
+            color="bg-white-600" 
+            icon="/images/icons/ventas.png"
+        />
       </div>
 
-       <div className="mt-8">
+      <div className="mt-8">
           <h3 className="text-xl font-bold text-gray-700 mb-4">Usuarios Recientes</h3>
           <UserTable />
-       </div>
+      </div>
     </div>
   );
 }

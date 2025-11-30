@@ -1,8 +1,9 @@
 "use client";
 import useProductForm from "@/hooks/admin/useProductForm";
+
 import Link from "next/link";
 import Image from "next/image";
-import { use, useMemo } from "react";
+import { use } from "react";
 
 // CORRECCIÓN RUTA IMAGEN: quitamos /logos
 const getPreviewPath = (category: string, key: string) => 
@@ -24,17 +25,17 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
 
     const previewPath = getPreviewPath(formData.category, formData.key);
 
-  return (
+return (
     <div className="p-8 md:p-12 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
+    <div className="flex justify-between items-center mb-8">
         <div>
             <h1 className="text-3xl font-extrabold text-gray-800">Editar Producto</h1>
             <p className="text-gray-500 text-sm mt-1">ID: {unwrappedParams.id}</p>
         </div>
         <Link href="/admin/products" className="text-gray-500 font-bold hover:text-black">Cancelar</Link>
-      </div>
+    </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* FORMULARIO */}
         <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-200 space-y-6">
@@ -92,9 +93,20 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                 
                 {/* Alerta de cambio de Key */}
                 <div className="bg-orange-50 p-2 rounded mt-2 border border-orange-100">
-                    <p className="text-[10px] text-orange-700 font-bold">⚠️ Cuidado al editar la Key</p>
+                    <p className="text-[10px] text-orange-700 font-bold">
+                        <Image
+                            src="/images/icons/advertencia.png"
+                            alt="Advertencia"
+                            width={12}
+                            height={12}
+                            className="inline-block mr-1 mb-0.5"
+                        /> Cuidado al editar la Key
+                    </p>
                     <p className="text-[10px] text-orange-600 leading-tight">
-                        Si cambias esto, la imagen dejará de verse hasta que renombres el archivo en la carpeta <code>public/images/pig/</code> manualmente.
+                        Si cambias esto, la imagen dejará de verse hasta que renombres el archivo en la carpeta <code>
+                            public/images/pig/
+                    </code> 
+                    manualmente.
                     </p>
                 </div>
             </div>
@@ -130,14 +142,14 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
             </div>
             
             <div className="text-center">
-                 <p className="text-xs text-gray-500 mb-1">Ruta de imagen:</p>
-                 <code className="text-[10px] bg-gray-200 px-2 py-1 rounded block break-all">
+                <p className="text-xs text-gray-500 mb-1">Ruta de imagen:</p>
+                <code className="text-[10px] bg-gray-200 px-2 py-1 rounded block break-all">
                     /public{previewPath}
-                 </code>
+                </code>
             </div>
         </div>
 
-      </div>
     </div>
-  );
+    </div>
+    );
 }

@@ -91,7 +91,7 @@ export default function AdminCreatePage() {
             </div>
 
             <p className="text-gray-500 text-sm mt-2">
-               Questions can be added later in the “Quizzes” section.
+                Las preguntas se podrán agregar después de crear el quiz.
             </p>
           </>
         );

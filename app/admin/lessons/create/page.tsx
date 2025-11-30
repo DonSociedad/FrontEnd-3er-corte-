@@ -1,10 +1,12 @@
 "use client";
 
 import useCreateLesson from "@/hooks/admin/useCreateLesson";
+
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CreateLessonPage() {
-  const { 
+const { 
     formData, 
     existingLessons, 
     isLoading,
@@ -16,37 +18,42 @@ export default function CreateLessonPage() {
     updateBlockPayload,
     updateOptionText,
     addOption,
-    removeOption,         // Función nueva
+    removeOption,         
     submit 
-  } = useCreateLesson();
+} = useCreateLesson();
 
-  return (
+return (
     <div className="p-8 md:p-12 pb-32 max-w-5xl mx-auto">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-8 border-b pb-4">
+    <div className="flex justify-between items-center mb-8 border-b pb-4">
         <div>
             <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight">Crear Lección</h1>
             <p className="text-gray-500 mt-1">Diseña el contenido educativo interactivo.</p>
         </div>
         <div className="text-right">
-             <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+            <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
                 Borrador
-             </span>
+            </span>
         </div>
-      </div>
+    </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* --- COLUMNA IZQUIERDA: CONFIGURACIÓN --- */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1 space-y-6">
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 sticky top-4">
                 <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    ⚙️ Configuración
+                    <Image 
+                        src="/images/icons/configuracion.png" 
+                        alt="Configuración"
+                        width={45}
+                        height={45}
+                    />
+
                 </h2>
                 
                 <div className="space-y-4">
                     <div>
-                        <label className="text-xs font-bold text-gray-500 uppercase">Título</label>
+                        <label className="text-xs font-bold text-gray-500 uppercase">
+                            Título
+                        </label>
                         <input 
                             type="text" 
                             value={formData.title}
@@ -75,7 +82,7 @@ export default function CreateLessonPage() {
                             className="w-full mt-2 border border-gray-200 rounded-xl p-2 text-sm outline-none focus:border-black bg-gray-50 cursor-pointer"
                             onChange={(e) => {
                                 addPrerequisite(e.target.value);
-                                e.target.value = ""; // Reset select
+                                e.target.value = ""; 
                             }}
                         >
                             <option value="">+ Agregar requisito...</option>
@@ -94,7 +101,9 @@ export default function CreateLessonPage() {
                                 const lesson = existingLessons.find(l => l.id === preId);
                                 return (
                                     <div key={preId} className="flex items-center gap-2 bg-black text-white px-3 py-1.5 rounded-lg text-xs animate-in fade-in zoom-in duration-200">
-                                        <span className="truncate max-w-[150px]">{lesson?.title || "Cargando..."}</span>
+                                        <span className="truncate max-w-[150px]">
+                                            {lesson?.title || "Cargando..."}
+                                        </span>
                                         <button 
                                             onClick={() => removePrerequisite(preId)}
                                             className="hover:text-red-400 font-bold px-1"
@@ -114,7 +123,13 @@ export default function CreateLessonPage() {
         {/* --- COLUMNA DERECHA: CONTENIDO --- */}
         <div className="lg:col-span-2 space-y-6">
             <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
-                📚 Bloques de Contenido
+                <Image 
+                    src="/images/icons/contenido2.png" 
+                    alt="Contenido"
+                    width={45}
+                    height={45}
+                />
+                Contenido de la Lección
             </h2>
             
             {formData.contentBlocks.map((block, bIndex) => (
@@ -151,7 +166,9 @@ export default function CreateLessonPage() {
 
                         {/* Opciones Mejoradas */}
                         <div className="bg-gray-50 p-4 rounded-xl space-y-3">
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Opciones de respuesta</p>
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                                Opciones de respuesta
+                            </p>
                             
                             {block.payload.options.map((opt, oIndex) => (
                                 <div key={opt.id} className="flex items-center gap-3 group/option">
@@ -242,10 +259,10 @@ export default function CreateLessonPage() {
             </button>
         </div>
 
-      </div>
+    </div>
 
       {/* --- ACTION BAR --- */}
-      <div className="fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-md border-t border-gray-200 p-4 md:pl-72 z-40 flex justify-between items-center">
+    <div className="fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-md border-t border-gray-200 p-4 md:pl-72 z-40 flex justify-between items-center">
             <p className="text-xs text-gray-400 hidden md:block">
                 Asegúrate de marcar la respuesta correcta en cada pregunta.
             </p>
@@ -268,7 +285,15 @@ export default function CreateLessonPage() {
                         </>
                     ) : (
                         <>
-                            <span>💾</span> Guardar Lección
+                            <span>
+                            <Image
+                                src="/images/icons/guardar.png"
+                                alt="Guardar"
+                                width={45}
+                                height={45}
+                            />
+                            </span> 
+                            Guardar Lección
                         </>
                     )}
                 </button>
