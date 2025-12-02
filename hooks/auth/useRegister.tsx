@@ -4,11 +4,13 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { RegisterDTO } from "@/interfaces/access/register"
 import { useAuth } from "@/contexts/authContext" 
+import { useNotification } from "@/contexts/notificationContext"
 
 export function useRegister() {
     const router = useRouter();
-    
-    const { register: registerUser } = useAuth(); 
+    const { showNotification } = useNotification();
+
+    const { register: registerUser } = useAuth();
 
     const {
         register,
@@ -23,20 +25,20 @@ export function useRegister() {
             const result = await registerUser(data);
             
             if (result.success) {
-                alert("Registro exitoso. Redirigiendo al inicio de sesión...");
-                router.push("/login"); 
+                showNotification("Registro exitoso. Redirigiendo al inicio de sesión...", 'success');
+                router.push("/login");
             } else {
-                alert(result.error || "Error al registrar usuario. Revisa los datos.");
+                showNotification(result.error || "Error al registrar usuario. Revisa los datos.", 'error');
             }
         } catch (error) {
             console.error("Error inesperado en hook register:", error);
-            alert("Error de conexión con el servidor. Intenta más tarde.");
+            showNotification("Error de conexión con el servidor. Intenta más tarde.", 'error');
         }
     };
 
     const onErrors = () => {
         console.log("Errores encontrados en el formulario:", errors);
-        alert("Información incompleta o errónea, revisa los campos.");
+        showNotification("Información incompleta o errónea, revisa los campos.", 'error');
     };
 
     return {

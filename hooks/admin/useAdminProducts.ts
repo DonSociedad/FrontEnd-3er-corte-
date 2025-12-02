@@ -1,10 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import { getAllProductsService, deleteProductService } from '@/libs/productsService';
 import { IProduct } from '@/interfaces/products/product';
+import { useNotification } from '@/contexts/notificationContext';
 
 export default function useAdminProducts() {
     const [products, setProducts] = useState<IProduct[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { showNotification } = useNotification();
     
     // Filtros
     const [filter, setFilter] = useState(''); // Texto
@@ -27,7 +29,7 @@ export default function useAdminProducts() {
         if (!error) {
             refreshProducts();
         } else {
-            alert("Error: " + error);
+            showNotification("Error: " + error, 'error');
         }
     };
 

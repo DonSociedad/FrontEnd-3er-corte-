@@ -18,40 +18,6 @@ type Lesson = {
   contentBlocks?: ContentBlock[];
 };
 
-// Clave para el array de lecciones en localStorage
-const LOCAL_COMPLETED_KEY = "completedLessons";
-
-const saveLocalProgress = (lessonId: string) => {
-  if (typeof window === "undefined") return;
-
-  // VALIDACIÓN DE SEGURIDAD
-  if (!lessonId) {
-      console.error("❌ Error: Se intentó guardar un ID vacío/nulo");
-      return;
-  }
-
-  try {
-    const raw = sessionStorage.getItem(LOCAL_COMPLETED_KEY);
-    let currentIds: string[] = [];
-    try {
-      currentIds = JSON.parse(raw ?? "[]");
-      if (!Array.isArray(currentIds)) currentIds = [];
-    } catch {
-      currentIds = [];
-    }
-
-    if (!currentIds.includes(lessonId)) {
-      currentIds.push(lessonId);
-      sessionStorage.setItem(LOCAL_COMPLETED_KEY, JSON.stringify(currentIds));
-      console.log("✅ Progreso guardado localmente. Nueva lista:", currentIds);
-    } else {
-      console.log("⚠️ La lección ya estaba guardada anteriormente.");
-    }
-  } catch (error) {
-    console.error("Error guardando progreso local:", error);
-  }
-};
-
 export const useLesson = (lessonId: string) => {
   const router = useRouter();
   const [lesson, setLesson] = useState<Lesson | null>(null);

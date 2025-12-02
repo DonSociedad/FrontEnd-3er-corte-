@@ -1,15 +1,17 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation" 
+import { useRouter } from "next/navigation"
 
 import { LoginDTO } from "@/interfaces/access/login"
 import { loginScheme } from "@/schemas/login"
-import { useAuth } from "@/contexts/authContext" 
+import { useAuth } from "@/contexts/authContext"
+import { useNotification } from "@/contexts/notificationContext"
 
 export function useLogin() {
     const { login } = useAuth(); // Usamos la función del contexto
     const router = useRouter();
+    const { showNotification } = useNotification();
 
     const {
         register,
@@ -30,17 +32,17 @@ export function useLogin() {
                 router.push("/map"); 
             } else {
                 // Si falló, mostramos el mensaje que devuelve el contexto
-                alert(result.error || "Error en el login, verifica tus credenciales.");
+                showNotification(result.error || "Error en el login, verifica tus credenciales.", 'error');
             }
 
         } catch (err) {
             console.error("Error inesperado en login", err);
-            alert("Ocurrió un error inesperado.");
+            showNotification("Ocurrió un error inesperado.", 'error');
         }
     };
 
     const onErrors = () => {
-        alert("Información incompleta o errónea, vuelve a intentar");
+        showNotification("Información incompleta o errónea, vuelve a intentar", 'error');
     };
 
     return {

@@ -20,8 +20,8 @@ export default function ProductTable() {
         isLoading, 
         filter, 
         setFilter, 
-        selectedCategory, // <--- Traemos esto
-        setSelectedCategory, // <--- Traemos esto
+        selectedCategory,
+        setSelectedCategory, 
         handleDelete 
     } = useAdminProducts();
 
