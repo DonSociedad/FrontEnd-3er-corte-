@@ -1,15 +1,13 @@
 import { apiFetch } from "./singletonFetch";
-import { LessonMapItem } from "@/interfaces/lessons/lesson";
+import { IAdminLesson, ICreateLessonPayload, LessonMapItem } from "@/interfaces/lessons/lesson";
 
-const LOCAL_LEVEL_KEY = "currentLevel";
-
-const readLocalCurrentLevel = (): number => {
+export const createLessonService = async (lesson: ICreateLessonPayload) => {
   try {
-    const raw = localStorage.getItem(LOCAL_LEVEL_KEY);
-    const n = parseInt(raw ?? "", 10);
-    return Number.isFinite(n) && n > 0 ? n : 1;
-  } catch {
-    return 1;
+    // El backend espera el body directo
+    const response = await apiFetch('/lessons', 'POST', lesson);
+    return { data: response, error: null };
+  } catch (error: any) {
+    return { data: null, error: error.message };
   }
 };
 
@@ -17,7 +15,7 @@ const readLocalCurrentLevel = (): number => {
 export const getLocalCompletedLessons = (): string[] => {
   if (typeof window === 'undefined') return [];
   try {
-    const raw = localStorage.getItem("completedLessons"); 
+    const raw = sessionStorage.getItem("completedLessons");
     const parsed = JSON.parse(raw ?? "[]");
     return Array.isArray(parsed) ? parsed : [];
   } catch {
@@ -72,5 +70,24 @@ export const answerLesson = async (id: string, blockId: string, answer: any) => 
   } catch (error: any) {
     console.error("Error en answerLesson:", error.message);
     return { data: null, error };
+  }
+};
+
+export const getAllLessonsService = async () => {
+  try {
+    // Llamamos al endpoint GET /lessons que acabamos de crear en el backend
+    const response = await apiFetch('/lessons', 'GET');
+    
+    // Validamos que sea array
+    if (!Array.isArray(response)) {
+        return { data: [], error: null };
+    }
+
+    const lessons: IAdminLesson[] = response as IAdminLesson[];
+
+    return { data: lessons, error: null };
+  } catch (error: any) {
+    console.error("Error fetching admin lessons:", error.message);
+    return { data: null, error: error.message || "Error obteniendo lecciones" };
   }
 };

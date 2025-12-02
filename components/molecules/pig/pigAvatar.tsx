@@ -4,10 +4,14 @@ import { getPigAssetPath } from '@/utils/pigHelpers';
 
 interface PigAvatarProps {
   config: IAvatarEquipped;
+  className?: string; // <--- 1. Agregamos esta prop opcional
 }
 
-export default function PigAvatar({ config }: PigAvatarProps) {
-  // Helper para renderizar capas de forma segura y limpia
+export default function PigAvatar({ config, className }: PigAvatarProps) {
+  
+  // 2. Definimos el tamaño: Si viene className externo lo usamos, si no, usamos el gigante por defecto.
+  const containerClasses = className || "w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96";
+
   const renderLayer = (src: string | null, alt: string, zIndex: string) => {
     if (!src) return null;
     return (
@@ -16,33 +20,23 @@ export default function PigAvatar({ config }: PigAvatarProps) {
           src={src} 
           alt={alt} 
           fill
-          sizes="(max-width: 768px) 100vw, 500px" // Importante para optimización
-          className="object-contain"
-          priority={zIndex === 'z-0'} // Priorizar la carga de la piel
+          sizes="(max-width: 768px) 100vw, 500px"
+          className="object-contain" // Esto asegura que la imagen se ajuste al contenedor
+          priority={zIndex === 'z-0'}
         />
       </div>
     );
   };
 
   return (
-    <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex items-center justify-center transition-all duration-300">
+    // 3. Aplicamos la clase dinámica aquí
+    <div className={`relative flex items-center justify-center transition-all duration-300 ${containerClasses}`}>
       
-      {/* 1. SKIN (Fondo) */}
       {renderLayer(getPigAssetPath('skins', config.skin), 'skin', 'z-0')}
-
-      {/* 2. OUTLINE (Línea negra obligatoria - root) */}
       {renderLayer(getPigAssetPath('root', 'outline'), 'outline', 'z-10 pointer-events-none')}
-
-      {/* 3. MOUTH (Boca) */}
       {renderLayer(getPigAssetPath('faces', config.mouth), 'mouth', 'z-20')}
-
-      {/* 4. EYES (Ojos) */}
       {renderLayer(getPigAssetPath('eyes', config.eyes), 'eyes', 'z-30')}
-
-      {/* 5. BODY (Ropa) */}
       {renderLayer(getPigAssetPath('bodies', config.body), 'body', 'z-40')}
-
-      {/* 6. HAT (Sombrero) */}
       {renderLayer(getPigAssetPath('hats', config.hat), 'hat', 'z-50')}
       
     </div>

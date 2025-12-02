@@ -1,3 +1,4 @@
+'use client'; 
 import { useState } from 'react';
 import Image from "next/image";
 import { IPigData } from '@/interfaces/users/user';
@@ -33,8 +34,7 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
       name: 'Nada',
       price: 0,
       category: activeTab,
-      createdAt: '',
-      updatedAt: ''
+      createdAt: ''
     });
   }
 

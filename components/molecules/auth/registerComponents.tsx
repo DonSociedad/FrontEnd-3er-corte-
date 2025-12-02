@@ -1,6 +1,6 @@
 'use client'
 
-import { useRegister } from "@/hooks/auth/useRegister";
+import useRegister from "@/hooks/auth/useRegister";
 import InputComponent from "../../atoms/inputComponents";
 import ButtonComponent from "../../atoms/buttonComponents";
 
@@ -48,7 +48,7 @@ export default function RegisterComponent() {
 
         <ButtonComponent
             type={2}
-            content="Iniciar sesión"
+            content="Registrate"
         />
         </form>
     );

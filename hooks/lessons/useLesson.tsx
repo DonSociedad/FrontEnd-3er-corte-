@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
 import { getLessonById, answerLesson, completeLessonService } from "@/libs/lessonsService";
 
+// Tipos auxiliares
 type ContentBlock = {
   id: string;
   type: string;
@@ -18,39 +18,8 @@ type Lesson = {
   contentBlocks?: ContentBlock[];
 };
 
-// Clave para el array de lecciones en localStorage
-const LOCAL_COMPLETED_KEY = "completedLessons";
-
-const saveLocalProgress = (lessonId: string) => {
-  if (typeof window === "undefined") return;
-
-  // VALIDACIÓN DE SEGURIDAD
-  if (!lessonId) {
-      console.error("❌ Error: Se intentó guardar un ID vacío/nulo");
-      return;
-  }
-
-  try {
-    const raw = localStorage.getItem(LOCAL_COMPLETED_KEY);
-    let currentIds: string[] = [];
-    try {
-      currentIds = JSON.parse(raw ?? "[]");
-      if (!Array.isArray(currentIds)) currentIds = [];
-    } catch {
-      currentIds = [];
-    }
-
-    if (!currentIds.includes(lessonId)) {
-      currentIds.push(lessonId);
-      localStorage.setItem(LOCAL_COMPLETED_KEY, JSON.stringify(currentIds));
-      console.log("✅ Progreso guardado localmente. Nueva lista:", currentIds);
-    } else {
-      console.log("⚠️ La lección ya estaba guardada anteriormente.");
-    }
-  } catch (error) {
-    console.error("Error guardando progreso local:", error);
-  }
-};
+// Estado de la lección para manejar la UI
+type LessonStatus = 'playing' | 'failed' | 'completed';
 
 export const useLesson = (lessonId: string) => {
   const router = useRouter();
@@ -61,6 +30,10 @@ export const useLesson = (lessonId: string) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastResponse, setLastResponse] = useState<null | { correct: boolean; explanation?: string }>(null);
+
+  // NUEVOS ESTADOS
+  const [mistakes, setMistakes] = useState(0); 
+  const [lessonStatus, setLessonStatus] = useState<LessonStatus>('playing');
 
   // 1. Cargar la lección
   const fetchLesson = async () => {
@@ -84,72 +57,67 @@ export const useLesson = (lessonId: string) => {
   useEffect(() => {
     if (!lessonId) return;
     fetchLesson();
+    resetLessonState();
+  }, [lessonId]);
+
+  // Función auxiliar para reiniciar todo
+  const resetLessonState = () => {
     setCurrentIndex(0);
     setLastResponse(null);
-  }, [lessonId]);
+    setMistakes(0);
+    setLessonStatus('playing');
+  };
 
   const currentBlock = lesson?.contentBlocks && lesson.contentBlocks.length > 0 
     ? lesson.contentBlocks[currentIndex] 
     : null;
 
   // 2. Lógica para avanzar y completar
-const goToNext = async () => {
+  const goToNext = async () => {
     if (!lesson?.contentBlocks) return;
     const next = currentIndex + 1;
     
-    // === CASO: LECCIÓN COMPLETADA ===
+    // === CASO: FINAL DE LA LECCIÓN ===
     if (next >= lesson.contentBlocks.length) {
       
-      console.log("🏁 Intentando finalizar lección. ID:", lessonId);
-
-      // 1. VALIDACIÓN CRÍTICA
-      if (!lessonId) {
-        alert("ERROR FATAL: lessonId es undefined o vacío");
+      // VALIDACIÓN DE ERRORES: Si hubo errores, mostramos pantalla de fallo
+      if (mistakes > 0) {
+        console.log(`Lección terminada con ${mistakes} errores. No se guarda progreso.`);
+        setLessonStatus('failed'); 
         return;
       }
 
-      // 2. INTENTO DE GUARDADO MANUAL (Sin usar la función helper externa para probar)
+      // Si no hubo errores, guardamos progreso y redirigimos
+      console.log("🏆 Lección perfecta. Guardando progreso...");
+
+      if (!lessonId) {
+        alert("ERROR FATAL: lessonId es undefined");
+        return;
+      }
+
       try {
         const key = "completedLessons";
-        const raw = localStorage.getItem(key);
+        const raw = sessionStorage.getItem(key);
         let ids: string[] = JSON.parse(raw ?? "[]");
-        
         if (!Array.isArray(ids)) ids = [];
 
         if (!ids.includes(lessonId)) {
             ids.push(lessonId);
-            localStorage.setItem(key, JSON.stringify(ids));
-            console.log("💾 Guardado ejecutado. Nuevos IDs:", ids);
-        } else {
-            console.log("💾 El ID ya existía en la lista.");
+            sessionStorage.setItem(key, JSON.stringify(ids));
         }
 
-        // 3. VERIFICACIÓN INMEDIATA
-        const check = localStorage.getItem(key);
-        console.log("🔍 Verificación post-guardado:", check);
-        
-        if (!check || !check.includes(lessonId)) {
-            alert("ERROR: Se intentó guardar pero el LocalStorage sigue sin tener el ID.");
-            return; // NO REDIRIGIR SI FALLÓ
-        }
-
-      } catch (e: any) {
-        alert("Error escribiendo en storage: " + e.message);
-        return;
-      }
-
-      // 4. Sincronización Backend (Silenciosa)
-      try {
+        // Sincronización Backend
         await completeLessonService(lessonId);
-      } catch (err) {
-        console.log("Backend sync failed (guest?)");
+        
+        // Redirección exitosa
+        router.push('/map');
+      } catch (e: any) {
+        console.error("Error al guardar:", e);
       }
-
-      // 5. SI LLEGAMOS AQUÍ, ES SEGURO REDIRIGIR
-      router.push('/map')
       return;
     }
     
+    // Si no es el final, avanzamos
     setCurrentIndex(next);
     setLastResponse(null);
   };
@@ -160,18 +128,28 @@ const goToNext = async () => {
     setIsSubmitting(true);
     try {
       const { data: res, error } = await answerLesson(lessonId, currentBlock.id, answer);
-      if (error || !res) {
-        throw error ?? new Error("No data returned from answerLesson");
+      
+      if (error || !res) throw error ?? new Error("Error en respuesta");
+      
+      const responseData = res as { correct: boolean; explanation?: string };
+      setLastResponse(responseData);
+
+      if (!responseData.correct) {
+         setMistakes(prev => prev + 1);
       }
-      setLastResponse(res as { correct: boolean; explanation?: string });
+
       setIsSubmitting(false);
       return res;
     } catch (err: any) {
-      console.error("Error submitting answer:", err?.message ?? err);
-      setError(err?.message ?? "Error enviando respuesta");
+      console.error("Error submitting answer:", err);
       setIsSubmitting(false);
       return null;
     }
+  };
+
+  // Función para reintentar desde la UI
+  const retryLesson = () => {
+    resetLessonState();
   };
 
   return { 
@@ -183,7 +161,10 @@ const goToNext = async () => {
     isSubmitting, 
     lastResponse, 
     currentIndex, 
-    goToNext 
+    goToNext,
+    lessonStatus, 
+    retryLesson,   
+    mistakes      
   };
 };
 

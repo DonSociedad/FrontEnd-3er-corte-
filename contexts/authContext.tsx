@@ -11,6 +11,7 @@ import { RegisterDTO } from "@/interfaces/access/register";
 interface User {
   email: string;
   id: string;
+  role: 'admin' | 'student';
   exp?: number; // Expiración del token
 }
 
@@ -54,9 +55,11 @@ const parseJwt = (token: string): User | null => {
     }).join(''));
 
     const decoded = JSON.parse(jsonPayload);
+    
     return {
       email: decoded.email,
-      id: decoded.sub, 
+      id: decoded.sub,
+      role: decoded.role || 'student', 
       exp: decoded.exp
     };
   } catch (e) {
@@ -140,7 +143,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     removeCookie("token");
     setUser(null);
-    localStorage.removeItem("currentLevel"); 
+    localStorage.removeItem("completedLessons");
     router.push("/login");
   };
 

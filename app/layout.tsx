@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/authContext";
+import NotificationProvider from '@/contexts/notificationContext';
+import NotificationComponent from "@/components/molecules/notificationComponent";
 
 export const metadata: Metadata = {
   title: "Piglance",
@@ -15,9 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthProvider>  
-          {children}
-        </AuthProvider>  
+        <AuthProvider>
+          <NotificationProvider>
+            {children}
+            <NotificationComponent />
+          </NotificationProvider>
+        </AuthProvider>
       </body>
     </html>
   );

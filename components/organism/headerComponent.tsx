@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useHeader } from '@/hooks/compotents/useHeader';
 import { useAuth } from '@/contexts/authContext';
@@ -8,37 +7,33 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function HeaderComponent() {
-  const { onNavigate } = useHeader();
-  const { isAuthenticated, logout } = useAuth(); 
+  const { onNavigate, showUserMenu, setShowUserMenu, menuRef, handleSwitchAccount } = useHeader();
+  const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
 
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const sidebarBg = isAuthenticated 
+    ? "bg-gradient-to-b from-cyan-50 via-teal-50 to-emerald-50 border-r border-teal-100" 
+    : "bg-[#f8f4eb]"; 
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setShowUserMenu(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [menuRef]);
+  const textColor = isAuthenticated
+    ? "text-cyan-900" 
+    : "text-gray-900";
 
-  const handleSwitchAccount = () => {
-    router.push('/login');
-  };
+  const btnHover = isAuthenticated
+    ? "hover:bg-cyan-200/50 hover:text-cyan-950" 
+    : "hover:bg-orange-100 hover:text-black"; 
 
-  const btnStyle = "flex items-center rounded-xl transition hover:bg-orange-100 hover:text-black font-bold text-gray-900 tracking-wide text-sm cursor-pointer w-full";
+  const btnStyle = `flex items-center rounded-xl transition font-bold tracking-wide text-sm cursor-pointer w-full ${textColor} ${btnHover}`;
 
   return (
     <>
-      <aside className="flex flex-col bg-[#f8f4eb] text-white w-60 h-screen p-2 fixed left-0 top-0">
+      <aside className={`flex flex-col ${sidebarBg} w-60 h-screen p-2 fixed left-0 top-0 transition-colors duration-500 ease-in-out z-40 shadow-sm`}>
         
+        {/* LOGO */}
         <div className="hidden md:flex items-center justify-center mb-2 mt-4">
           <Link href='/' className="flex flex-col items-center">
             <Image 
-              className="mb-5" 
+              className="mb-5 drop-shadow-sm" 
               src="/images/logos/Piglance.png" 
               alt="Piglance" 
               width={100} 
@@ -48,47 +43,64 @@ export default function HeaderComponent() {
           </Link>
         </div>
 
+        {/* NAVEGACIÓN PRINCIPAL */}
         <nav className="flex flex-col px-1 gap-2 w-ss">
           <Link href="/" className={btnStyle}>
             <Image 
-            src="/images/header/home.png"
-            alt="Inicio" 
-            width={90} 
-            height={90} /> 
+              src="/images/header/home.png"
+              alt="Inicio" 
+              width={90} 
+              height={90} 
+            /> 
             <span className="hidden md:block">Inicio</span>
           </Link>
 
           <Link href="/map" className={btnStyle}>
             <Image 
-            src="/images/header/learn.png" 
-            alt="Aprender" 
-            width={90} 
-            height={90} /> 
+              src="/images/header/learn.png" 
+              alt="Aprender" 
+              width={90} 
+              height={90} 
+            /> 
             <span className="hidden md:block">Aprender</span>
-          </Link>  
+          </Link>
+
+          {/* === NUEVO BOTÓN COMUNIDAD === */}
+          <Link href="/community" className={btnStyle}>
+            <Image 
+              src="/images/header/learn.png"  //FALTA IMAGEN
+              alt="Comunidad" 
+              width={90} 
+              height={90} 
+            /> 
+            <span className="hidden md:block">Comunidad</span>
+          </Link>
         </nav>
 
+        {/* SECCIÓN INFERIOR (PERFIL Y EXTRAS) */}
         <div className="flex md:mt-auto gw-auto md:w-full md:block relative" ref={menuRef}>         
 
             {isAuthenticated && (
               <>
                 <Link href="/store" className={btnStyle}>
                   <Image 
-                  src="/images/header/shop.png" 
-                  alt="Tienda" 
-                  width={90} 
-                  height={90} /> 
+                    src="/images/header/shop.png" 
+                    alt="Tienda" 
+                    width={90} 
+                    height={90} 
+                  /> 
                   <span className="hidden md:block">Tienda</span>
                 </Link>
 
-                <button className={`${btnStyle} hidden md:flex`}>
+                <Link href="/notifications" className={btnStyle}>
                   <Image 
-                  src="/images/header/notificaciones.png" 
-                  alt="Notificaciones" 
-                  width={90} 
-                  height={90} />
+                    src="/images/header/notificaciones.png" 
+                    alt="Notificaciones" 
+                    width={90} 
+                    height={90} 
+                  />
                   <span>Notificaciones</span>
-                </button>
+                </Link>
               </>
             )}
 
@@ -113,30 +125,31 @@ export default function HeaderComponent() {
               </span>
             </button>
 
+            {/* Menú desplegable */}
             {showUserMenu && isAuthenticated && (
               <div className="absolute bottom-16 md:bottom-12 left-1/2 -translate-x-1/2 
-              md:left-0 md:translate-x-0 w-48 bg-[#e1f5fe]/90 rounded-lg 
-              shadow-xl border border-[#81d4fa] overflow-hidden z-50">
+              md:left-0 md:translate-x-0 w-48 bg-white/95 backdrop-blur-sm rounded-lg 
+              shadow-xl border border-cyan-200 overflow-hidden z-50">
 
                 <div className="py-1">
                   <button 
                     onClick={() => { onNavigate("profile"); setShowUserMenu(false); }}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#71b8e0ff]/30"
+                    className="block w-full text-left px-4 py-2 text-sm text-cyan-900 hover:bg-cyan-50 font-medium"
                   >
                     Ver Perfil
                   </button>
 
                   <button 
                     onClick={handleSwitchAccount}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#71b8e0ff]/30"
+                    className="block w-full text-left px-4 py-2 text-sm text-cyan-900 hover:bg-cyan-50 font-medium"
                   >
                     Cambiar cuenta
                   </button>
 
-                  <div className="border-t border-gray-100 my-1"></div>
+                  <div className="border-t border-cyan-100 my-1"></div>
                   <button 
                     onClick={() => { logout(); setShowUserMenu(false); }}
-                    className="block w-full text-left px-4 py-2 text-sm text-[#c9998aff] font-bold hover:bg-[#71b8e0ff]/30"
+                    className="block w-full text-left px-4 py-2 text-sm text-red-400 font-bold hover:bg-red-50"
                   >
                     Cerrar sesión
                   </button>
@@ -146,12 +159,13 @@ export default function HeaderComponent() {
             )}
         </div>
 
-
         <div className="hidden md:flex justify-center mt-2 pb-2">
-          <span className="text-gray-900 text-xs">v1.0.0</span>
+          <span className={`text-xs opacity-60 ${textColor}`}>v1.0.0</span>
         </div>
 
       </aside>
+      
+      {/* Espaciadores para layout responsive */}
       <div className="md:hidden h-16 w-full"></div> 
       <div className="hidden md:block w-60 flex-shrink-0"></div>
     </>

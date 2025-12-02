@@ -1,6 +1,6 @@
 'use client'
 
-import { useLogin } from "@/hooks/auth/useLogin"
+import useLogin from "@/hooks/auth/useLogin"
 import InputComponent from "@/components/atoms/inputComponents"
 import ButtonComponent from "@/components/atoms/buttonComponents"
 
