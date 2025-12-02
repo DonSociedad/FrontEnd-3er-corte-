@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://piglance.online";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 type methods = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
