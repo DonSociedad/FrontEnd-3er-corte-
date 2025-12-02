@@ -26,9 +26,6 @@ export const LessonsMap = () => {
                   Volver
                 </span>
             </button>
-
-
-
       </div>
 
 
