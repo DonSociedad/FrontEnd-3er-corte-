@@ -1,48 +1,47 @@
 'use client'
-import { useForm, SubmitHandler } from "react-hook-form"
+
+import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form" // <--- Importar SubmitErrorHandler
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
-
 import { LoginDTO } from "@/interfaces/access/login"
 import { loginScheme } from "@/schemas/login"
 import { useAuth } from "@/contexts/authContext"
 import { useNotification } from "@/contexts/notificationContext"
+import getFriendlyErrorMessage from "@/utils/authErrors"
 
-export function useLogin() {
-    const { login } = useAuth(); // Usamos la función del contexto
+export default function useLogin() {
+    const { login } = useAuth();
     const router = useRouter();
     const { showNotification } = useNotification();
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm<LoginDTO>({
         resolver: zodResolver(loginScheme),
     });
 
     const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
-        try {
-            // El contexto se encarga de llamar al servicio, guardar cookie (1h) y actualizar estado
+       try {
             const result = await login(data);
-
             if (result.success) {
-                console.log("Login correcto");
-                // Redirigimos al mapa
                 router.push("/map"); 
             } else {
-                // Si falló, mostramos el mensaje que devuelve el contexto
-                showNotification(result.error || "Error en el login, verifica tus credenciales.", 'error');
+                const friendlyMessage = getFriendlyErrorMessage(result.error || "");
+                showNotification(friendlyMessage, 'error');
             }
-
         } catch (err) {
-            console.error("Error inesperado en login", err);
             showNotification("Ocurrió un error inesperado.", 'error');
         }
     };
 
-    const onErrors = () => {
-        showNotification("Información incompleta o errónea, vuelve a intentar", 'error');
+    const onErrors: SubmitErrorHandler<LoginDTO> = (errors) => {
+        const firstError = Object.values(errors)[0];
+        
+        if (firstError?.message) {
+            showNotification(firstError.message, 'error'); 
+        }
     };
 
     return {
@@ -51,5 +50,6 @@ export function useLogin() {
         onSubmit,
         onErrors,
         errors, 
+        isSubmitting,
     };
 }
