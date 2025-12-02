@@ -45,7 +45,7 @@ export default function ProfilePage() {
           
             <button 
                 onClick={() => router.back()} 
-                className="flex items-center  gap-2 text-gray-500 hover:text-[#f0b9a8] transition-colors font-bold group"
+                className="flex items-center gap-2 text-gray-500 hover:text-[#f0b9a8] transition-colors font-bold group"
             >
                 <ArrowLeftIcon className="w-6 h-6 transition-transform duration-200 group-hover:-translate-x-1" />
                 <span className="text-lg">
@@ -53,9 +53,10 @@ export default function ProfilePage() {
                 </span>
             </button>
 
-            {/* Contador de Monedas (Alineado a la derecha) */}
+            {/* Contador de Monedas */}
             <div className="bg-red-500 text-white px-5 py-2 rounded-2xl font-bold flex items-center gap-3 shadow-lg transform -rotate-2 hover:rotate-0 transition-transform cursor-default">
                 <div className="relative w-8 h-8">
+                    {/* Asegúrate de que esta imagen exista en public/images/icons/moneda.png */}
                     <Image
                         src="/images/icons/moneda.png" 
                         alt="Moneda" 
@@ -70,10 +71,17 @@ export default function ProfilePage() {
             </div>
         </header>
 
-        {/*No entiendo porque no da el vercel*/}
         <section className="flex-1 flex items-center justify-center p-4 w-full">
             <div className="w-full max-w-4xl">
-                <ProfileCard user={user} onEquip={equipItem} />
+                {/* 
+                   AQUÍ ESTABA EL DETALLE: 
+                   Agregamos isOwnProfile={true} para activar el modo edición 
+                */}
+                <ProfileCard 
+                    user={user} 
+                    onEquip={equipItem} 
+                    isOwnProfile={true} 
+                />
             </div>
         </section>
 

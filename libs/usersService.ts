@@ -49,3 +49,40 @@ export const getAllUsersService = async () => {
     return { data: null, error: error.message || "Error al obtener usuarios" };
   }
 };
+
+// Obtener lista de usuarios para la comunidad
+export const getCommunityUsersService = async () => {
+  try {
+    const response = await apiFetch('/users/community/search', 'GET'); 
+    
+    if (!Array.isArray(response)) return { data: [], error: null };
+
+    const formattedData: IUserProfile[] = response.map((u: any) => ({
+        id: u.id || u._id,
+        name: u.name,
+        lastName: u.lastName,
+        email: u.email,
+        role: u.role,
+        coins: u.coins,
+        pig: u.pig,
+        completedLessons: u.completedLessons || (u.progress ? u.progress.length : 0),
+        friends: u.friends || 0,
+        itemsCount: u.pig?.inventory ? u.pig.inventory.length : 0
+    }));
+
+    return { data: formattedData, error: null };
+  } catch (error: any) {
+    return { data: [], error: error.message };
+  }
+};
+
+// Obtener perfil de otro usuario por ID
+export const getPublicUserProfileService = async (id: string) => {
+  try {
+    const response = await apiFetch(`/users/${id}/public`, 'GET');
+    return { data: response as IUserProfile, error: null };
+  } catch (error: any) {
+    console.error("Error fetching public profile:", error.message);
+    return { data: null, error: error.message };
+  }
+};

@@ -12,14 +12,12 @@ export default function HeaderComponent() {
   const router = useRouter();
 
   const sidebarBg = isAuthenticated 
-    ? "bg-gradient-to-b from-cyan-50 via-teal-50 to-emerald-50 border-r border-teal-100" // Oceánico Primaveral
+    ? "bg-gradient-to-b from-cyan-50 via-teal-50 to-emerald-50 border-r border-teal-100" 
     : "bg-[#f8f4eb]"; 
 
-  // Texto base
   const textColor = isAuthenticated
     ? "text-cyan-900" 
     : "text-gray-900";
-
 
   const btnHover = isAuthenticated
     ? "hover:bg-cyan-200/50 hover:text-cyan-950" 
@@ -31,6 +29,7 @@ export default function HeaderComponent() {
     <>
       <aside className={`flex flex-col ${sidebarBg} w-60 h-screen p-2 fixed left-0 top-0 transition-colors duration-500 ease-in-out z-40 shadow-sm`}>
         
+        {/* LOGO */}
         <div className="hidden md:flex items-center justify-center mb-2 mt-4">
           <Link href='/' className="flex flex-col items-center">
             <Image 
@@ -44,45 +43,62 @@ export default function HeaderComponent() {
           </Link>
         </div>
 
+        {/* NAVEGACIÓN PRINCIPAL */}
         <nav className="flex flex-col px-1 gap-2 w-ss">
           <Link href="/" className={btnStyle}>
             <Image 
-            src="/images/header/home.png"
-            alt="Inicio" 
-            width={90} 
-            height={90} /> 
+              src="/images/header/home.png"
+              alt="Inicio" 
+              width={90} 
+              height={90} 
+            /> 
             <span className="hidden md:block">Inicio</span>
           </Link>
 
           <Link href="/map" className={btnStyle}>
             <Image 
-            src="/images/header/learn.png" 
-            alt="Aprender" 
-            width={90} 
-            height={90} /> 
+              src="/images/header/learn.png" 
+              alt="Aprender" 
+              width={90} 
+              height={90} 
+            /> 
             <span className="hidden md:block">Aprender</span>
-          </Link>  
+          </Link>
+
+          {/* === NUEVO BOTÓN COMUNIDAD === */}
+          <Link href="/community" className={btnStyle}>
+            <Image 
+              src="/images/header/learn.png"  //FALTA IMAGEN
+              alt="Comunidad" 
+              width={90} 
+              height={90} 
+            /> 
+            <span className="hidden md:block">Comunidad</span>
+          </Link>
         </nav>
 
+        {/* SECCIÓN INFERIOR (PERFIL Y EXTRAS) */}
         <div className="flex md:mt-auto gw-auto md:w-full md:block relative" ref={menuRef}>         
 
             {isAuthenticated && (
               <>
                 <Link href="/store" className={btnStyle}>
                   <Image 
-                  src="/images/header/shop.png" 
-                  alt="Tienda" 
-                  width={90} 
-                  height={90} /> 
+                    src="/images/header/shop.png" 
+                    alt="Tienda" 
+                    width={90} 
+                    height={90} 
+                  /> 
                   <span className="hidden md:block">Tienda</span>
                 </Link>
 
                 <button className={`${btnStyle} hidden md:flex`}>
                   <Image 
-                  src="/images/header/notificaciones.png" 
-                  alt="Notificaciones" 
-                  width={90} 
-                  height={90} />
+                    src="/images/header/notificaciones.png" 
+                    alt="Notificaciones" 
+                    width={90} 
+                    height={90} 
+                  />
                   <span>Notificaciones</span>
                 </button>
               </>
@@ -144,11 +160,12 @@ export default function HeaderComponent() {
         </div>
 
         <div className="hidden md:flex justify-center mt-2 pb-2">
-          {/* Ajustamos el color del texto de la versión también */}
           <span className={`text-xs opacity-60 ${textColor}`}>v1.0.0</span>
         </div>
 
       </aside>
+      
+      {/* Espaciadores para layout responsive */}
       <div className="md:hidden h-16 w-full"></div> 
       <div className="hidden md:block w-60 flex-shrink-0"></div>
     </>
