@@ -22,8 +22,11 @@ export default function NotificationsPage() {
 
     const fetchNotifications = async () => {
         setLoading(true);
-        const { data } = await getNotificationsService();
-        if (data) setRequests(data);
+        const { data, error } = await getNotificationsService();
+        if (error) {
+            showNotification(error, 'error');
+        }
+        setRequests(data || []);
         setLoading(false);
     };
 
