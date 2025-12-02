@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://piglance.online/";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://piglance.online";
 
 type methods = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
