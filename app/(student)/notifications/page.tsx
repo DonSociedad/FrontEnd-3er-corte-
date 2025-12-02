@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getNotificationsService, respondRequestService } from '@/libs/friendsService';
 import { useNotification } from '@/contexts/notificationContext';
 import PigAvatar from '@/components/molecules/pig/pigAvatar';
+import { IAvatarEquipped } from '@/interfaces/users/user';
 
 type RequestType = {
     _id: string;
@@ -10,7 +11,7 @@ type RequestType = {
         _id: string;
         name: string;
         lastName: string;
-        pig: { equipped: any }; 
+        pig: { equipped: IAvatarEquipped };
     };
     createdAt: string;
 };
