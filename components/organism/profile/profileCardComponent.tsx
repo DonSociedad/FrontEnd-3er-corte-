@@ -7,6 +7,8 @@ import PigAvatar from '@/components/molecules/pig/pigAvatar';
 import StatItem from '@/components/molecules/profile/StatItem'; 
 import AvatarEditor from './avatarEditorComponent';
 import { useFriendship } from '@/hooks/community/useFriendship';
+import { ArrowLeftIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface ProfileCardProps {
   user: IUserProfile;
@@ -16,6 +18,7 @@ interface ProfileCardProps {
 
 export default function ProfileCard({ user, onEquip, isOwnProfile = false }: ProfileCardProps) {
   const [view, setView] = useState<'info' | 'customize'>('info');
+    const router = useRouter();
 
   // Hook de amistad: Si es mi perfil, pasamos string vacío para evitar llamadas innecesarias
   const { status, sendRequest } = useFriendship(isOwnProfile ? '' : user?.id || '');
@@ -63,16 +66,6 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 w-full max-w-5xl mx-auto bg-white/50 backdrop-blur-sm p-6 md:p-10 rounded-[3rem] shadow-sm border border-pink-100 mt-6">
       
-      {/* Implementación de Link: Botón para volver al dashboard o comunidad */}
-      <div className="absolute top-6 left-6 z-10">
-        <Link 
-            href="/dashboard" 
-            className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md text-gray-400 hover:text-pink-500 hover:bg-pink-50 transition-colors"
-            title="Volver al inicio"
-        >
-            ⬅️
-        </Link>
-      </div>
 
       {/* === COLUMNA IZQUIERDA: CERDO Y NOMBRE === */}
       <div className="flex flex-col items-center z-0">

@@ -177,7 +177,7 @@ export default function HomePage() {
                 <div className="md:w-1/2 relative bg-rose-100 flex items-center justify-center p-6 overflow-hidden">
                   <Image
                     className="relative z-10 w-full h-auto object-contain max-h-[400px] transition-transform duration-700 group-hover:scale-110"
-                    src="/images/home/decisiones.png"
+                    src="/images/home/decisiones1.png"
                     alt="desiciones inteligentes"
                     width={400}
                     height={400}
