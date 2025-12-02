@@ -92,7 +92,7 @@ export default function HeaderComponent() {
                   <span className="hidden md:block">Tienda</span>
                 </Link>
 
-                <button className={`${btnStyle} hidden md:flex`}>
+                <Link href="/notifications" className={btnStyle}>
                   <Image 
                     src="/images/header/notificaciones.png" 
                     alt="Notificaciones" 
@@ -100,7 +100,7 @@ export default function HeaderComponent() {
                     height={90} 
                   />
                   <span>Notificaciones</span>
-                </button>
+                </Link>
               </>
             )}
 

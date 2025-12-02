@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
   // Rutas que queremos proteger
   const adminRoutes = ['/admin']; 
-  const studentRoutes = ['/profile', '/store', '/map', '/learn', '/community']; 
+  const studentRoutes = ['/profile', '/store', '/map', '/learn', '/community', '/notifications']; 
   const authRoutes = ['/login', '/register'];
 
   // 1. Si NO hay token y quiere entrar a rutas privadas -> Login
@@ -70,6 +70,7 @@ export const config = {
     '/community/:path*',
     '/store/:path*',
     '/map/:path*',
+    '/notifications/:path*',
     '/learn/:path*',
     '/login', 
     '/register'
