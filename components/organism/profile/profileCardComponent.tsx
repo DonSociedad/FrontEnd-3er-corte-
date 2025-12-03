@@ -109,7 +109,7 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
             {/* Fondo decorativo: CAMBIA SI ES PREMIUM */}
             <div 
                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity ${
-                    isPremium 
+                    user.isPremium 
                     ? 'bg-gradient-to-tr from-yellow-200 via-amber-200 to-yellow-100' // Dorado brillante
                     : 'bg-gradient-to-tr from-pink-200 to-purple-100' // Normal
                 }`}
