@@ -117,7 +117,14 @@ export default function ProductTable() {
 
             {products.length === 0 && (
                 <div className="text-center py-12 text-gray-400 flex flex-col items-center">
-                    <span className="text-4xl mb-2">🤷‍♂️</span>
+                    <span className="text-4xl mb-2">
+                        <Image 
+                            src="/images/icons/piggy.png" 
+                            alt="No products"   
+                            width={48}
+                            height={48}
+                        />
+                    </span>
                     <p>No hay productos en esta categoría.</p>
                 </div>
             )}
