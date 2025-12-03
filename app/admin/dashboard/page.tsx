@@ -4,6 +4,7 @@ import UserTable from "@/components/organism/admin/userTable";
 import useAdminUsers from "@/hooks/admin/useAdminUsers";
 import useAdminLessons from "@/hooks/admin/useAdminLessons";
 import useAdminPurchases from "@/hooks/admin/useAdminPurchases";
+import Image from "next/image";
 
 const THEME = {
   bgMain: "#ebd1dbff",         
@@ -88,10 +89,12 @@ function StatCard({ title, value, color, icon }: { title: string; value: string;
                 </div>
                 
                 <div className="flex-shrink-0 ml-4">
-                    <img 
+                    <Image 
                         src={icon} 
                         alt={title} 
                         className="w-24 h-24 object-contain drop-shadow-md" 
+                        width={96}
+                        height={96}
                     />
                 </div>
             </div>

@@ -26,4 +26,5 @@ export interface IAdminLesson {
   order: number;
   prerequisites: number;      
   contentBlocksCount: number; 
+  coins?: number;
 }
