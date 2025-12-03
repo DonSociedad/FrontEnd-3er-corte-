@@ -60,7 +60,7 @@ export default function AdminDashboardPage() {
         
         <StatCard 
             title="Ventas Tienda" 
-            value="450" 
+            value="0" 
             color="bg-[#885e51ff]" 
             icon="/images/icons/ventas.png"
         />

@@ -35,9 +35,9 @@ export const getAllUsersService = async () => {
         email: u.email,
         role: u.role,
         coins: u.coins,
-        pig: u.pig, 
-        
-        // Pruebas
+        pig: u.pig,
+        isPremium: u.isPremium, 
+
         completedLessons: u.completedLessons || (u.progress ? u.progress.length : 0),
         friends: u.friends || 0,
         itemsCount: u.pig?.inventory ? u.pig.inventory.length : 0
@@ -106,4 +106,13 @@ export const updateUserProfileService = async (changes: { name?: string; lastNam
     console.error("Error updating profile:", error.message);
     return { data: null, error: error.message || "Error al actualizar perfil" };
   }
+};
+
+export const updateUserByAdminService = async (userId: string, data: { name?: string; lastName?: string; role?: string; coins?: number }) => {
+    try {
+        const response = await apiFetch(`/users/${userId}`, 'PATCH', data);
+        return { data: response, error: null };
+    } catch (error: any) {
+        return { data: null, error: error.message || "Error al actualizar usuario" };
+    }
 };

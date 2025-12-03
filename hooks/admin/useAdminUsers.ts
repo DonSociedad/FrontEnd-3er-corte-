@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { getAllUsersService } from '@/libs/usersService';
+import { getAllUsersService, updateUserByAdminService } from '@/libs/usersService';
 import { IUserProfile } from '@/interfaces/users/user';
 
 export default function useAdminUsers() {
@@ -8,22 +8,36 @@ export default function useAdminUsers() {
     const [error, setError] = useState<string | null>(null);
     const [filter, setFilter] = useState<string>('');
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            setIsLoading(true);
-            const { data, error } = await getAllUsersService();
-            
-            if (error) {
-                setError(error);
-            } else if (data) {
-                setUsers(data);
-            }
-            
-            setIsLoading(false);
-        };
+    // Estado para feedback de actualización
+    const [isUpdating, setIsUpdating] = useState(false);
 
+    useEffect(() => {
         fetchUsers();
     }, []);
+
+    const fetchUsers = async () => {
+        setIsLoading(true);
+        const { data, error } = await getAllUsersService();
+        if (error) setError(error);
+        else if (data) setUsers(data);
+        setIsLoading(false);
+    };
+
+    const updateUser = async (id: string, updatedData: Partial<IUserProfile>) => {
+        setIsUpdating(true);
+        const { data, error } = await updateUserByAdminService(id, updatedData);
+
+        if (error) {
+            alert("Error actualizando: " + error);
+        } else if (data) {
+            // Actualización optimista en la lista local
+            setUsers(prev => prev.map(user => 
+                user.id === id ? { ...user, ...updatedData } : user
+            ));
+        }
+        setIsUpdating(false);
+        return { success: !error };
+    };
 
     const filteredUsers = useMemo(() => {
         const term = filter.toLowerCase();
@@ -40,6 +54,8 @@ export default function useAdminUsers() {
         isLoading,
         error,
         filter,
-        setFilter
+        setFilter,
+        updateUser, 
+        isUpdating
     };
 }

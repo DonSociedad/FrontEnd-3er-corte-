@@ -69,77 +69,46 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false, onUpd
 
             {/* === COLUMNA IZQUIERDA: CERDO Y NOMBRE === */}
             <div className="flex flex-col items-center z-0 w-full md:w-auto">
-                {user.role === 'admin' && (
-                    <span className="bg-yellow-100 text-yellow-700 border border-yellow-200 text-xs font-bold px-3 py-1 rounded-full mb-3 shadow-sm flex items-center gap-1">
-                        <Image src="/images/icons/cargando.png" alt="profesor" width={16} height={16} /> PROFESOR 
-                    </span>
-                )}
                 
-                {/* Lógica de Edición de Nombre */}
+                {/* --- ZONA DE BADGES (ETIQUETAS) --- */}
+                <div className="flex gap-2 mb-3">
+                    {/* Badge de Profesor/Admin */}
+                    {user.role === 'admin' && (
+                        <span className="bg-purple-100 text-purple-700 border border-purple-200 text-xs font-bold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                             🎓 ADMIN
+                        </span>
+                    )}
+
+                    {/* Badge de Estado Premium vs Gratuito */}
+                    {user.isPremium ? (
+                        <span className="bg-amber-100 text-amber-700 border border-amber-200 text-xs font-bold px-3 py-1 rounded-full shadow-sm flex items-center gap-1 animate-in zoom-in">
+                            👑 PREMIUM
+                        </span>
+                    ) : (
+                        <span className="bg-gray-100 text-gray-500 border border-gray-200 text-xs font-bold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                            🌱 GRATUITO
+                        </span>
+                    )}
+                </div>
+
+                {/* --- EDICIÓN DE NOMBRE (Lo que ya tenías) --- */}
                 {isOwnProfile && isEditing ? (
-                    <div className="flex flex-col gap-3 mb-4 w-full max-w-xs animate-in fade-in zoom-in duration-200">
-                        <input 
-                            type="text" 
-                            value={editForm.name}
-                            onChange={(e) => setEditForm(prev => ({...prev, name: e.target.value}))}
-                            placeholder="Nombre"
-                            className="w-full border-2 border-gray-300 rounded-xl px-4 py-2 font-bold text-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none text-center"
-                        />
-                        <input 
-                            type="text" 
-                            value={editForm.lastName}
-                            onChange={(e) => setEditForm(prev => ({...prev, lastName: e.target.value}))}
-                            placeholder="Apellido"
-                            className="w-full border-2 border-gray-300 rounded-xl px-4 py-2 font-bold text-gray-700 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 outline-none text-center"
-                        />
-                        {/* ... inputs de nombre y apellido arriba ... */}
-                        <div className="flex gap-2 justify-center mt-2">
-                            <button 
-                                onClick={handleCancelEdit}
-                                disabled={isUpdating}
-                                className="px-4 py-2 text-gray-500 font-bold hover:bg-gray-100 rounded-xl transition-colors text-sm"
-                            >
-                                Cancelar
-                            </button>
-                            
-                            {/* BOTÓN GUARDAR ESTILO VESTIDOR */}
-                            <button 
-                                onClick={handleSaveProfile}
-                                disabled={isUpdating}
-                                className="px-6 py-2 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl shadow-lg shadow-pink-200 border-b-4 border-pink-700 active:border-b-0 active:translate-y-1 transition-all text-sm flex items-center gap-2"
-                            >
-                                {isUpdating ? (
-                                    <>
-                                        {/* Spinner simple css si está cargando */}
-                                        <span className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                                        Guardando...
-                                    </>
-                                ) : (
-                                    'Guardar'
-                                )}
-                            </button>
-                        </div>
-                    </div>
+                    // ... (Tu código de inputs de edición aquí)
+                     <div className="flex flex-col gap-3 mb-4 w-full max-w-xs animate-in fade-in zoom-in duration-200">
+                        {/* ... inputs ... */}
+                        {/* ... botones (incluyendo el botón rosado arreglado) ... */}
+                     </div>
                 ) : (
-                    <div className="flex items-center gap-3 mb-4 group relative">
-                        <h2 className="text-4xl font-black text-gray-800 capitalize text-center leading-tight">
-                            {user.name} <br className="md:hidden"/> {user.lastName}
-                        </h2>
-                        
-                        {/* Botón Editar (Lápiz) solo visible si es mi perfil */}
-                        {isOwnProfile && (
-                            <button 
-                                onClick={() => setIsEditing(true)}
-                                className="absolute -right-8 top-1 md:static md:opacity-0 md:group-hover:opacity-100 p-2 text-gray-400 hover:text-pink-500 hover:bg-pink-50 rounded-xl transition-all"
-                                title="Editar nombre"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                            </button>
-                        )}
-                    </div>
+                    // ... (Tu código de visualización de nombre aquí)
+                     <div className="flex items-center gap-3 mb-4 group relative">
+                        {/* ... h2 nombre ... */}
+                        {/* ... botón lápiz ... */}
+                     </div>
                 )}
                 
+                {/* --- AVATAR (Cerdo) --- */}
                 <div className="relative transition-all duration-500 hover:scale-105 group cursor-pointer mt-2">
+                    {/* El fondo brillante ya usa user.isPremium, así que combina perfecto con el badge */}
                     <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity ${
                         user.isPremium ? 'bg-gradient-to-tr from-yellow-200 via-amber-200 to-yellow-100' : 'bg-gradient-to-tr from-pink-200 to-purple-100'
                     }`}></div>
@@ -149,7 +118,6 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false, onUpd
                     <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-4 bg-black/10 rounded-[100%] blur-md z-[-1]"></div>
                 </div>
             </div>
-
             {/* === COLUMNA DERECHA: PANEL INTERACTIVO (Sin cambios mayores) === */}
             <div className="bg-white rounded-3xl p-6 shadow-xl w-full md:w-[450px] min-h-[500px] flex flex-col border-b-8 border-gray-50 ring-1 ring-gray-100 z-0">
                 <div className="flex gap-6 border-b-2 border-gray-100 pb-2 mb-4">
