@@ -1,13 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { IUserProfile } from '@/interfaces/users/user';
 import PigAvatar from '@/components/molecules/pig/pigAvatar';
 import StatItem from '@/components/molecules/profile/StatItem'; 
 import AvatarEditor from './avatarEditorComponent';
 import { useFriendship } from '@/hooks/community/useFriendship';
-import { ArrowLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 interface ProfileCardProps {
@@ -18,17 +16,16 @@ interface ProfileCardProps {
 
 export default function ProfileCard({ user, onEquip, isOwnProfile = false }: ProfileCardProps) {
   const [view, setView] = useState<'info' | 'customize'>('info');
-    const router = useRouter();
-
-  // Hook de amistad: Si es mi perfil, pasamos string vacío para evitar llamadas innecesarias
+  const router = useRouter();
   const { status, sendRequest } = useFriendship(isOwnProfile ? '' : user?.id || '');
 
-  // Guard clause para evitar fallos de build si user llega null momentáneamente
   if (!user) {
     return <div className="p-10 text-center animate-pulse">Cargando perfil...</div>;
   }
 
-  // Helper para renderizar botón de amistad
+  // Verificar si es premium (asegurando booleano)
+  const isPremium = !!user.isPremium;
+
   const renderFriendButton = () => {
     switch (status) {
         case 'loading':
@@ -51,7 +48,7 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
                     <span>🔔</span> Solicitud pendiente
                 </div>
             );
-        default: // 'none'
+        default: 
             return (
                 <button 
                     onClick={sendRequest}
@@ -66,27 +63,42 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
   return (
     <div className="relative flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 w-full max-w-5xl mx-auto bg-white/50 backdrop-blur-sm p-6 md:p-10 rounded-[3rem] shadow-sm border border-pink-100 mt-6">
       
-
       {/* === COLUMNA IZQUIERDA: CERDO Y NOMBRE === */}
       <div className="flex flex-col items-center z-0">
-        {user.role === 'admin' && (
-            <span className="bg-yellow-100 text-yellow-700 border border-yellow-200 text-xs font-bold px-3 py-1 rounded-full mb-3 shadow-sm flex items-center gap-1">
-                PROFESOR ⭐
-            </span>
-        )}
         
-        <h2 className="text-4xl font-black text-gray-800 mb-4 capitalize text-center">
+        {/* Contenedor de Badges (Roles y Premium) */}
+        <div className="flex flex-wrap gap-2 justify-center mb-3">
+            {user.role === 'admin' && (
+                <span className="bg-yellow-100 text-yellow-700 border border-yellow-200 text-xs font-bold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                    PROFESOR ⭐
+                </span>
+            )}
+            
+            {/* NUEVO: INDICADOR PREMIUM */}
+            {isPremium && (
+                <span className="bg-gradient-to-r from-amber-200 to-yellow-400 text-amber-900 border border-amber-300 text-xs font-bold px-3 py-1 rounded-full shadow-sm flex items-center gap-1 animate-pulse">
+                    PLUS 👑
+                </span>
+            )}
+        </div>
+        
+        {/* Nombre: Si es premium, sale dorado oscuro, si no, gris */}
+        <h2 className={`text-4xl font-black mb-4 capitalize text-center ${isPremium ? 'text-amber-600 drop-shadow-sm' : 'text-gray-800'}`}>
             {user.name} {user.lastName}
         </h2>
         
         <div className="relative transition-all duration-500 hover:scale-105 group cursor-pointer">
-            {/* Fondo decorativo */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-tr from-pink-200 to-purple-100 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity"></div>
+            {/* Fondo decorativo: CAMBIA SI ES PREMIUM */}
+            <div 
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition-opacity ${
+                    isPremium 
+                    ? 'bg-gradient-to-tr from-yellow-200 via-amber-200 to-yellow-100' // Dorado brillante
+                    : 'bg-gradient-to-tr from-pink-200 to-purple-100' // Normal
+                }`}
+            ></div>
             
-            {/* Componente Atom/Molecule del Cerdo */}
             <PigAvatar config={user.pig.equipped} />
             
-            {/* Sombra */}
             <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-4 bg-black/10 rounded-[100%] blur-md z-[-1]"></div>
         </div>
       </div>
@@ -94,7 +106,6 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
       {/* === COLUMNA DERECHA: PANEL INTERACTIVO === */}
       <div className="bg-white rounded-3xl p-6 shadow-xl w-full md:w-[450px] min-h-[500px] flex flex-col border-b-8 border-gray-50 ring-1 ring-gray-100 z-0">
         
-        {/* HEADER TABS */}
         <div className="flex gap-6 border-b-2 border-gray-100 pb-2 mb-4">
             <button 
                 onClick={() => setView('info')}
@@ -121,19 +132,16 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
             )}
         </div>
 
-        {/* CONTENIDO CAMBIANTE */}
         <div className="flex-1 flex flex-col">
             {view === 'info' ? (
                 <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 flex flex-col h-full justify-between">
                     
-                    {/* Lista de Estadísticas - Ahora user.friends debería ser correcto */}
                     <div className="space-y-4 mt-2">
                         <StatItem label="Lecciones Completadas" value={user.completedLessons || 0} />
                         <StatItem label="Amigos" value={user.friends || 0}  />
                         <StatItem label="Colección de Objetos" value={user.pig?.inventory?.length || 0} highlight />
                     </div>
                     
-                    {/* ACCIONES */}
                     <div className="mt-6">
                         {isOwnProfile ? (
                             <button 

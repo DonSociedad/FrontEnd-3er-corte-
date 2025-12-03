@@ -19,7 +19,7 @@ export interface IUserProfile {
   role: string;
   pig: IPigData;
   coins: number;
-  // Propiedades calculadas o adicionales
+  isPremium?: boolean;
   completedLessons?: number; 
   friends?: number;
   itemsCount?: number;

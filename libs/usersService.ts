@@ -86,3 +86,14 @@ export const getPublicUserProfileService = async (id: string) => {
     return { data: null, error: error.message };
   }
 };
+
+export const subscribePremiumService = async (plan: 'monthly' | 'yearly') => {
+  try {
+    // Enviamos el plan en el body
+    const response = await apiFetch('/users/subscribe', 'POST', { plan });
+    return { data: response as IUserProfile, error: null };
+  } catch (error: any) {
+    console.error("Error subscribing:", error.message);
+    return { data: null, error: error.message || "Error al procesar la suscripción" };
+  }
+};
