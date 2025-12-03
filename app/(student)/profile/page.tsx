@@ -7,7 +7,7 @@ import useProfile from '@/hooks/profile/useProfile';
 import ProfileCard from '@/components/organism/profile/profileCardComponent';
 
 export default function ProfilePage() {
-  const { user, loading, error, equipItem } = useProfile();
+  const { user, loading, error, equipItem, updateUserData, isUpdating } = useProfile();
   const router = useRouter(); 
 
   if (loading) {
@@ -41,6 +41,7 @@ export default function ProfilePage() {
   return (
     <main className="min-h-screen bg-pink-100 flex flex-col">
       
+        {/* HEADER: Solo contiene el botón Volver y las Monedas */}
         <header className="w-full max-w-7xl mx-auto p-6 flex justify-between items-center">
           
             <button 
@@ -56,7 +57,6 @@ export default function ProfilePage() {
             {/* Contador de Monedas */}
             <div className="bg-red-500 text-white px-5 py-2 rounded-2xl font-bold flex items-center gap-3 shadow-lg transform -rotate-2 hover:rotate-0 transition-transform cursor-default">
                 <div className="relative w-8 h-8">
-                    {/* Asegúrate de que esta imagen exista en public/images/icons/moneda.png */}
                     <Image
                         src="/images/icons/moneda.png" 
                         alt="Moneda" 
@@ -71,12 +71,15 @@ export default function ProfilePage() {
             </div>
         </header>
 
+        {/* SECTION PRINCIPAL: Aquí va el ProfileCard ÚNICO */}
         <section className="flex-1 flex items-center justify-center p-4 w-full">
             <div className="w-full max-w-4xl">
                 <ProfileCard 
                     user={user} 
                     onEquip={equipItem} 
-                    isOwnProfile={true} 
+                    isOwnProfile={true}
+                    onUpdateProfile={updateUserData}
+                    isUpdating={isUpdating}
                 />
             </div>
         </section>

@@ -91,3 +91,32 @@ export const getAllLessonsService = async () => {
     return { data: null, error: error.message || "Error obteniendo lecciones" };
   }
 };
+
+export const updateLessonService = async (id: string, payload: Partial<ICreateLessonPayload>) => {
+    try {
+        const response = await apiFetch(`/lessons/${id}`, 'PATCH', payload);
+        return { data: response, error: null };
+    } catch (error: any) {
+        return { data: null, error: error.message };
+    }
+};
+
+// Eliminar Lección
+export const deleteLessonService = async (id: string) => {
+  try {
+    await apiFetch(`/lessons/${id}`, 'DELETE');
+    return { error: null };
+  } catch (error: any) {
+    if (error.message && (
+        error.message.includes('JSON') || 
+        error.message.includes('Unexpected end') ||
+        error.message.includes("Failed to execute 'json'")
+    )) {
+        return { error: null };
+    }
+
+    // Si es otro error real, lo devolvemos
+    console.error("Error deleting lesson:", error.message);
+    return { error: error.message || "Error al eliminar la lección" };
+  }
+};
