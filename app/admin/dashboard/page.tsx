@@ -3,6 +3,7 @@
 import UserTable from "@/components/organism/admin/userTable";
 import useAdminUsers from "@/hooks/admin/useAdminUsers";
 import useAdminLessons from "@/hooks/admin/useAdminLessons";
+import useAdminPurchases from "@/hooks/admin/useAdminPurchases";
 
 const THEME = {
   bgMain: "#ebd1dbff",         
@@ -30,6 +31,7 @@ const THEME = {
 export default function AdminDashboardPage() {
   const { totalUsers, isLoading: loadingUsers } = useAdminUsers();
   const { totalLessons, isLoading: loadingLessons } = useAdminLessons(); 
+  const { totalSales, isLoading: loadingPurchases } = useAdminPurchases();
 
   return (
     <div className="p-8 md:p-12">
@@ -60,7 +62,7 @@ export default function AdminDashboardPage() {
         
         <StatCard 
             title="Ventas Tienda" 
-            value="0" 
+            value={loadingPurchases ? "..." : totalSales.toString()}  
             color="bg-[#885e51ff]" 
             icon="/images/icons/ventas.png"
         />

@@ -3,22 +3,25 @@ import { use } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useProductForm from "@/hooks/admin/useProductForm";
-import InputComponent from "@/components/atoms/inputComponents";
 
+// Helper para ruta de imagen
 const getPreviewPath = (category: string, key: string) => 
     `/images/pig/${category}/${key}.png`;
 
 export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
+    // Desempaquetamos params (Next.js 15)
     const unwrappedParams = use(params);
     
     const { 
         formData, 
         updateField, 
         submit, 
+        handleDelete, 
         isLoading, 
         categories, 
         isImageValid, 
-        setIsImageValid 
+        setIsImageValid,
+        isEditMode   
     } = useProductForm(unwrappedParams.id);
 
     const previewPath = getPreviewPath(formData.category, formData.key);
@@ -81,7 +84,7 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                                 min="0"
                                 className="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-black outline-none transition-colors"
                                 value={formData.price}
-                                onChange={(e) => updateField('price', Number(e.target.value))} // Aseguramos que sea Number
+                                onChange={(e) => updateField('price', Number(e.target.value))}
                             />
                         </div>
                     </div>
@@ -89,14 +92,14 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                     {/* Checkbox Premium */}
                     <div 
                         className="flex items-center gap-3 p-3 border-2 border-amber-100 bg-amber-50 rounded-xl cursor-pointer hover:bg-amber-100 transition-colors"
-                        onClick={() => updateField('isPremium', !formData.isPremium)} // Click en todo el div activa
+                        onClick={() => updateField('isPremium', !formData.isPremium)}
                     >
                         <input 
                             type="checkbox" 
                             id="isPremium"
-                            className="w-5 h-5 accent-amber-500 cursor-pointer pointer-events-none" // pointer-events-none para que el div maneje el click
+                            className="w-5 h-5 accent-amber-500 cursor-pointer pointer-events-none"
                             checked={formData.isPremium || false}
-                            readOnly // Controlado por el div padre
+                            readOnly
                         />
                         <div className="flex-1">
                             <span className="block text-xs font-bold text-amber-700 uppercase">¿Es Premium?</span>
@@ -140,13 +143,46 @@ export default function EditProductPage({ params }: { params: Promise<{ id: stri
                         </div>
                     </div>
 
-                    <button 
-                        onClick={submit}
-                        disabled={isLoading || !isImageValid}
-                        className="w-full bg-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
-                    >
-                        {isLoading ? "Guardando..." : "Actualizar Producto"}
-                    </button>
+                    {/* --- ZONA DE ACCIONES --- */}
+                    <div className="flex gap-3 pt-2">
+                        {/* Botón Guardar */}
+                        <button 
+                            onClick={submit}
+                            disabled={isLoading || !isImageValid}
+                            className="flex-1 bg-black text-white font-bold py-4 rounded-xl hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg active:scale-95"
+                        >
+                            {isLoading ? "Guardando..." : "Actualizar Producto"}
+                        </button>
+
+                        {/* Botón Eliminar (Visible solo si es modo edición) */}
+                        {isEditMode && (
+                            <button 
+                                onClick={handleDelete}
+                                disabled={isLoading}
+                                className="px-5 bg-red-50 text-red-500 border-2 border-red-100 rounded-xl hover:bg-red-500 hover:text-white hover:border-red-500 transition-all flex items-center justify-center group shadow-sm active:scale-95"
+                                title="Eliminar producto"
+                            >
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    width="24" 
+                                    height="24" 
+                                    viewBox="0 0 24 24" 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    strokeWidth="2" 
+                                    strokeLinecap="round" 
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M3 6h18"></path>
+                                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                            </button>
+                        )}
+                    </div>
+
                 </div>
 
                 {/* COLUMNA DERECHA: PREVIEW */}

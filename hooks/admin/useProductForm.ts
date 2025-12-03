@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { createProductService, getProductByIdService, updateProductService } from '@/libs/productsService';
+import { createProductService, deleteProductService, getProductByIdService, updateProductService } from '@/libs/productsService';
 import { ICreateProductPayload } from '@/interfaces/products/product';
 import { useNotification } from '@/contexts/notificationContext';
 
@@ -18,8 +18,6 @@ export default function useProductForm(productId?: string) {
     const { showNotification } = useNotification();
     const [isLoading, setIsLoading] = useState(false);
     const [isImageValid, setIsImageValid] = useState(false);
-    
-    // Convertimos productId a booleano para el modo
     const isEditMode = !!productId;
 
     const [formData, setFormData] = useState<ICreateProductPayload>({
@@ -61,6 +59,33 @@ export default function useProductForm(productId?: string) {
             setIsImageValid(false);
         }
     }, []);
+
+    const handleDelete = async () => {
+        if (!productId) return;
+
+        // Confirmación nativa del navegador
+        const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este producto? Esta acción no se puede deshacer.");
+        
+        if (!confirmDelete) return;
+
+        setIsLoading(true);
+
+        try {
+            const { error } = await deleteProductService(productId);
+
+            if (error) {
+                showNotification("Error al eliminar: " + error, 'error');
+                setIsLoading(false);
+            } else {
+                showNotification("Producto eliminado correctamente", 'success');
+                router.push('/admin/products');
+                router.refresh(); // Actualiza la lista
+            }
+        } catch (err) {
+            showNotification("Ocurrió un error inesperado", 'error');
+            setIsLoading(false);
+        }
+    };
 
     const submit = async () => {
         if (isLoading) return;
@@ -112,6 +137,7 @@ export default function useProductForm(productId?: string) {
         updateField, 
         submit, 
         isLoading, 
+        handleDelete,
         categories: CATEGORY_OPTIONS, 
         isImageValid, 
         setIsImageValid,

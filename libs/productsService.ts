@@ -25,7 +25,14 @@ export const deleteProductService = async (id: string) => {
     await apiFetch(`/products/${id}`, 'DELETE');
     return { error: null };
   } catch (error: any) {
-    return { error: error.message };
+    if (error.message && (
+        error.message.includes('JSON') || 
+        error.message.includes('Unexpected end')
+    )) {
+        return { error: null };
+    }
+
+    return { error: error.message || "Error al eliminar producto" };
   }
 };
 
