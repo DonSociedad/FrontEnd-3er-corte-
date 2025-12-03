@@ -78,9 +78,9 @@ export default function FooterComponent() {
                                     <Image
                                         src="/images/icons/facebook.png" 
                                         alt="Facebook" 
-                                        width={24}
-                                        height={24}
-                                        className="w-6 h-6"
+                                        width={100}
+                                        height={100}
+                                        className="w-9 h-9"
                                     />
                                 </Link>
                                 <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
@@ -88,9 +88,9 @@ export default function FooterComponent() {
                                     <Image 
                                         src="/images/icons/instagram.png" 
                                         alt="Instagram" 
-                                        width={24} 
-                                        height={24} 
-                                        className="w-6 h-6"
+                                        width={100} 
+                                        height={100} 
+                                        className="w-9 h-9"
                                     />
                                 </Link>
                             </div>

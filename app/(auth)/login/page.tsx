@@ -50,7 +50,6 @@ export default function LoginPage() {
     const router = useRouter(); 
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
     
             <main className="flex-grow flex items-center justify-center py-8 px-4 sm:px-6">
                 
@@ -111,8 +110,6 @@ export default function LoginPage() {
 
                 </div>
             </main>
-
-        </div>
     )
 }
 

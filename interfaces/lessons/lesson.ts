@@ -1,3 +1,18 @@
+import { z } from 'zod';
+import { 
+    createLessonSchema, 
+    lessonBlockSchema, 
+    lessonBlockPayloadSchema, 
+    lessonOptionSchema 
+} from '@/schemas/lesson';
+
+// Tipos inferidos automáticamente de Zod 
+export type ICreateLessonPayload = z.infer<typeof createLessonSchema>;
+export type ILessonBlock = z.infer<typeof lessonBlockSchema>;
+export type ILessonBlockPayload = z.infer<typeof lessonBlockPayloadSchema>;
+export type ILessonOption = z.infer<typeof lessonOptionSchema>;
+
+// Interfaces adicionales para la UI o respuestas del Backend
 export interface LessonMapItem {
   id: string;
   title: string;
@@ -11,28 +26,4 @@ export interface IAdminLesson {
   order: number;
   prerequisites: number;      
   contentBlocksCount: number; 
-}
-
-export interface ILessonOption {
-    id: string;   // "a", "b", "c"
-    text: string;
-}
-
-export interface ILessonBlockPayload {
-    prompt: string;         
-    options: ILessonOption[];
-    correctOptionId: string; 
-    explanation: string;
-}
-
-export interface ILessonBlock {
-    type: 'multiple_choice'; // Por ahora solo este tipo
-    payload: ILessonBlockPayload;
-}
-
-export interface ICreateLessonPayload {
-    title: string;
-    order: number;
-    prerequisites: string[]; 
-    contentBlocks: ILessonBlock[];
 }

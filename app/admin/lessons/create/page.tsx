@@ -4,9 +4,12 @@ import useCreateLesson from "@/hooks/admin/useCreateLesson";
 
 import Link from "next/link";
 import Image from "next/image";
+import InputComponent from "@/components/atoms/inputComponents";
+import useLogin from "@/hooks/auth/useLogin";
 
 export default function CreateLessonPage() {
 const { 
+
     formData, 
     existingLessons, 
     isLoading,
@@ -21,6 +24,10 @@ const {
     removeOption,         
     submit 
 } = useCreateLesson();
+
+const {
+    register
+} = useLogin();
 
 return (
     <div className="p-8 md:p-12 pb-32 max-w-5xl mx-auto">
@@ -51,25 +58,39 @@ return (
                 
                 <div className="space-y-4">
                     <div>
-                        <label className="text-xs font-bold text-gray-500 uppercase">
-                            Título
-                        </label>
-                        <input 
-                            type="text" 
+                        <label className="text-xs font-bold text-gray-500 uppercase">Título</label>
+                        <input
+                            type="text"
                             value={formData.title}
                             onChange={(e) => updateField('title', e.target.value)}
                             className="w-full mt-1 border-b-2 border-gray-200 py-2 focus:border-black outline-none font-medium bg-transparent"
-                            placeholder="Ej: Inflación Básica"
+                            placeholder="Título de la lección"
                         />
                     </div>
-
                     <div>
                         <label className="text-xs font-bold text-gray-500 uppercase">Orden</label>
-                        <input 
-                            type="number" 
+                        <input
+                            type="number"
                             value={formData.order}
                             onChange={(e) => updateField('order', Number(e.target.value))}
                             className="w-full mt-1 border-b-2 border-gray-200 py-2 focus:border-black outline-none font-medium bg-transparent"
+                            placeholder="1"
+                            min="0"
+                        />
+                    </div>
+                    <div>
+
+                    </div>
+
+                    <div>
+                        <label className="text-xs font-bold text-gray-500 uppercase">Monedas al completar</label>
+                        <input
+                            type="number"
+                            value={formData.coins}
+                            onChange={(e) => updateField('coins', Number(e.target.value))}
+                            className="w-full mt-1 border-b-2 border-gray-200 py-2 focus:border-black outline-none font-medium bg-transparent"
+                            placeholder="0"
+                            min="0"
                         />
                     </div>
 
@@ -154,12 +175,15 @@ return (
                     <div className="space-y-5">
                         {/* Prompt */}
                         <div>
-                            <input 
-                                type="text" 
+                            <InputComponent
+                                label="Pregunta"
+                                typeElement="text"
+                                idElement={`prompt-${bIndex}`}
+                                nameElement={`prompt-${bIndex}`}
+                                register={register}
                                 value={block.payload.prompt}
-                                onChange={(e) => updateBlockPayload(bIndex, 'prompt', e.target.value)}
-                                className="w-full text-lg font-bold placeholder-gray-300 border-none outline-none focus:ring-0 bg-transparent"
-                                placeholder="Escribe tu pregunta aquí..."
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateBlockPayload(bIndex, 'prompt', e.target.value)}
+
                             />
                             <div className="h-0.5 w-full bg-gray-100 mt-1"></div>
                         </div>
@@ -197,16 +221,14 @@ return (
                                     {/* Input de texto */}
                                     <div className="flex-1 relative">
                                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-mono text-gray-400">{opt.id.toUpperCase()}</span>
-                                        <input 
-                                            type="text"
+                                        <InputComponent
+                                            typeElement="text"
+                                            idElement={`opt-${bIndex}-${oIndex}`}
+                                            nameElement={`opt-${bIndex}-${oIndex}`}
+                                            placeholder={`Opción ${opt.id.toUpperCase()}`}
                                             value={opt.text}
-                                            onChange={(e) => updateOptionText(bIndex, oIndex, e.target.value)}
-                                            className={`w-full pl-8 pr-3 py-2 rounded-lg border text-sm outline-none transition-all ${
-                                                block.payload.correctOptionId === opt.id 
-                                                ? 'border-green-500 bg-white shadow-sm' 
-                                                : 'border-transparent bg-white focus:border-gray-300 focus:bg-white'
-                                            }`}
-                                            placeholder={`Opción ${opt.id}`}
+                                            register={register}
+                                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateOptionText(bIndex, oIndex, e.target.value)}
                                         />
                                     </div>
 

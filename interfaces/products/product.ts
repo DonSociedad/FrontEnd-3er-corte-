@@ -3,6 +3,7 @@ export interface IProduct {
     key: string; 
     name: string;
     price: number;
+    isPremium: boolean;
     category: 'skins' | 'hats' | 'eyes' | 'mouths' | 'bodies' | string;
     createdAt?: string;
 }
@@ -13,4 +14,5 @@ export interface ICreateProductPayload {
     name: string;
     price: number;
     category: string;
+    isPremium?: boolean;
 }

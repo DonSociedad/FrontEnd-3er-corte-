@@ -10,6 +10,7 @@ export default function RegisterComponent() {
     
     return (
         <form
+            data-testid="form"
             onSubmit={handleSubmit(onSubmit, onErrors)}
             className="space-y-4 p-6 max-w-md mx-auto bg-white rounded-lg shadow-md"
         >

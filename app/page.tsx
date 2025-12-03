@@ -201,7 +201,7 @@ export default function HomePage() {
               <div className="flex flex-col md:flex-row items-stretch bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 border border-emerald-100">
                 <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-emerald-50">
                   <div className="bg-emerald-100 w-fit px-3 py-1 rounded-full text-emerald-600 text-xs font-bold mb-4 uppercase tracking-wide">
-                    Meta Final
+                    paso 3 y final
                   </div>
                   <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4 group-hover:text-emerald-700 transition-colors">
                     Domina tu dinero

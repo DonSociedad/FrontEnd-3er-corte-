@@ -32,8 +32,7 @@ export default function EmerPageButton({
           >
             {/* Contenedor del contenido */}
             <motion.div
-              className="bg-fuchsia-900 rounded-2xl shadow-lg p-6 max-w-3/4 w-full relative 
-                           overflow-y-auto" 
+              className="bg-fuchsia-900 rounded-2xl shadow-lg p-6 max-w-3/4 w-full relative overflow-y-auto" 
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}

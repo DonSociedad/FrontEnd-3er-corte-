@@ -23,7 +23,7 @@ export default function MapPage() {
         transition-colors duration-700 ease-in-out
       `}
     >
-      <HeaderComponent />
+      <HeaderComponent /> 
       
       <div className="flex-1 max-w-3xl">
           <LessonsMap />

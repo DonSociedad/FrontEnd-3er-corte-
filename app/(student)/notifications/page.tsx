@@ -1,58 +1,18 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { getNotificationsService, respondRequestService } from '@/libs/friendsService';
-import { useNotification } from '@/contexts/notificationContext';
+
 import PigAvatar from '@/components/molecules/pig/pigAvatar';
-import { IAvatarEquipped } from '@/interfaces/users/user';
+import useNotification from "@/hooks/notifications/useNotification";
 
-type RequestType = {
-    _id: string;
-    sender: {
-        _id: string;
-        name: string;
-        lastName: string;
-        pig: { equipped: IAvatarEquipped };
-    };
-    createdAt: string;
-};
-
-export default function NotificationsPage() {
-    const [requests, setRequests] = useState<RequestType[]>([]);
-    const [loading, setLoading] = useState(true);
-    const { showNotification } = useNotification();
-
-    const fetchNotifications = async () => {
-        setLoading(true);
-        const { data, error } = await getNotificationsService();
-        if (error) {
-            showNotification(error, 'error');
-        }
-        setRequests(data || []);
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        fetchNotifications();
-    }, []);
-
-    const handleResponse = async (requestId: string, accept: boolean) => {
-        const { error } = await respondRequestService(requestId, accept);
-        if (error) {
-            showNotification(error, 'error');
-        } else {
-            showNotification(accept ? "Solicitud aceptada" : "Solicitud rechazada", accept ? 'success' : 'info');
-            // Recargar lista
-            fetchNotifications(); 
-        }
-    };
+export default function NotificationPage() {
+    const { requests, loading, handleResponse } = useNotification();
 
     return (
         <div className="min-h-screen bg-[#fff0f5]">
             
             <main className="max-w-4xl mx-auto p-6 md:p-10">
                 <h1 className="text-4xl font-black text-gray-800 tracking-tight mb-8 flex items-center gap-3">
-                   <div className="bg-red-100 p-2 rounded-2xl">🔔</div> 
-                   Notificaciones
+                    <div className="bg-red-100 p-2 rounded-2xl">🔔</div> 
+                        Notificaciones
                 </h1>
 
                 {loading ? (
@@ -70,7 +30,7 @@ export default function NotificationsPage() {
                                 {/* Avatar del Solicitante */}
                                 <div className="w-20 h-20 relative bg-pink-50 rounded-full border-2 border-pink-200 overflow-hidden flex-shrink-0">
                                     <div className="w-full h-full relative transform scale-125 translate-y-2">
-                                         <PigAvatar config={req.sender.pig.equipped} className="w-full h-full" />
+                                        <PigAvatar config={req.sender.pig.equipped} className="w-full h-full" />
                                     </div>
                                 </div>
 

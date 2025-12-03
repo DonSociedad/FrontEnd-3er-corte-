@@ -11,10 +11,8 @@ export default function studioLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-        <body>
-            {children}
-        </body>
-        </html>
+        <>
+        {children}
+        </>
     );
 }

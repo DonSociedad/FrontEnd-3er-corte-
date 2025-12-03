@@ -1,4 +1,5 @@
 "use client";
+
 import useAdminLessons from "@/hooks/admin/useAdminLessons";
 
 export default function LessonTable() {

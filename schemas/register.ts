@@ -15,5 +15,5 @@ export const RegisterScheme = z.object({
     
     password: z.string()
         .min(1, { message: "La contraseña es obligatoria" })
-        .min(5, { message: "La contraseña debe tener al menos 5 caracteres" }) 
+        .min(6, { message: "La contraseña debe tener al menos 6 caracteres" }) 
 })

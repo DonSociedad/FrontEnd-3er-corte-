@@ -75,6 +75,21 @@ export default function CreateProductPage() {
                 </div>
             </div>
 
+            <div className="flex items-center gap-3 p-3 border-2 border-amber-100 bg-amber-50 rounded-xl cursor-pointer hover:bg-amber-100 transition-colors">
+                <input 
+                    type="checkbox" 
+                    id="isPremium"
+                    className="w-5 h-5 accent-amber-500 cursor-pointer"
+                    checked={formData.isPremium || false}
+                    onChange={(e) => updateField('isPremium', e.target.checked)}
+                />
+                <label htmlFor="isPremium" className="cursor-pointer flex-1">
+                    <span className="block text-xs font-bold text-amber-700 uppercase">¿Es Premium?</span>
+                    <span className="text-xs text-amber-600">Solo usuarios Plus podrán comprarlo.</span>
+                </label>
+                <div className="text-xl">👑</div>
+            </div>
+
             {/* Key / Archivo */}
             <div>
                 <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Key (Nombre Archivo)</label>

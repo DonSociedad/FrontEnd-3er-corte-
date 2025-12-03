@@ -1,15 +1,12 @@
 'use client'; 
-import { useState } from 'react';
-import Image from "next/image";
-import { IPigData } from '@/interfaces/users/user';
+
 import { AvatarCategory } from '@/utils/avatarCatalog';
 import { getPigAssetPath } from '@/utils/pigHelpers';
 import useProducts from '@/hooks/products/useProducts';
+import { AvatarEditorProps } from '@/interfaces/interaction/avatarEditorProps';
 
-interface AvatarEditorProps {
-  pigData: IPigData;
-  onEquip: (category: string, itemId: string) => void;
-}
+import { useState } from 'react';
+import Image from "next/image";
 
 export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
   const [activeTab, setActiveTab] = useState<AvatarCategory>('hats');
@@ -33,6 +30,7 @@ export default function AvatarEditor({ pigData, onEquip }: AvatarEditorProps) {
       key: 'none',
       name: 'Nada',
       price: 0,
+      isPremium: false,
       category: activeTab,
       createdAt: ''
     });

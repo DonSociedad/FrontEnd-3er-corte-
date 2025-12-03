@@ -1,7 +1,7 @@
 'use client';
 
 export default function ProfileComponent() {
-  return (
+    return (
     <div>
         <div className="grid grid-cols-2 h-100  gap-4 items-center justify-center p-4">
             <div className="flex justify-center">
@@ -16,5 +16,5 @@ export default function ProfileComponent() {
             
         </div>
     </div>
-  );
+    );
 }

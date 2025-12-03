@@ -1,11 +1,10 @@
 import PigAvatar from '@/components/molecules/pig/pigAvatar';
-import { IUserProfile } from '@/interfaces/users/user';
+import { PigPreviewProps } from '@/interfaces/interaction/pigPreviewProps';
+
 import { ArrowLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-interface PigPreviewProps {
-    user: IUserProfile | null;
-}
+
 
 export default function PigPreview({ user }: PigPreviewProps) {
     const router = useRouter();
