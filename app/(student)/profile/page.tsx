@@ -73,10 +73,6 @@ export default function ProfilePage() {
 
         <section className="flex-1 flex items-center justify-center p-4 w-full">
             <div className="w-full max-w-4xl">
-                {/* 
-                   AQUÍ ESTABA EL DETALLE: 
-                   Agregamos isOwnProfile={true} para activar el modo edición 
-                */}
                 <ProfileCard 
                     user={user} 
                     onEquip={equipItem} 

@@ -1,8 +1,9 @@
+import HeaderComponent from "@/components/organism/headerComponent";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Iniciar sesión | Piglance",
-    description: "Bienvenido, las finanzas y tu serán nuevos amigos, los cuales se ayudarán a alcanzar metas | Piglance",
+    title: "Perfil | Piglance",
+    description: "Modifica e interactua con tu avatar y entiende los avances de tu conocimiento",
 };
 
 export default function studioLayout({

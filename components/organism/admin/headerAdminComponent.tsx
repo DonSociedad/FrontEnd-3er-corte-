@@ -41,7 +41,6 @@ export default function AdminSidebar() {
     menuRef, 
     toggleMenu, 
     pathname,
-    isActive
   } = useHeaderAdmin();
 
   const btnBase = "flex items-center rounded-xl transition-all duration-200 font-bold tracking-wide text-sm cursor-pointer w-full py-3 px-2 group";
