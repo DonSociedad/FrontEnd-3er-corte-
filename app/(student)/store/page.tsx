@@ -4,17 +4,13 @@ import useStore from '@/hooks/shopPig/useStore';
 import ProductCard from '@/components/molecules/shopPig/productCartComponent';
 import PigPreview from '@/components/organism/shopPig/pigPreviewComponent';
 
-// Diccionario local de categorías (Mapeo Backend -> Frontend)
-// Se define fuera del componente para que no se recree en cada render
 const CATEGORY_NAMES: Record<string, string> = {
     all: 'Todos',
-    // Plurales (habitual en DB)
     skins: 'Pieles',
     hats: 'Sombreros',
     bodies: 'Ropa',
     eyes: 'Ojos',
     faces: 'Bocas',
-    // Singulares/Variaciones (por seguridad si el backend cambia)
     skin: 'Pieles',
     hat: 'Sombreros',
     body: 'Ropa',
@@ -44,13 +40,15 @@ export default function StorePage() {
         );
     }
 
+    // Calculamos si es premium una sola vez para pasar el booleano limpio
+    const isUserPremium = !!user?.isPremium;
+
     return (
         <div className="min-h-screen bg-gray-50 pb-20 pt-8">
             <main className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-10">
                 
                 {/* COLUMNA IZQUIERDA: Preview del Cerdo */}
                 <aside className="lg:col-span-5 xl:col-span-4">
-                    {/* Sticky: Hace que el cerdo te siga al bajar el scroll */}
                     <div className="sticky top-24">
                         <PigPreview user={user} />
                     </div>
@@ -84,14 +82,14 @@ export default function StorePage() {
                             <ProductCard
                                 key={product.key}
                                 product={product}
-                                // Verificación segura (Optional chaining)
                                 isOwned={user?.pig.inventory.includes(product.key) || false}
                                 canAfford={(user?.coins || 0) >= product.price}
                                 isProcessing={purchasingKey === product.key}
                                 onBuy={handleBuy}
+                                // 👇 AQUÍ ESTÁ EL CAMBIO IMPORTANTE 👇
+                                userIsPremium={isUserPremium}
                             />
                         )) : (
-                            // Empty State
                             <div className="col-span-full py-12 flex flex-col items-center justify-center text-gray-400 bg-white rounded-3xl border-2 border-dashed border-gray-200">
                                 <span className="text-4xl mb-2">🐽</span>
                                 <p className="font-medium">No hay productos en esta categoría.</p>

@@ -22,7 +22,8 @@ export default function useProductForm(productId?: string) {
         name: '',
         key: '',
         price: 0,
-        category: 'skins'
+        category: 'skins',
+        isPremium: false
     });
 
     // Si hay ID, cargamos los datos del producto
@@ -35,7 +36,8 @@ export default function useProductForm(productId?: string) {
                         name: data.name,
                         key: data.key,
                         price: data.price,
-                        category: data.category
+                        category: data.category,
+                        isPremium: !!data.isPremium
                     });
                     // Asumimos valida inicialmente si ya existe, el onError del Image la corregirá si no
                     setIsImageValid(true); 
