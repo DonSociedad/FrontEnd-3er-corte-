@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation"; 
-import Image from "next/image"; // 1. Importamos Image
+import Image from "next/image";
 import MultipleChoice from "@/components/molecules/multipleChoice";
 import NextButton from "@/components/atoms/nextButton";
 import { LearnOrganismProps } from "@/interfaces/lessons/learnOrganismProps";
