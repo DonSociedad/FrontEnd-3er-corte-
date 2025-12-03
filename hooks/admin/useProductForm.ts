@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createProductService, getProductByIdService, updateProductService } from '@/libs/productsService';
 import { ICreateProductPayload } from '@/interfaces/products/product';
-import { AvatarCategory } from '@/utils/avatarCatalog'; 
+import { AvatarCategory } from '@/utils/avatarCatalog';
+import { useNotification } from '@/contexts/notificationContext';
 
 const CATEGORY_OPTIONS = [
     { label: 'Pieles', value: 'skins' },
@@ -14,6 +15,7 @@ const CATEGORY_OPTIONS = [
 
 export default function useProductForm(productId?: string) {
     const router = useRouter();
+    const { showNotification } = useNotification();
     const [isLoading, setIsLoading] = useState(false);
     const [isImageValid, setIsImageValid] = useState(false);
     const [isEditMode, setIsEditMode] = useState(!!productId);
@@ -42,7 +44,7 @@ export default function useProductForm(productId?: string) {
                     // Asumimos valida inicialmente si ya existe, el onError del Image la corregirá si no
                     setIsImageValid(true); 
                 } else {
-                    alert("Error cargando producto");
+                    showNotification("Error cargando producto", 'error');
                     router.push('/admin/products');
                 }
                 setIsLoading(false);
@@ -61,13 +63,13 @@ export default function useProductForm(productId?: string) {
         setIsLoading(true);
 
         if (!formData.key || !formData.name) {
-            alert("Completa todos los campos");
+            showNotification("Completa todos los campos", 'error');
             setIsLoading(false);
             return;
         }
 
         if (!isImageValid) {
-            alert("❌ La imagen no es válida. Revisa la ruta en 'public/images/pig/...'");
+            showNotification("❌ La imagen no es válida. Revisa la ruta en 'public/images/pig/...'", 'error');
             setIsLoading(false);
             return;
         }
@@ -82,9 +84,9 @@ export default function useProductForm(productId?: string) {
         }
 
         if (result.error) {
-            alert("Error: " + result.error);
+            showNotification("Error: " + result.error, 'error');
         } else {
-            alert(isEditMode ? "Producto actualizado" : "Producto creado");
+            showNotification(isEditMode ? "Producto actualizado" : "Producto creado", 'success');
             router.push('/admin/products');
         }
         setIsLoading(false);

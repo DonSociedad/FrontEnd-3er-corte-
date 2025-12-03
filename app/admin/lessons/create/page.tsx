@@ -58,25 +58,26 @@ return (
                 
                 <div className="space-y-4">
                     <div>
-                        <InputComponent
-                        label="Título"
-                        typeElement="text"
-                        idElement="title"
-                        nameElement="title"
-                        register={register}
-                        value={formData.title}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('title', e.target.value)}
-                            />
+                        <label className="text-xs font-bold text-gray-500 uppercase">Título</label>
+                        <input
+                            type="text"
+                            value={formData.title}
+                            onChange={(e) => updateField('title', e.target.value)}
+                            className="w-full mt-1 border-b-2 border-gray-200 py-2 focus:border-black outline-none font-medium bg-transparent"
+                            placeholder="Título de la lección"
+                        />
                     </div>
-                        <InputComponent
-                        label="Orden"
-                        typeElement="number"
-                        idElement="order"
-                        nameElement="order"
-                        register={register}
-                        value={formData.title}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('order',Number(e.target.value))}
-                            />                        
+                    <div>
+                        <label className="text-xs font-bold text-gray-500 uppercase">Orden</label>
+                        <input
+                            type="number"
+                            value={formData.order}
+                            onChange={(e) => updateField('order', Number(e.target.value))}
+                            className="w-full mt-1 border-b-2 border-gray-200 py-2 focus:border-black outline-none font-medium bg-transparent"
+                            placeholder="1"
+                            min="0"
+                        />
+                    </div>
                     <div>
 
                     </div>
