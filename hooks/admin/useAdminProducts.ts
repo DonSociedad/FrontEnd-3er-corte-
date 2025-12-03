@@ -36,16 +36,19 @@ export default function useAdminProducts() {
     // LÓGICA DE FILTRADO COMBINADO (Texto + Categoría)
     const filteredProducts = useMemo(() => {
         const term = filter.toLowerCase();
-        
+
         return products.filter(p => {
+            // Excluir la skin "Clásico" (pig_skin) para evitar ediciones accidentales
+            if (p.key === 'pig_skin') return false;
+
             // 1. Coincidir Texto
-            const matchesText = 
-                p.name.toLowerCase().includes(term) || 
+            const matchesText =
+                p.name.toLowerCase().includes(term) ||
                 p.key.toLowerCase().includes(term);
 
             // 2. Coincidir Categoría
-            const matchesCategory = 
-                selectedCategory === 'all' || 
+            const matchesCategory =
+                selectedCategory === 'all' ||
                 p.category === selectedCategory;
 
             return matchesText && matchesCategory;
