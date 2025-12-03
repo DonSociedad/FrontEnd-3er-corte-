@@ -143,6 +143,28 @@ export default function useCreateLesson() {
             setIsLoading(false);
             return;
         }
+        // Validar bloques de selección múltiple
+        for (const block of formData.contentBlocks) {
+            if (block.type === 'multiple_choice') {
+                if (!block.payload.prompt || block.payload.prompt.trim() === '') {
+                    alert("El título de la pregunta de selección múltiple no puede estar vacío");
+                    setIsLoading(false);
+                    return;
+                }
+                if (!block.payload.options || block.payload.options.length < 2) {
+                    alert("La pregunta de selección múltiple debe tener al menos 2 opciones");
+                    setIsLoading(false);
+                    return;
+                }
+                for (const option of block.payload.options) {
+                    if (!option.text || option.text.trim() === '') {
+                        alert("Todas las opciones de la pregunta de selección múltiple deben tener texto");
+                        setIsLoading(false);
+                        return;
+                    }
+                }
+            }
+        }
         const { error } = await createLessonService(formData);
         if (error) {
             alert("Error al crear: " + error);
