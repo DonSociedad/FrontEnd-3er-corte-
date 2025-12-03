@@ -25,7 +25,8 @@ export default function useCreateLesson() {
         title: '',
         order: 1,
         prerequisites: [],
-        contentBlocks: [initialBlock]
+        contentBlocks: [initialBlock],
+        coins: 0
     });
 
     useEffect(() => {

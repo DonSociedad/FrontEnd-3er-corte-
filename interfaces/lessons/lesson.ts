@@ -33,6 +33,7 @@ export interface ILessonBlock {
 export interface ICreateLessonPayload {
     title: string;
     order: number;
-    prerequisites: string[]; 
+    prerequisites: string[];
     contentBlocks: ILessonBlock[];
+    coins: number;
 }

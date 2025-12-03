@@ -65,11 +65,23 @@ return (
 
                     <div>
                         <label className="text-xs font-bold text-gray-500 uppercase">Orden</label>
-                        <input 
-                            type="number" 
+                        <input
+                            type="number"
                             value={formData.order}
                             onChange={(e) => updateField('order', Number(e.target.value))}
                             className="w-full mt-1 border-b-2 border-gray-200 py-2 focus:border-black outline-none font-medium bg-transparent"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="text-xs font-bold text-gray-500 uppercase">Monedas al completar</label>
+                        <input
+                            type="number"
+                            value={formData.coins}
+                            onChange={(e) => updateField('coins', Number(e.target.value))}
+                            className="w-full mt-1 border-b-2 border-gray-200 py-2 focus:border-black outline-none font-medium bg-transparent"
+                            placeholder="0"
+                            min="0"
                         />
                     </div>
 
