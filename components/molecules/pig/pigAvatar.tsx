@@ -8,8 +8,7 @@ interface PigAvatarProps {
 }
 
 export default function PigAvatar({ config, className }: PigAvatarProps) {
-  
-  // 2. Definimos el tamaño: Si viene className externo lo usamos, si no, usamos el gigante por defecto.
+
   const containerClasses = className || "w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96";
 
   const renderLayer = (src: string | null, alt: string, zIndex: string) => {

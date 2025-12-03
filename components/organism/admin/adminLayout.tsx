@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+
 import { useAuth } from "@/contexts/authContext";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

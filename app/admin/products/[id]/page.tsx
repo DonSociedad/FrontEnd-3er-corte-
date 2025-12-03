@@ -4,6 +4,9 @@ import useProductForm from "@/hooks/admin/useProductForm";
 import Link from "next/link";
 import Image from "next/image";
 import { use } from "react";
+import InputComponent from "@/components/atoms/inputComponents";
+import { register } from "module";
+import useLogin from "@/hooks/auth/useLogin";
 
 // CORRECCIÓN RUTA IMAGEN: quitamos /logos
 const getPreviewPath = (category: string, key: string) => 
@@ -12,6 +15,7 @@ const getPreviewPath = (category: string, key: string) =>
 export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
     // Desempaquetamos params (Next.js 15 lo requiere como promesa, si usas Next 14 o menor es directo)
     const unwrappedParams = use(params);
+    const { register } = useLogin();
     
     const { 
         formData, 
@@ -42,9 +46,11 @@ return (
             
             <div>
                 <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Nombre Visible</label>
-                <input 
-                    type="text" 
-                    className="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-black outline-none font-bold"
+                <InputComponent 
+                    typeElement="text" 
+                    idElement="text"
+                    nameElement="text"
+                    register={register}
                     value={formData.name}
                     onChange={(e) => updateField('name', e.target.value)}
                 />

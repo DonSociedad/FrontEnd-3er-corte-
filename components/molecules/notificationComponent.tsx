@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
-// import Image from 'next/image'; // Descomenta si usas la imagen del cerdito
 import { useNotification } from '@/contexts/notificationContext';
+
+import React from 'react';
 
 export default function NotificationComponent() {
   const { notifications, removeNotification } = useNotification();

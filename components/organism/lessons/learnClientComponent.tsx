@@ -3,8 +3,9 @@
 import useLesson from "@/hooks/lessons/useLesson";
 import LearnOrganism from "@/components/organism/lessons/learnOrganism";
 import { LearnClientProps } from "@/interfaces/lessons/learnClientProps";
+
 import { useRouter } from "next/navigation";
-import Image from "next/image"; // Buena práctica que pediste antes
+
 
 export default function LearnClient({ lessonId }: LearnClientProps) {
     const { 

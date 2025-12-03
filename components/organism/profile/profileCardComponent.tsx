@@ -1,35 +1,28 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { IUserProfile } from '@/interfaces/users/user';
+
+import { ProfileCardProps } from '@/interfaces/interaction/profileCardProps';
 import PigAvatar from '@/components/molecules/pig/pigAvatar';
 import StatItem from '@/components/molecules/profile/StatItem'; 
 import AvatarEditor from './avatarEditorComponent';
 import { useFriendship } from '@/hooks/community/useFriendship';
-import { ArrowLeftIcon } from 'lucide-react';
+
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface ProfileCardProps {
-  user: IUserProfile;
-  onEquip?: (cat: string, id: string) => void;
-  isOwnProfile?: boolean;
-}
-
 export default function ProfileCard({ user, onEquip, isOwnProfile = false }: ProfileCardProps) {
-  const [view, setView] = useState<'info' | 'customize'>('info');
-    const router = useRouter();
+    const [view, setView] = useState<'info' | 'customize'>('info');
 
   // Hook de amistad: Si es mi perfil, pasamos string vacío para evitar llamadas innecesarias
-  const { status, sendRequest } = useFriendship(isOwnProfile ? '' : user?.id || '');
+    const { status, sendRequest } = useFriendship(isOwnProfile ? '' : user?.id || '');
 
   // Guard clause para evitar fallos de build si user llega null momentáneamente
-  if (!user) {
-    return <div className="p-10 text-center animate-pulse">Cargando perfil...</div>;
-  }
+    if (!user) {
+        return <div className="p-10 text-center animate-pulse">Cargando perfil...</div>;
+}
 
   // Helper para renderizar botón de amistad
-  const renderFriendButton = () => {
+    const renderFriendButton = () => {
     switch (status) {
         case 'loading':
             return <div className="w-full mt-4 py-3 text-center text-gray-400 text-sm animate-pulse">Cargando...</div>;
@@ -61,14 +54,14 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
                 </button>
             );
     }
-  };
+};
 
-  return (
+    return (
     <div className="relative flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 w-full max-w-5xl mx-auto bg-white/50 backdrop-blur-sm p-6 md:p-10 rounded-[3rem] shadow-sm border border-pink-100 mt-6">
-      
+
 
       {/* === COLUMNA IZQUIERDA: CERDO Y NOMBRE === */}
-      <div className="flex flex-col items-center z-0">
+        <div className="flex flex-col items-center z-0">
         {user.role === 'admin' && (
             <span className="bg-yellow-100 text-yellow-700 border border-yellow-200 text-xs font-bold px-3 py-1 rounded-full mb-3 shadow-sm flex items-center gap-1">
                 PROFESOR ⭐
@@ -89,10 +82,10 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
             {/* Sombra */}
             <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-4 bg-black/10 rounded-[100%] blur-md z-[-1]"></div>
         </div>
-      </div>
+    </div>
 
       {/* === COLUMNA DERECHA: PANEL INTERACTIVO === */}
-      <div className="bg-white rounded-3xl p-6 shadow-xl w-full md:w-[450px] min-h-[500px] flex flex-col border-b-8 border-gray-50 ring-1 ring-gray-100 z-0">
+    <div className="bg-white rounded-3xl p-6 shadow-xl w-full md:w-[450px] min-h-[500px] flex flex-col border-b-8 border-gray-50 ring-1 ring-gray-100 z-0">
         
         {/* HEADER TABS */}
         <div className="flex gap-6 border-b-2 border-gray-100 pb-2 mb-4">
@@ -160,7 +153,7 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
                 </div>
             )}
         </div>
-      </div>
+        </div>
     </div>
-  );
+    );
 }

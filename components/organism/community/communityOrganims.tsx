@@ -38,10 +38,10 @@ export default function CommunityOrganism() {
 
         {/* === SECCIÓN 2: ESTADOS DE CARGA === */}
         {loading && (
-           <div className="flex flex-col items-center justify-center py-24 gap-4">
+          <div className="flex flex-col items-center justify-center py-24 gap-4">
               <div className="text-4xl animate-bounce">🐷</div>
               <div className="text-pink-400 font-bold text-xl">Cargando cerditos...</div>
-           </div>
+          </div>
         )}
 
         {/* === SECCIÓN 3: GRILLA DE USUARIOS === */}
@@ -57,7 +57,7 @@ export default function CommunityOrganism() {
 
                   {/* Avatar */}
                   <div className="relative z-10 mt-6 mb-2 w-32 h-32 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                     <PigAvatar config={user.pig.equipped} className="w-full h-full" /> 
+                    <PigAvatar config={user.pig.equipped} className="w-full h-full" /> 
                   </div>
 
                   {/* Info Usuario */}

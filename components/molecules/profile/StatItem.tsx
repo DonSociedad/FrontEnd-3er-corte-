@@ -1,8 +1,5 @@
-interface StatItemProps {
-  label: string;
-  value: number | string;
-  highlight?: boolean;
-}
+import { StatItemProps } from "@/interfaces/products/statItemProps";
+
 
 export default function StatItem({ label, value, highlight = false }: StatItemProps) {
   return (
