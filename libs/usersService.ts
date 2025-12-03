@@ -97,3 +97,13 @@ export const subscribePremiumService = async (plan: 'monthly' | 'yearly') => {
     return { data: null, error: error.message || "Error al procesar la suscripción" };
   }
 };
+
+export const updateUserProfileService = async (changes: { name?: string; lastName?: string }) => {
+  try {
+    const response = await apiFetch('/users/profile', 'PATCH', changes);
+    return { data: response as IUserProfile, error: null };
+  } catch (error: any) {
+    console.error("Error updating profile:", error.message);
+    return { data: null, error: error.message || "Error al actualizar perfil" };
+  }
+};
