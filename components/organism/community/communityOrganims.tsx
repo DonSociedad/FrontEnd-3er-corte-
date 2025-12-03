@@ -1,9 +1,12 @@
 'use client';
 
-import Link from "next/link";
-import { Search } from "lucide-react"; 
 import PigAvatar from "@/components/molecules/pig/pigAvatar";
 import useCommunity from "@/hooks/community/useCommunity";
+
+import Image from 'next/image';
+import Link from "next/link";
+import { Search } from "lucide-react";
+
 
 export default function CommunityOrganism() {
   // Consumimos el hook aquí adentro para encapsular la lógica
@@ -39,7 +42,14 @@ export default function CommunityOrganism() {
         {/* === SECCIÓN 2: ESTADOS DE CARGA === */}
         {loading && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
-              <div className="text-4xl animate-bounce">🐷</div>
+              <div className="text-4xl animate-bounce">
+                <Image
+                  src= "/images/icons/cargando.png"
+                  alt = "cerdo"
+                  width={50}
+                  height={50}
+                />
+              </div>
               <div className="text-pink-400 font-bold text-xl">Cargando cerditos...</div>
           </div>
         )}
@@ -75,12 +85,23 @@ export default function CommunityOrganism() {
                     {/* Stats */}
                     <div className="flex justify-center items-center bg-gray-50 rounded-2xl px-6 py-2 w-auto inline-flex gap-5 text-xs font-bold text-gray-500 border border-gray-100 group-hover:border-pink-100 transition-colors shadow-sm">
                         <div className="flex flex-col items-center gap-1" title="Lecciones completadas">
-                            <span className="text-lg">📚</span>
+                            <span className="text-lg">                
+                              <Image 
+                              src= "/images/icons/piggy.png"
+                              alt = "cerdo"
+                              width={50}
+                              height={50}
+                            /></span>
                             <span>{user.completedLessons}</span>
                         </div>
                         <div className="w-[1px] h-6 bg-gray-200"></div>
                         <div className="flex flex-col items-center gap-1" title="Objetos conseguidos">
-                            <span className="text-lg">👒</span>
+                            <span className="text-lg">                <Image 
+                                              src= "/images/icons/lecciones-completadas.png"
+                                              alt = "cerdo"
+                                              width={50}
+                                              height={50}
+                                            /></span>
                             <span>{user.pig.inventory.length}</span>
                         </div>
                     </div>
@@ -94,7 +115,14 @@ export default function CommunityOrganism() {
         {/* === SECCIÓN 4: ESTADO VACÍO === */}
         {!loading && users.length === 0 && (
             <div className="flex flex-col items-center justify-center py-20 text-gray-400 opacity-70">
-                <p className="text-6xl mb-4 grayscale">🐽</p>
+                <p className="text-6xl mb-4 grayscale">
+                <Image 
+                  src= "/images/icons/piggy.png"
+                  alt = "cerdo"
+                  width={50}
+                  height={50}
+                />
+                </p>
                 <p className="text-lg font-medium">No encontramos estudiantes.</p>
                 {searchTerm && (
                     <button 

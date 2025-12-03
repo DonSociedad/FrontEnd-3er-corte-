@@ -1,8 +1,7 @@
 'use client';
 
 import { useNotification } from '@/contexts/notificationContext';
-
-import React from 'react';
+import Image from 'next/image';;
 
 export default function NotificationComponent() {
   const { notifications, removeNotification } = useNotification();
@@ -20,10 +19,15 @@ export default function NotificationComponent() {
         >
           <div className="flex flex-col items-center relative z-10">
             
-            {/* Ícono con fondo blanco puro para resaltar sobre el rosa pálido */}
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm border border-[#FFE4F0]">
-              {/* <Image src="/images/piggy.png" alt="Pig" width={40} height={40} /> */}
-              <span className="text-3xl filter drop-shadow-sm">🐷</span>
+              <span className="text-3xl filter drop-shadow-sm">
+                <Image 
+                  src= "/images/icons/piggy.png"
+                  alt = "cerdo"
+                  width={50}
+                  height={50}
+                />
+              </span>
             </div>
 
             {/* Título */}

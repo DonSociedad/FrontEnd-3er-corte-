@@ -8,7 +8,7 @@ import AvatarEditor from './avatarEditorComponent';
 import { useFriendship } from '@/hooks/community/useFriendship';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function ProfileCard({ user, onEquip, isOwnProfile = false }: ProfileCardProps) {
     const [view, setView] = useState<'info' | 'customize'>('info');
@@ -29,19 +29,40 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
         case 'friends':
             return (
                 <div className="w-full mt-4 py-3 rounded-xl bg-teal-50 text-teal-600 font-bold text-center border-2 border-teal-100 flex items-center justify-center gap-2 shadow-sm">
-                    <span>✅</span> ¡Ya son amigos!
+                    <span>                
+                    <Image
+                        src= "/images/icons/amigos.png"
+                        alt = "cerdo"
+                        width={50}
+                        height={50}
+                    />
+                    </span> ¡Ya son amigos!
                 </div>
             );
         case 'pending_sent':
             return (
                 <div className="w-full mt-4 py-3 rounded-xl bg-gray-50 text-gray-500 font-bold text-center border-2 border-gray-200 flex items-center justify-center gap-2">
-                    <span>🕓</span> Solicitud enviada
+                    <span> 
+                    <Image
+                    src= "/images/icons/enviada.png"
+                    alt = "solicitud"
+                    width={50}
+                    height={50}
+                    />
+                    </span> Solicitud enviada
                 </div>
             );
         case 'pending_received':
             return (
                 <div className="w-full mt-4 py-3 rounded-xl bg-orange-50 text-orange-600 font-bold text-center border-2 border-orange-100 flex items-center justify-center gap-2">
-                    <span>🔔</span> Solicitud pendiente
+                    <span>                
+                        <Image
+                        src= "/images/icons/pendiente.png"
+                        alt = "cenviada"
+                        width={50}
+                        height={50}
+                        />
+                    </span> Solicitud pendiente
                 </div>
             );
         default: // 'none'
@@ -50,7 +71,14 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
                     onClick={sendRequest}
                     className="group w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-xl shadow-md border-b-4 border-blue-700 active:border-b-0 active:translate-y-1 transition-all flex items-center justify-center gap-2"
                 >
-                    <span className="group-hover:scale-125 transition-transform">➕</span> Agregar Amigo
+                    <span className="group-hover:scale-125 transition-transform">                
+                        <Image
+                        src= "/images/icons/agregar.png"
+                        alt = "cerdo"
+                        width={50}
+                        height={50}
+                        />
+                    </span> Agregar Amigo
                 </button>
             );
     }
@@ -64,7 +92,12 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
         <div className="flex flex-col items-center z-0">
         {user.role === 'admin' && (
             <span className="bg-yellow-100 text-yellow-700 border border-yellow-200 text-xs font-bold px-3 py-1 rounded-full mb-3 shadow-sm flex items-center gap-1">
-                PROFESOR ⭐
+                <Image
+                src= "/images/icons/cargando.png"
+                alt = "profesor"
+                width={50}
+                height={50}
+                />                PROFESOR 
             </span>
         )}
         
@@ -133,7 +166,14 @@ export default function ProfileCard({ user, onEquip, isOwnProfile = false }: Pro
                                 onClick={() => setView('customize')}
                                 className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-pink-200 border-b-4 border-pink-700 active:border-b-0 active:translate-y-1 transition-all flex items-center justify-center gap-2"
                             >
-                                <span>👕</span> IR A VESTIDOR
+                                <span>
+                                <Image 
+                                src= "/images/icons/vestidor.png"
+                                alt = "vestidor"
+                                width={50}
+                                height={50}
+                                />                                   
+                                </span> IR A VESTIDOR
                             </button>
                         ) : (
                             <div>
