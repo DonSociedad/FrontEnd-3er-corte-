@@ -27,7 +27,7 @@ export default function LearnClient({ lessonId }: LearnClientProps) {
     if (loading) return <div className="p-4 text-slate-500 font-medium animate-pulse">Cargando lección...</div>;
     if (error) return <div className="p-4 text-red-400">Error: {error}</div>;
 
-    // === PANTALLA DE ERROR / GAME OVER ===
+
     if (lessonStatus === 'failed') {
         return (
             <div className="min-h-screen w-full flex flex-col items-center justify-center bg-orange-50 p-6 animate-in fade-in duration-500">
