@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { createProductService, getProductByIdService, updateProductService } from '@/libs/productsService';
 import { ICreateProductPayload } from '@/interfaces/products/product';
-import { AvatarCategory } from '@/utils/avatarCatalog';
 import { useNotification } from '@/contexts/notificationContext';
 
+// Movemos constantes fuera del hook para evitar recreaciones
 const CATEGORY_OPTIONS = [
     { label: 'Pieles', value: 'skins' },
     { label: 'Sombreros', value: 'hats' },
@@ -18,7 +18,9 @@ export default function useProductForm(productId?: string) {
     const { showNotification } = useNotification();
     const [isLoading, setIsLoading] = useState(false);
     const [isImageValid, setIsImageValid] = useState(false);
-    const [isEditMode, setIsEditMode] = useState(!!productId);
+    
+    // Convertimos productId a booleano para el modo
+    const isEditMode = !!productId;
 
     const [formData, setFormData] = useState<ICreateProductPayload>({
         name: '',
@@ -28,7 +30,7 @@ export default function useProductForm(productId?: string) {
         isPremium: false
     });
 
-    // Si hay ID, cargamos los datos del producto
+    // Cargar datos iniciales
     useEffect(() => {
         if (productId) {
             setIsLoading(true);
@@ -41,55 +43,68 @@ export default function useProductForm(productId?: string) {
                         category: data.category,
                         isPremium: !!data.isPremium
                     });
-                    // Asumimos valida inicialmente si ya existe, el onError del Image la corregirá si no
                     setIsImageValid(true); 
                 } else {
-                    showNotification("Error cargando producto", 'error');
+                    showNotification(`Error: ${error || 'Producto no encontrado'}`, 'error');
                     router.push('/admin/products');
                 }
                 setIsLoading(false);
             });
         }
-    }, [productId, router]);
+    }, [productId, router, showNotification]);
 
-    const updateField = (field: keyof ICreateProductPayload, value: any) => {
+    const updateField = useCallback((field: keyof ICreateProductPayload, value: any) => {
         setFormData(prev => ({ ...prev, [field]: value }));
+        
+        // Si cambia algo relacionado con la imagen, reseteamos validez hasta que cargue
         if (field === 'key' || field === 'category') {
             setIsImageValid(false);
         }
-    };
+    }, []);
 
     const submit = async () => {
+        if (isLoading) return;
         setIsLoading(true);
 
-        if (!formData.key || !formData.name) {
-            showNotification("Completa todos los campos", 'error');
+        // Validaciones Frontend
+        if (!formData.key.trim() || !formData.name.trim()) {
+            showNotification("El nombre y la Key son obligatorios", 'error');
             setIsLoading(false);
             return;
         }
 
         if (!isImageValid) {
-            showNotification("❌ La imagen no es válida. Revisa la ruta en 'public/images/pig/...'", 'error');
+            showNotification("La imagen no es válida. Revisa la ruta.", 'error');
             setIsLoading(false);
             return;
         }
 
-        let result;
-        if (isEditMode && productId) {
-            // Modo Edición
-            result = await updateProductService(productId, formData);
-        } else {
-            // Modo Creación
-            result = await createProductService(formData);
-        }
+        try {
+            let result;
+            if (isEditMode && productId) {
+                // PATCH: 
+                result = await updateProductService(productId, formData);
+            } else {
+                // POST
+                result = await createProductService(formData);
+            }
 
-        if (result.error) {
-            showNotification("Error: " + result.error, 'error');
-        } else {
-            showNotification(isEditMode ? "Producto actualizado" : "Producto creado", 'success');
-            router.push('/admin/products');
+            if (result.error) {
+                showNotification(result.error, 'error');
+            } else {
+                showNotification(
+                    isEditMode ? "Producto actualizado correctamente" : "Producto creado con éxito", 
+                    'success'
+                );
+                router.push('/admin/products');
+                router.refresh(); 
+            }
+        } catch (err) {
+            console.error(err);
+            showNotification("Ocurrió un error inesperado", 'error');
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
 
     return { 

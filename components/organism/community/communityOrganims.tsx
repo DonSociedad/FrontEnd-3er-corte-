@@ -87,7 +87,7 @@ export default function CommunityOrganism() {
                         <div className="flex flex-col items-center gap-1" title="Lecciones completadas">
                             <span className="text-lg">                
                               <Image 
-                              src= "/images/icons/piggy.png"
+                              src= "/images/icons/lecciones-completadas.png"
                               alt = "cerdo"
                               width={50}
                               height={50}
@@ -96,8 +96,9 @@ export default function CommunityOrganism() {
                         </div>
                         <div className="w-[1px] h-6 bg-gray-200"></div>
                         <div className="flex flex-col items-center gap-1" title="Objetos conseguidos">
-                            <span className="text-lg">                <Image 
-                                              src= "/images/icons/lecciones-completadas.png"
+                            <span className="text-lg">                
+                                          <Image 
+                                              src= "/images/icons/piggy.png"
                                               alt = "cerdo"
                                               width={50}
                                               height={50}
